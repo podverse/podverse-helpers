@@ -29,13 +29,6 @@ export const request = async <T>(
       ...requestConfig
     });
     return response.data;
-  } catch (error) {
-    if (axios.isCancel(error)) {
-      console.error('Request canceled', error.message);
-    } else {
-      console.error('Error fetching data', error);
-    }
-    throw error;
   } finally {
     if (timeoutId) {
       clearTimeout(timeoutId);
