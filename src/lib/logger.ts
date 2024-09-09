@@ -52,6 +52,9 @@ export const addRemoteTransport = (transport: TransportStream) => {
   logger.add(transport);
 };
 
-export const logError = (error: Error) => {
-  logger.error(error.message, { stack: error.stack });
+export const logError = (message: string, error?: Error) => {
+  logger.error(message);
+  if (error?.message) {
+    logger.error(error?.message, { stack: error?.stack });
+  }
 };
