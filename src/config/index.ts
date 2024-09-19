@@ -4,5 +4,6 @@ export const config = {
   logLevel: process.env.LOG_LEVEL || 'info',
   logging: {
     logDir: process.env.LOG_DIR || 'logs',
-  }
+  },
+  shouldLogTimer: process.env.LOG_TIMER === 'true'
 };
