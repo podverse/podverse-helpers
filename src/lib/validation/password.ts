@@ -12,8 +12,5 @@ const passwordSchema = Joi.string()
 
 export const validatePassword = (password: string) => {
   const { error } = passwordSchema.validate(password);
-  if (error) {
-    return error.details[0].message;
-  }
-  return 'Password is valid';
+  return error ? false : true;
 };
