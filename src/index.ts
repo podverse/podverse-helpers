@@ -1,5 +1,6 @@
 import './module-alias-config';
 
+export * from './lib/error/errorMessages';
 export * from './lib/accountMembership';
 export * from './lib/array';
 export * from './lib/boolean';
