@@ -5,6 +5,7 @@ export * from './lib/accountMembership';
 export * from './lib/array';
 export * from './lib/boolean';
 export * from './lib/category';
+export * from './lib/date';
 export * from './lib/debug';
 export * from './lib/hash';
 export * from './lib/logger';
