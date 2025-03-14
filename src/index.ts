@@ -9,6 +9,7 @@ export * from './lib/date';
 export * from './lib/debug';
 export * from './lib/hash';
 export * from './lib/item';
+export * from './lib/itemImage';
 export * from './lib/logger';
 export * from './lib/logTimer';
 export * from './lib/medium';
