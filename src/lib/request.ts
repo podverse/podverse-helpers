@@ -21,12 +21,12 @@ export const request = async <T>(
     const response: AxiosResponse<T> = await axios.request<T>({
       url,
       method: 'GET',
+      ...requestConfig,
       headers: {
         'User-Agent': config?.userAgent,
         ...requestConfig?.headers
       },
       signal: abort?.controller?.signal,
-      ...requestConfig
     });
     return response.data;
   } finally {
