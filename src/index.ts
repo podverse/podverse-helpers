@@ -15,6 +15,7 @@ export * from './lib/itemImage';
 export * from './lib/logger';
 export * from './lib/logTimer';
 export * from './lib/medium';
+export * from './lib/playlistResource';
 export * from './lib/remoteItem';
 export * from './lib/request';
 export * from './lib/sharableStatus';
