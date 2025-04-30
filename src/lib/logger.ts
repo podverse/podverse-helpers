@@ -52,9 +52,14 @@ export const addRemoteTransport = (transport: TransportStream) => {
   logger.add(transport);
 };
 
-export const logError = (message: string, error?: Error) => {
+export const logError = (message: string, error?: Error | unknown) => {
   logger.error(message);
-  if (error?.message) {
-    logger.error(error?.message, { stack: error?.stack });
+
+  if (error instanceof Error) {
+    logger.error(error.message, { stack: error.stack });
+  } else if (typeof error === 'string') {
+    logger.error(error);
+  } else if (error) {
+    logger.error('An unknown error occurred:', { error });
   }
 };
