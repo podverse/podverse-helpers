@@ -19,6 +19,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20.16.0'
+          registry-url: 'https://registry.npmjs.org'
+          token: ${{ secrets.ALPHA_NPM_TOKEN }}
 
       # Clean install dependencies
       - name: Clean install dependencies
@@ -52,8 +54,6 @@ jobs:
       # Publish to npm
       - name: Publish to npm
         run: npm publish --tag alpha
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.ALPHA_NPM_TOKEN }}
 
       # Commit and push the updated version
       - name: Commit and push version bump
