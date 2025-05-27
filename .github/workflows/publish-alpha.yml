@@ -13,53 +13,61 @@ jobs:
       # Checkout the repository
       - name: Checkout repository
         uses: actions/checkout@v3
-
+        
       # Set up Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '20.16.0'
           registry-url: 'https://registry.npmjs.org'
-          token: ${{ secrets.ALPHA_NPM_TOKEN }}
 
       # Clean install dependencies
       - name: Clean install dependencies
         run: npm clean-install
 
-      # Increment version
+      # Increment alpha version
       - name: Increment alpha version
         id: version
         run: |
-          CURRENT_VERSION=$(node -p "require('./package.json').version")
-          if [[ "$CURRENT_VERSION" =~ -alpha\.[0-9]+$ ]]; then
-            BASE_VERSION=$(echo $CURRENT_VERSION | sed -E 's/([0-9]+\.[0-9]+\.[0-9]+)-alpha\.[0-9]+/\1/')
-            ALPHA_VERSION=$(echo $CURRENT_VERSION | sed -E 's/.*-alpha\.([0-9]+)/\1/')
-            NEXT_ALPHA_VERSION=$((ALPHA_VERSION + 1))
-          else
-            BASE_VERSION=$CURRENT_VERSION
-            NEXT_ALPHA_VERSION=0
-          fi
-          NEXT_VERSION="${BASE_VERSION}-alpha.${NEXT_ALPHA_VERSION}"
-          echo "NEXT_VERSION=$NEXT_VERSION" >> $GITHUB_ENV
+          PACKAGE_NAME=$(node -p "require('./package.json').name")
+          BASE_VERSION=$(node -p "require('./package.json').version")
 
-      # Update package.json with the new version
-      - name: Update package.json
-        run: |
+          # Try to get the current alpha version (e.g., 5.1.1-alpha.3)
+          ALPHA_VERSION=$(npm dist-tag ls "$PACKAGE_NAME" 2>/dev/null | grep -w alpha | awk '{print $2}')
+
+          # If no alpha tag exists
+          if [[ -z "$ALPHA_VERSION" ]]; then
+            echo "No alpha version found. Starting with: $BASE_VERSION-alpha.0"
+            NEXT_VERSION="$BASE_VERSION-alpha.0"
+          else
+            # Extract the base and numeric suffix from the current alpha version
+            CURRENT_BASE=$(echo "$ALPHA_VERSION" | cut -d '-' -f 1)
+            CURRENT_ALPHA_NUM=$(echo "$ALPHA_VERSION" | sed -En 's/.*alpha\.([0-9]+)$/\1/p')
+
+            # If current alpha is malformed or suffix missing
+            if [[ -z "$CURRENT_ALPHA_NUM" ]]; then
+              NEXT_VERSION="$BASE_VERSION-alpha.0"
+            fi
+
+            if [[ "$CURRENT_BASE" == "$BASE_VERSION" ]]; then
+              NEXT_INDEX=$((CURRENT_ALPHA_NUM + 1))
+              NEXT_VERSION="$BASE_VERSION-alpha.$NEXT_INDEX"
+              echo "Same base version detected. Incrementing alpha to: $NEXT_VERSION"
+            else
+              NEXT_VERSION="$BASE_VERSION-alpha.0"
+              echo "New base version detected. Resetting alpha to: $NEXT_VERSION"
+            fi
+          fi
+          
+          echo "Updating package.json"
           npm version $NEXT_VERSION --no-git-tag-version
 
       # Build the module
       - name: Build module
         run: npm run build
-
+      
       # Publish to npm
       - name: Publish to npm
         run: npm publish --tag alpha
-
-      # Commit and push the updated version
-      - name: Commit and push version bump
-        run: |
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
-          git add package.json package-lock.json
-          git commit -m "chore: bump version to $NEXT_VERSION"
-          git push origin v5-alpha
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.ALPHA_NPM_TOKEN }}
