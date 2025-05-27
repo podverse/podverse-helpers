@@ -31,6 +31,8 @@ jobs:
         run: |
           PACKAGE_NAME=$(node -p "require('./package.json').name")
           BASE_VERSION=$(node -p "require('./package.json').version")
+          # Strip any pre-release tag (e.g., '-develop') from BASE_VERSION
+          BASE_VERSION=$(echo "$BASE_VERSION" | sed 's/-.*//')
 
           # Try to get the current alpha version (e.g., 5.1.1-alpha.3)
           ALPHA_VERSION=$(npm dist-tag ls "$PACKAGE_NAME" 2>/dev/null | grep -w alpha | awk '{print $2}')
