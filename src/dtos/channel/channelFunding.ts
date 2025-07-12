@@ -1,3 +1,6 @@
 export interface DTOChannelFunding {
-  // Define DTO fields here
+  id: number;
+  channel_id: number;
+  url: string;
+  title: string | null;
 }

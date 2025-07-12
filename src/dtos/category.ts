@@ -1,3 +1,7 @@
 export interface DTOCategory {
-  // Define DTO fields here
+  id: number;
+  parent_id: number | null;
+  display_name: string;
+  slug: string;
+  mapping_key: string | null;
 }

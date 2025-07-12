@@ -1,3 +1,4 @@
 export interface DTOChannelItunesType {
-  // Define DTO fields here
+  id: number;
+  itunes_type: 1 | 2; // 1 = Episodic, 2 = Serial
 }

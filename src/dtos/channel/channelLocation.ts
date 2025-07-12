@@ -1,3 +1,7 @@
 export interface DTOChannelLocation {
-  // Define DTO fields here
+  id: number;
+  channel_id: number;
+  geo: string | null;
+  osm: string | null;
+  name: string | null;
 }

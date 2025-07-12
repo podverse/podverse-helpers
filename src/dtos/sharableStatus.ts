@@ -1,3 +1,4 @@
 export interface DTOSharableStatus {
-  // Define DTO fields here
+  id: number;
+  status: 'public' | 'unlisted' | 'private';
 }

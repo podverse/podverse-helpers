@@ -1,3 +1,5 @@
 export interface DTOChannelDescription {
-  // Define DTO fields here
+  id: number;
+  channel_id: number;
+  value: string;
 }

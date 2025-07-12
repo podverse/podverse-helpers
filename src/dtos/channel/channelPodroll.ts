@@ -1,3 +1,4 @@
 export interface DTOChannelPodroll {
-  // Define DTO fields here
+  id: number;
+  channel_id: number;
 }

@@ -1,3 +1,5 @@
 export interface DTOChannelCategory {
-  // Define DTO fields here
+  id: number;
+  channel_id: number;
+  category_id: number;
 }

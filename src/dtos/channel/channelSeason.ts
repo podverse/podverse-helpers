@@ -1,3 +1,6 @@
 export interface DTOChannelSeason {
-  // Define DTO fields here
+  id: number;
+  channel_id: number;
+  number: number;
+  name: string | null;
 }

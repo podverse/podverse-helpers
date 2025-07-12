@@ -1,3 +1,9 @@
+import { AccountMembershipEnum } from '../lib/accountMembership';
+
 export interface DTOMembershipClaimToken {
-  // Define DTO fields here
+  id: string;
+  claimed: boolean;
+  months_to_add: number;
+  account_membership_id: number;
+  account_membership: AccountMembershipEnum;
 }

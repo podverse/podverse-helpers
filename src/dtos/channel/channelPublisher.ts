@@ -1,3 +1,4 @@
 export interface DTOChannelPublisher {
-  // Define DTO fields here
+  id: number;
+  channel_id: number;
 }

@@ -1,3 +1,6 @@
 export interface DTOChannelLicense {
-  // Define DTO fields here
+  id: number;
+  channel_id: number;
+  identifier: string;
+  url: string | null;
 }

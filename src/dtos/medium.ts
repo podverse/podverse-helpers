@@ -1,3 +1,6 @@
+import { MediumEnum } from '../lib/medium';
+
 export interface DTOMedium {
-  // Define DTO fields here
+  id: number;
+  value: MediumEnum;
 }

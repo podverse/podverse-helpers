@@ -1,3 +1,11 @@
 export interface DTOChannelValueRecipient {
-  // Define DTO fields here
+  id: number;
+  channel_value_id: number;
+  type: string;
+  address: string;
+  split: number;
+  name: string | null;
+  custom_key: string | null;
+  custom_value: string | null;
+  fee: boolean;
 }
