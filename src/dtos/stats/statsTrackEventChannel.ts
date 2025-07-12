@@ -1,3 +1,6 @@
 export interface DTOStatsTrackEventChannel {
-  // Define DTO fields here
+  id: number;
+  account_guid: string;
+  channel_id: number;
+  created_at: string;
 }

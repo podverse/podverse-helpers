@@ -1,3 +1,8 @@
+import { DTOAccount } from '../account/account';
+
 export interface DTOStatsTrackAccountGuid {
-  // Define DTO fields here
+  id: number;
+  account: DTOAccount;
+  account_guid: string;
+  updated_at: string;
 }

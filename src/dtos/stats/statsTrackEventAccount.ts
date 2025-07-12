@@ -1,3 +1,6 @@
 export interface DTOStatsTrackEventAccount {
-  // Define DTO fields here
+  id: number;
+  account_guid: string;
+  tracked_account_id: number;
+  created_at: string;
 }
