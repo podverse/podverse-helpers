@@ -17,7 +17,6 @@
   "license": "AGPLv3",
   "dependencies": {
     "axios": "^1.7.4",
-    "bcrypt": "^5.1.1",
     "bignumber.js": "^9.1.2",
     "joi": "^17.13.3",
     "module-alias": "^2.2.3",
@@ -30,7 +29,6 @@
     "@eslint/config-array": "^0.18.0",
     "@eslint/eslintrc": "^3.1.0",
     "@eslint/js": "^9.8.0",
-    "@types/bcrypt": "^5.0.2",
     "@types/node": "^22.0.0",
     "eslint": "^9.9.0",
     "nodemon": "^3.1.4",

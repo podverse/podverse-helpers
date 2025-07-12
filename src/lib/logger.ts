@@ -1,4 +1,4 @@
-import { config } from '@helpers/config';
+import { config } from '../config';
 import { createLogger, format, transports } from 'winston';
 import * as TransportStream from 'winston-transport';
 import * as fs from 'fs';

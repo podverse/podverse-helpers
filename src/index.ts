@@ -1,9 +1,6 @@
-import './module-alias-config';
-
 export * from './lib/error/errorMessages';
 export * from './lib/accountMembership';
 export * from './lib/array';
-export * from './lib/auth/password';
 export * from './lib/boolean';
 export * from './lib/category';
 export * from './lib/date';
@@ -17,7 +14,7 @@ export * from './lib/logTimer';
 export * from './lib/medium';
 export * from './lib/playlistResource';
 export * from './lib/remoteItem';
-export * from './lib/request';
+export * from './lib/requests';
 export * from './lib/sharableStatus';
 export * from './lib/sleep';
 export * from './lib/sortableTitle';

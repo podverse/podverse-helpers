@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import { config } from '@helpers/config';
+import { config } from '../../config';
 
 export const request = async <T>(
   url: string,
