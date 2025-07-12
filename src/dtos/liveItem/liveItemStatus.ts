@@ -1,3 +1,4 @@
 export interface DTOLiveItemStatus {
-  // Define DTO fields here
+  id: number;
+  status: 'pending' | 'live' | 'ended';
 }
