@@ -20,7 +20,6 @@ export interface ApiRequestParams {
 }
 
 export function apiRequest<T>({ path, method = 'GET', data, config = {}, abort }: ApiRequestParams): Promise<T> {
-  console.log(`API Request: ${method} ${API_BASE}${path}`, { data, config, abort });
   const options =
     method === 'GET' || method === 'DELETE'
       ? { method, ...config }
