@@ -1,3 +1,4 @@
 export interface DTOItemItunesEpisodeType {
-  // Define DTO fields here
+  id: number;
+  itunes_episode_type: string;
 }

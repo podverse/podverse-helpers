@@ -1,3 +1,11 @@
 export interface DTOItem {
-  // Define DTO fields here
+  id: number;
+  id_text: string;
+  slug?: string | null;
+  channel_id: number;
+  guid?: string | null;
+  guid_enclosure_url?: string | null;
+  pub_date?: string | null;
+  title?: string | null;
+  item_flag_status_id: number;
 }

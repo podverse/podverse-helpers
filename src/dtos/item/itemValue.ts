@@ -1,3 +1,7 @@
 export interface DTOItemValue {
-  // Define DTO fields here
+  id: number;
+  item_id: number;
+  type: string;
+  method: string;
+  suggested?: number | null;
 }

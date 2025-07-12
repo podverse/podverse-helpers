@@ -1,3 +1,6 @@
 export interface DTOItemSeason {
-  // Define DTO fields here
+  id: number;
+  channel_season_id: number;
+  item_id: number;
+  title: string | null;
 }

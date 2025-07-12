@@ -1,3 +1,6 @@
 export interface DTOItemFunding {
-  // Define DTO fields here
+  id: number;
+  item_id: number;
+  url: string;
+  title?: string | null;
 }

@@ -1,3 +1,6 @@
 export interface DTOItemEnclosureIntegrity {
-  // Define DTO fields here
+  id: number;
+  item_enclosure_id: number;
+  type: 'sri' | 'pgp-signature';
+  value: string;
 }

@@ -1,3 +1,6 @@
 export interface DTOItemChaptersFeed {
-  // Define DTO fields here
+  id: number;
+  item_id: number;
+  url: string;
+  type: string;
 }

@@ -1,3 +1,7 @@
 export interface DTOItemLocation {
-  // Define DTO fields here
+  id: number;
+  item_id: number;
+  geo?: string | null;
+  osm?: string | null;
+  name: string | null;
 }

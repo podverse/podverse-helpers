@@ -1,3 +1,6 @@
 export interface DTOItemContentLink {
-  // Define DTO fields here
+  id: number;
+  item_id: number;
+  href: string;
+  title?: string | null;
 }

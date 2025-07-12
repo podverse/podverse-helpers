@@ -1,3 +1,8 @@
 export interface DTOItemSoundbite {
-  // Define DTO fields here
+  id: number;
+  id_text: string;
+  item_id: number;
+  start_time: string;
+  duration: string;
+  title?: string | null;
 }

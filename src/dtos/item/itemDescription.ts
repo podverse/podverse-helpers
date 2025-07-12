@@ -1,3 +1,5 @@
 export interface DTOItemDescription {
-  // Define DTO fields here
+  id: number;
+  item_id: number;
+  value: string;
 }

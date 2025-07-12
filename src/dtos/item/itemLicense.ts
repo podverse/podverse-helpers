@@ -1,3 +1,6 @@
 export interface DTOItemLicense {
-  // Define DTO fields here
+  id: number;
+  item_id: number;
+  identifier: string;
+  url: string | null;
 }
