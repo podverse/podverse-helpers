@@ -1,27 +1,30 @@
-import { config } from '../config';
-import { logger } from './logger';
+import { LoggerService } from './logger';
 
-class TimerManager {
+export class TimerManager {
   private timers: Map<string, number>;
+  public shouldLogTimer: boolean;
+  private logger: LoggerService;
 
-  constructor() {
+  constructor(shouldLogTimer: boolean, logger: LoggerService) {
     this.timers = new Map();
+    this.shouldLogTimer = shouldLogTimer;
+    this.logger = logger;
   }
 
   start(label: string): void {
-    if (config.shouldLogTimer) {
+    if (this.shouldLogTimer) {
       this.timers.set(label, performance.now());
     }
   }
 
   end(label: string, preventLog?: boolean): number {
-    if (config.shouldLogTimer) {
+    if (this.shouldLogTimer) {
       const startTime = this.timers.get(label);
       if (startTime !== undefined) {
         const endTime = performance.now();
         const duration = endTime - startTime;
         if (!preventLog) {
-          logger.info(`${label} took ${duration}ms`);
+          this.logger.info(`${label} took ${duration}ms`);
         }
         this.timers.delete(label);
         return duration;
@@ -31,15 +34,13 @@ class TimerManager {
   }
 
   endAll(): void {
-    if (config.shouldLogTimer) {
+    if (this.shouldLogTimer) {
       this.timers.forEach((startTime, label) => {
         const endTime = performance.now();
         const duration = endTime - startTime;
-        logger.info(`${label} took ${duration}ms`);
+        this.logger.info(`${label} took ${duration}ms`);
       });
       this.timers.clear();
     }
   }
 }
-
-export const timerManager = new TimerManager();

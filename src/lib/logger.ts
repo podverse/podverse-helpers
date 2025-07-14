@@ -1,5 +1,4 @@
-import { config } from '../config';
-import { createLogger, format, transports } from 'winston';
+import { createLogger, format, transports, Logger } from 'winston';
 import * as TransportStream from 'winston-transport';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -10,56 +9,87 @@ const logFormat = printf(({ level, message, timestamp, stack }) => {
   return stack ? `${timestamp} [${level}]: ${message} - ${stack}` : `${timestamp} [${level}]: ${message}`;
 });
 
-const logDir = config.logging.logDir;
-if (!fs.existsSync(logDir)) {
-  fs.mkdirSync(logDir, { recursive: true });
+export interface LoggerServiceParams {
+  logDir: string;
+  logLevel: string;
 }
 
-export const logger = createLogger({
-  level: config.logLevel,
-  format: combine(
-    timestamp(),
-    logFormat
-  ),
-  transports: [
-    new transports.Console({
-      format: combine(
-        colorize(),
-        timestamp(),
-        logFormat
-      )
-    }),
-    new transports.File({
-      filename: path.join(logDir, 'info.log'),
-      level: 'info',
+export class LoggerService {
+  private logger: Logger;
+
+  constructor({ logDir, logLevel }: LoggerServiceParams) {
+    const logDirectory = logDir;
+    if (!fs.existsSync(logDirectory)) {
+      fs.mkdirSync(logDirectory, { recursive: true });
+    }
+
+    this.logger = createLogger({
+      level: logLevel,
       format: combine(
         timestamp(),
         logFormat
-      )
-    }),
-    new transports.File({
-      filename: path.join(logDir, 'error.log'),
-      level: 'error',
-      format: combine(
-        timestamp(),
-        logFormat
-      )
-    })
-  ]
-});
-
-export const addRemoteTransport = (transport: TransportStream) => {
-  logger.add(transport);
-};
-
-export const logError = (message: string, error?: Error | unknown) => {
-  logger.error(message);
-
-  if (error instanceof Error) {
-    logger.error(error.message, { stack: error.stack });
-  } else if (typeof error === 'string') {
-    logger.error(error);
-  } else if (error) {
-    logger.error('An unknown error occurred:', { error });
+      ),
+      transports: [
+        new transports.Console({
+          format: combine(
+            colorize(),
+            timestamp(),
+            logFormat
+          )
+        }),
+        new transports.File({
+          filename: path.join(logDirectory, 'info.log'),
+          level: 'info',
+          format: combine(
+            timestamp(),
+            logFormat
+          )
+        }),
+        new transports.File({
+          filename: path.join(logDirectory, 'error.log'),
+          level: 'error',
+          format: combine(
+            timestamp(),
+            logFormat
+          )
+        })
+      ]
+    });
   }
-};
+
+  public addRemoteTransport(transport: TransportStream) {
+    this.logger.add(transport);
+  }
+
+  public logError(message: string, error?: Error | unknown) {
+    this.logger.error(message);
+
+    if (error instanceof Error) {
+      this.logger.error(error.message, { stack: error.stack });
+    } else if (typeof error === 'string') {
+      this.logger.error(error);
+    } else if (error) {
+      this.logger.error('An unknown error occurred:', { error });
+    }
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  info(message: string, meta?: any) {
+    this.logger.info(message, meta);
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  warn(message: string, meta?: any) {
+    this.logger.warn(message, meta);
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  error(message: string, meta?: any) {
+    this.logger.error(message, meta);
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  debug(message: string, meta?: any) {
+    this.logger.debug(message, meta);
+  }
+}
