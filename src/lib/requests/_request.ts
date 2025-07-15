@@ -1,5 +1,4 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import { config } from '../../config';
 
 export const request = async <T>(
   url: string,
@@ -18,12 +17,16 @@ export const request = async <T>(
   }
   
   try {
+    const isJSONRequest =
+      requestConfig?.method?.toUpperCase() === 'POST'
+      || requestConfig?.method?.toUpperCase() === 'PUT';
+
     const response: AxiosResponse<T> = await axios.request<T>({
       url,
       method: 'GET',
       ...requestConfig,
       headers: {
-        'User-Agent': config?.userAgent,
+        ...(isJSONRequest ? { 'Content-Type': 'application/json' } : {}),
         ...requestConfig?.headers
       },
       signal: abort?.controller?.signal,

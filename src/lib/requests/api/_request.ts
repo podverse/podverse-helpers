@@ -1,13 +1,6 @@
 import { request } from '../_request';
-import { config } from '../../../config';
-
-function getApiBase(): string {
-  const { protocol, host, port, prefix, version } = config.api;
-  const portPart = port ? `:${port}` : '';
-  return `${protocol}://${host}${portPart}${prefix.replace(/\/$/, '')}${version}`;
-}
-
-const API_BASE = getApiBase();
+import { reqAccountGetManyPublic } from './account/account';
+import { reqAuthLogin, reqAuthLogout, reqAuthMe } from './auth/auth';
 
 export type AbortOpts = { controller: AbortController; timeoutMs: number };
 
@@ -17,17 +10,75 @@ export interface ApiRequestParams {
   data?: unknown;
   config?: Record<string, unknown>;
   abort?: AbortOpts;
+  userAgent?: string;
+  jwt?: string;
 }
 
-export function apiRequest<T>({ path, method = 'GET', data, config = {}, abort }: ApiRequestParams): Promise<T> {
-  const options =
-    method === 'GET' || method === 'DELETE'
-      ? { method, ...config }
-      : { method, data, ...config };
+export class ApiRequestService {
+  private apiBase: string;
+  private jwt?: string;
 
-  return request<T>(
-    `${API_BASE}${path}`,
-    options,
-    abort
-  );
+  constructor(params: {
+    protocol: string;
+    host: string;
+    port?: string | number;
+    prefix: string;
+    version: string;
+    jwt?: string;
+  }) {
+    const { protocol, host, port, prefix, version, jwt } = params;
+    const portPart = port ? `:${port}` : '';
+    this.apiBase = `${protocol}://${host}${portPart}${prefix.replace(/\/$/, '')}${version}`;
+    this.jwt = jwt;
+  }
+
+  apiRequest<T>({ path, method = 'GET', data, config = {}, abort, userAgent }: ApiRequestParams): Promise<T> {
+    const mergedConfig = {
+      ...config,
+      ...(userAgent ? { userAgent } : {}),
+      ...(this.jwt ?
+        {
+          headers: {
+            ...(config.headers || {}),
+            Cookie: `jwt=${this.jwt}`,
+          },
+        }
+        : {}),
+    };
+    
+    const options =
+      method === 'GET' || method === 'DELETE'
+        ? { method, ...mergedConfig }
+        : { method, data, ...mergedConfig };
+    
+    return request<T>(
+      `${this.apiBase}${path}`,
+      options,
+      abort
+    );
+  }
+
+  /* ACCOUNT */
+
+  reqAccountGetManyPublic() {
+    return reqAccountGetManyPublic(this);
+  }
+  
+  /* AUTH */
+
+  reqAuthLogin(params: {
+    email: string;
+    password: string;
+    includeTokenInResponseBody?: boolean;
+  }) {
+    return reqAuthLogin(this, params);
+  }
+
+  reqAuthLogout() {
+    return reqAuthLogout(this);
+  }
+
+  reqAuthMe() {
+    return reqAuthMe(this);
+  }
 }

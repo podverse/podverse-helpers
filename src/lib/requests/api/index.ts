@@ -1,1 +1,1 @@
-export { reqAccountGetManyPublic } from './account/account';
+export { ApiRequestService } from './_request';
