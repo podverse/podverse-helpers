@@ -33,7 +33,7 @@ export class ApiRequestService {
     this.jwt = jwt;
   }
 
-  apiRequest<T>({ path, method = 'GET', data, config = {}, abort, userAgent }: ApiRequestParams): Promise<T> {
+  async apiRequest<T>({ path, method = 'GET', data, config = {}, abort, userAgent }: ApiRequestParams): Promise<T> {
     const mergedConfig = {
       ...config,
       ...(userAgent ? { userAgent } : {}),
@@ -52,11 +52,12 @@ export class ApiRequestService {
         ? { method, ...mergedConfig }
         : { method, data, ...mergedConfig };
     
-    return request<T>(
+    const response = await request<T>(
       `${this.apiBase}${path}`,
       options,
       abort
     );
+    return response.data;
   }
 
   /* ACCOUNT */

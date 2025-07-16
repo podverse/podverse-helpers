@@ -7,7 +7,7 @@ export const request = async <T>(
     controller: AbortController
     timeoutMs: number
   }
-): Promise<T> => {
+): Promise<{ status: number; data: T }> => {
   // eslint-disable-next-line no-undef
   let timeoutId: NodeJS.Timeout | undefined;
   if (abort) {
@@ -31,7 +31,7 @@ export const request = async <T>(
       },
       signal: abort?.controller?.signal,
     });
-    return response.data;
+    return { status: response.status, data: response.data };
   } finally {
     if (timeoutId) {
       clearTimeout(timeoutId);
