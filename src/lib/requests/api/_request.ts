@@ -85,7 +85,7 @@ export class ApiRequestService {
 
   /* CHANNEL */
 
-  reqChannelGetMany(params: { page?: number } = {}) {
+  reqChannelGetMany(params: { page?: number, sort?: "recent" | "oldest" } = {}) {
     return reqChannelGetMany(this, params);
   }
 }
