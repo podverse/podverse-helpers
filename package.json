@@ -18,6 +18,7 @@
   "dependencies": {
     "axios": "^1.7.4",
     "bignumber.js": "^9.1.2",
+    "date-fns": "^4.1.0",
     "joi": "^17.13.3",
     "module-alias": "^2.2.3",
     "podcast-partytime": "^4.8.0",

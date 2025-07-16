@@ -1,6 +1,7 @@
 import { request } from '../_request';
 import { reqAccountGetManyPublic } from './account/account';
 import { reqAuthLogin, reqAuthLogout, reqAuthMe } from './auth/auth';
+import { reqChannelGetMany } from './channel/channel';
 
 export type AbortOpts = { controller: AbortController; timeoutMs: number };
 
@@ -81,4 +82,14 @@ export class ApiRequestService {
   reqAuthMe() {
     return reqAuthMe(this);
   }
+
+  /* CHANNEL */
+
+  reqChannelGetMany(params: { page?: number } = {}) {
+    return reqChannelGetMany(this, params);
+  }
 }
+
+export type ApiRequestServiceMethod = {
+  [K in keyof ApiRequestService]: ApiRequestService[K] extends (...args: unknown[]) => unknown ? ApiRequestService[K] : never;
+}[keyof ApiRequestService];

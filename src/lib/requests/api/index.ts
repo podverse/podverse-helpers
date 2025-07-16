@@ -1,1 +1,1 @@
-export { ApiRequestService } from './_request';
+export { ApiRequestService, ApiRequestServiceMethod } from './_request';
