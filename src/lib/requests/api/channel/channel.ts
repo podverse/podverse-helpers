@@ -11,8 +11,8 @@ export async function reqChannelGetMany(
     method: 'GET',
     config: {
       params: {
-        page: params.page ?? 1,
-        sort: params.sort ?? 'recent'
+        ...(params.page ? { page: params.page } : {}),
+        ...(params.sort ? { sort: params.sort } : {})
       }
     }
   });
