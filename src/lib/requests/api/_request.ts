@@ -2,6 +2,7 @@ import { request } from '../_request';
 import { reqAccountGetManyPublic } from './account/account';
 import { reqAuthLogin, reqAuthLogout, reqAuthMe } from './auth/auth';
 import { reqChannelGetMany } from './channel/channel';
+import { QueryParamChannels } from './queryParams';
 
 export type AbortOpts = { controller: AbortController; timeoutMs: number };
 
@@ -34,30 +35,35 @@ export class ApiRequestService {
   }
 
   async apiRequest<T>({ path, method = 'GET', data, config = {}, abort, userAgent }: ApiRequestParams): Promise<T> {
-    const mergedConfig = {
-      ...config,
-      ...(userAgent ? { userAgent } : {}),
-      ...(this.jwt ?
-        {
-          headers: {
-            ...(config.headers || {}),
-            Cookie: `jwt=${this.jwt}`,
-          },
-        }
-        : {}),
-    };
-    
-    const options =
-      method === 'GET' || method === 'DELETE'
-        ? { method, ...mergedConfig }
-        : { method, data, ...mergedConfig };
-    
-    const response = await request<T>(
-      `${this.apiBase}${path}`,
-      options,
-      abort
-    );
-    return response.data;
+    try {
+      const mergedConfig = {
+        ...config,
+        ...(userAgent ? { userAgent } : {}),
+        ...(this.jwt ?
+          {
+            headers: {
+              ...(config.headers || {}),
+              Cookie: `jwt=${this.jwt}`,
+            },
+          }
+          : {}),
+      };
+      
+      const options =
+        method === 'GET' || method === 'DELETE'
+          ? { method, ...mergedConfig }
+          : { method, data, ...mergedConfig };
+
+      const response = await request<T>(
+        `${this.apiBase}${path}`,
+        options,
+        abort
+      );
+      return response.data;
+    } catch (error) {
+      console.error("API request error:", error);
+      throw error;
+    }
   }
 
   /* ACCOUNT */
@@ -86,7 +92,7 @@ export class ApiRequestService {
 
   /* CHANNEL */
 
-  reqChannelGetMany(params: { page?: number, sort?: "recent" | "oldest" } = {}) {
+  reqChannelGetMany(params: QueryParamChannels = {}) {
     return reqChannelGetMany(this, params);
   }
 }
