@@ -232,4 +232,6 @@ export function getCategoryEnumValue(input: string | null): CategoryEnum | null 
   return (sanitizedInput && mapping[sanitizedInput]) || null;
 }
 
-export const categoryMappingKeys = Object.keys(mapping);
+export const CATEGORY_MAPPING_KEYS = Object.keys(mapping);
+
+export type CategoryMappingKeys = typeof CATEGORY_MAPPING_KEYS[number];
