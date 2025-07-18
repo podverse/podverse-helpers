@@ -50,3 +50,16 @@ export async function reqAuthMe(
   });
 }
 
+export async function reqAuthCheckSession(
+  api: ApiRequestService,
+  options?: { headers?: Record<string, string> }
+) {
+  return api.apiRequest<ApiMessageResponse>({
+    path: '/auth/check-session',
+    method: 'GET',
+    config: {
+      withCredentials: true,
+      ...(options?.headers ? { headers: options.headers } : {})
+    }
+  });
+}

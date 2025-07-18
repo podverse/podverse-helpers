@@ -1,6 +1,6 @@
 import { request } from '../_request';
 import { reqAccountGetManyPublic } from './account/account';
-import { reqAuthLogin, reqAuthLogout, reqAuthMe } from './auth/auth';
+import { reqAuthCheckSession, reqAuthLogin, reqAuthLogout, reqAuthMe } from './auth/auth';
 import { reqChannelGetMany } from './channel/channel';
 import { QueryParamChannels } from './queryParams';
 
@@ -88,6 +88,10 @@ export class ApiRequestService {
 
   reqAuthMe() {
     return reqAuthMe(this);
+  }
+
+  reqAuthCheckSession() {
+    return reqAuthCheckSession(this);
   }
 
   /* CHANNEL */
