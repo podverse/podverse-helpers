@@ -11,6 +11,7 @@ export * from './lib/hash';
 export * from './lib/item';
 export * from './lib/itemImage';
 export * from './lib/medium';
+export * from './lib/pagination';
 export * from './lib/playlistResource';
 export * from './lib/remoteItem';
 export * from './lib/requests';
