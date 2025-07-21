@@ -4,4 +4,5 @@ export interface DTOCategory {
   display_name: string;
   slug: string;
   mapping_key: string | null;
+  children?: DTOCategory[];
 }
