@@ -1,6 +1,7 @@
 import { request } from '../_request';
 import { reqAccountGetManyPublic } from './account/account';
 import { reqAuthCheckSession, reqAuthLogin, reqAuthLogout, reqAuthMe } from './auth/auth';
+import { reqCategoryGetAll } from './category/category';
 import { reqChannelGetMany } from './channel/channel';
 import { QueryParamChannels } from './queryParams';
 
@@ -92,6 +93,12 @@ export class ApiRequestService {
 
   reqAuthCheckSession() {
     return reqAuthCheckSession(this);
+  }
+
+  /* CATEGORY */
+  
+  reqCategoryGetAll() {
+    return reqCategoryGetAll(this);
   }
 
   /* CHANNEL */
