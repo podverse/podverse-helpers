@@ -1,3 +1,5 @@
+import { DTOLiveItem } from "../liveItem/liveItem";
+
 export interface DTOItem {
   id: number;
   id_text: string;
@@ -8,4 +10,5 @@ export interface DTOItem {
   pub_date?: string | null;
   title?: string | null;
   item_flag_status_id: number;
+  live_item?: DTOLiveItem | null;
 }

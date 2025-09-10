@@ -1,14 +1,14 @@
 import { ApiRequestService } from '../_request';
 import { ApiListResponse } from '../_response';
-import { DTOChannel } from 'src/dtos';
+import { DTOChannel, DTOItem } from 'src/dtos';
 import { QueryParamsChannels } from '../queryParams';
 
-export async function reqChannelGetMany(
+export async function reqItemGetMany(
   api: ApiRequestService,
   params: QueryParamsChannels = {}
 ) {
   return api.apiRequest<ApiListResponse<DTOChannel>>({
-    path: '/channel',
+    path: '/item',
     method: 'GET',
     config: {
       params: {
@@ -16,19 +16,20 @@ export async function reqChannelGetMany(
         ...(params.sort ? { sort: params.sort } : {}),
         ...(params.type ? { type: params.type } : {}),
         ...(params.range ? { range: params.range } : {}),
-        ...(params.category ? { category: params.category } : {})
+        ...(params.category ? { category: params.category } : {}),
+        // ...(params.medium ? { medium: params.medium } : {})
       },
       withCredentials: true
     }
   });
 }
 
-export async function reqChannelGetByIdOrIdText(
+export async function reqItemGetByIdOrIdText(
   api: ApiRequestService,
   idOrIdText: string
 ) {
-  return api.apiRequest<DTOChannel>({
-    path: `/channel/${idOrIdText}`,
+  return api.apiRequest<DTOItem>({
+    path: `/item/${idOrIdText}`,
     method: 'GET'
   });
 }

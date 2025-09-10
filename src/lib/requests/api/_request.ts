@@ -2,8 +2,9 @@ import { request } from '../_request';
 import { reqAccountGetManyPublic } from './account/account';
 import { reqAuthCheckSession, reqAuthLogin, reqAuthLogout, reqAuthMe } from './auth/auth';
 import { reqCategoryGetAll } from './category/category';
-import { reqChannelGetMany } from './channel/channel';
-import { QueryParamChannels } from './queryParams';
+import { reqChannelGetByIdOrIdText, reqChannelGetMany } from './channel/channel';
+import { reqItemGetByIdOrIdText, reqItemGetMany } from './item/item';
+import { QueryParamsChannels } from './queryParams';
 
 export type AbortOpts = { controller: AbortController; timeoutMs: number };
 
@@ -103,8 +104,22 @@ export class ApiRequestService {
 
   /* CHANNEL */
 
-  reqChannelGetMany(params: QueryParamChannels = {}) {
+  reqChannelGetByIdOrIdText(idOrIdText: string) {
+    return reqChannelGetByIdOrIdText(this, idOrIdText);
+  }
+
+  reqChannelGetMany(params: QueryParamsChannels = {}) {
     return reqChannelGetMany(this, params);
+  }
+
+  /* ITEM */
+
+  reqItemGetByIdOrIdText(idOrIdText: string) {
+    return reqItemGetByIdOrIdText(this, idOrIdText);
+  }
+
+  reqItemGetMany(params: QueryParamsChannels = {}) {
+    return reqItemGetMany(this, params);
   }
 }
 
