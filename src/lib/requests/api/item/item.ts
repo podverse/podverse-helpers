@@ -33,3 +33,10 @@ export async function reqItemGetByIdOrIdText(
     method: 'GET'
   });
 }
+
+export async function reqItemGetManyWithoutLiveItemByChannel(api: ApiRequestService, channel_id: string) {
+  return api.apiRequest<ApiListResponse<DTOItem>>({
+    path: `/item/channel/${channel_id}`,
+    method: 'GET'
+  });
+}
