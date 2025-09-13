@@ -1,4 +1,4 @@
-import { DTOChannelImage } from "../dtos";
+import { DTOChannelImage, DTOItemImage } from "../dtos";
 
 type ItemImagePartial = {
   image_width_size: number | null;
@@ -23,7 +23,7 @@ export function findDTOChannelImageBySize(
 }
 
 export function findDTOItemImageBySize(
-  itemImages: ItemImagePartial[] | null | undefined,
+  itemImages: DTOItemImage[] | null | undefined,
   size: number | 'largest' | 'smallest',
   comparison: Comparison = null,
   allowedExtensions: AllowedExtension[] = ['png', 'jpg']
