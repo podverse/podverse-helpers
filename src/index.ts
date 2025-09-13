@@ -1,6 +1,7 @@
 export * from './dtos';
 
 export * from './lib/error/errorMessages';
+export * from './lib/web/clipboard';
 export * from './lib/accountMembership';
 export * from './lib/array';
 export * from './lib/boolean';
