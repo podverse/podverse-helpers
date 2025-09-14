@@ -1,6 +1,5 @@
 export interface DTOChannelValueRecipient {
   id: number;
-  channel_value_id: number;
   type: string;
   address: string;
   split: number;
