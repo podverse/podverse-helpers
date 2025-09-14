@@ -4,6 +4,16 @@ import { DTOChannelValueRecipient } from '../dtos/channel/channelValueRecipient'
 export type NormalizedChannelValueRecipient = DTOChannelValueRecipient & { normalized_split: number; final_amount: number }
 export type NormalizedItemValueRecipient = DTOItemValueRecipient & { normalized_split: number; final_amount: number }
 
+export type AppValueRecipient = {
+  type: string
+  address: string
+  name: string
+  custom_key?: string | null
+  custom_value?: string | null
+  normalized_split: number
+  final_amount: number
+}
+
 // Helper to ensure integer splits sum to 100 using the largest remainder method
 function normalizeRecipients<T extends { split: number }>(
   recipients: T[],
