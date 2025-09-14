@@ -24,3 +24,4 @@ export * from './lib/validation/databaseConstants';
 export * from './lib/validation/email';
 export * from './lib/validation/password';
 export * from './lib/validation/url';
+export * from './lib/value';
