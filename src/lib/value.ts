@@ -51,7 +51,7 @@ function normalizeRecipients<T extends { split: number }>(
   return recipients.map((recipient, i) => ({
     ...recipient,
     normalized_split: normalizedSplits[i],
-    final_amount: (normalizedSplits[i] / 100) * total_amount,
+    final_amount: Math.floor((normalizedSplits[i] / 100) * total_amount),
   }));
 }
 
