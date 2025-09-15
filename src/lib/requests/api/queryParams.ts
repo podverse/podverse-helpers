@@ -42,7 +42,7 @@ export interface QueryParamsChannels extends QueryParamsPage {
 // Items
 
 export const QUERY_PARAMS_ITEMS_TYPE_VALUES = ["all", "subscribed", "category"] as const;
-export const QUERY_PARAMS_ITEMS_SORT_VALUES = ["recent", "oldest", "alphabetical", "top"] as const;
+export const QUERY_PARAMS_ITEMS_SORT_VALUES = ["recent", "oldest", "top"] as const;
 
 export type QueryParamsItemsType = typeof QUERY_PARAMS_ITEMS_TYPE_VALUES[number];
 export type QueryParamsItemsSort = typeof QUERY_PARAMS_ITEMS_SORT_VALUES[number];

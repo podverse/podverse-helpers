@@ -1,7 +1,7 @@
 import { ApiRequestService } from '../_request';
 import { ApiListResponse } from '../_response';
 import { DTOChannel, DTOItem } from 'src/dtos';
-import { QueryParamsChannels } from '../queryParams';
+import { QueryParamsChannel, QueryParamsChannels } from '../queryParams';
 
 export async function reqItemGetMany(
   api: ApiRequestService,
@@ -34,9 +34,21 @@ export async function reqItemGetByIdOrIdText(
   });
 }
 
-export async function reqItemGetManyWithoutLiveItemByChannel(api: ApiRequestService, channel_id: string) {
+export async function reqItemGetManyWithoutLiveItemByChannel(
+  api: ApiRequestService,
+  channelIdOrIdText: string,
+  params: QueryParamsChannel = {}
+) {
   return api.apiRequest<ApiListResponse<DTOItem>>({
-    path: `/item/channel/${channel_id}`,
-    method: 'GET'
+    path: `/item/channel/${channelIdOrIdText}`,
+    method: 'GET',
+    config: {
+      params: {
+        ...(params.page ? { page: params.page } : {}),
+        ...(params.sort ? { sort: params.sort } : {}),
+        ...(params.range ? { range: params.range } : {})
+      },
+      withCredentials: true
+    }
   });
 }

@@ -5,7 +5,7 @@ import { reqAuthCheckSession, reqAuthLogin, reqAuthLogout, reqAuthMe } from './a
 import { reqCategoryGetAll } from './category/category';
 import { reqChannelGetByIdOrIdText, reqChannelGetMany } from './channel/channel';
 import { reqItemGetByIdOrIdText, reqItemGetMany, reqItemGetManyWithoutLiveItemByChannel } from './item/item';
-import { QueryParamsChannels } from './queryParams';
+import { QueryParamsChannel, QueryParamsChannels } from './queryParams';
 
 export type AbortOpts = { controller: AbortController; timeoutMs: number };
 
@@ -133,8 +133,8 @@ export class ApiRequestService {
     return reqItemGetMany(this, params);
   }
 
-  reqItemGetManyWithoutLiveItemByChannel(channel_id: string) {
-    return reqItemGetManyWithoutLiveItemByChannel(this, channel_id);
+  reqItemGetManyWithoutLiveItemByChannel(channel_id: string, params: QueryParamsChannel = {}) {
+    return reqItemGetManyWithoutLiveItemByChannel(this, channel_id, params);
   }
   
 }
