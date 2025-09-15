@@ -1,4 +1,4 @@
-export interface ApiMessageResponse<> {
+export interface ApiMessageResponse {
   message: string;
 };
 

@@ -1,5 +1,6 @@
 import { request } from '../_request';
 import { reqAccountGetManyPublic } from './account/account';
+import { reqAccountFollowChannel, reqAccountUnfollowChannel } from './account/follow/channel';
 import { reqAuthCheckSession, reqAuthLogin, reqAuthLogout, reqAuthMe } from './auth/auth';
 import { reqCategoryGetAll } from './category/category';
 import { reqChannelGetByIdOrIdText, reqChannelGetMany } from './channel/channel';
@@ -72,6 +73,16 @@ export class ApiRequestService {
 
   reqAccountGetManyPublic() {
     return reqAccountGetManyPublic(this);
+  }
+
+  /* ACCOUNT > FOLLOW > CHANNEL */
+
+  reqAccountFollowChannel(params: { channel_id_text: string }) {
+    return reqAccountFollowChannel(this, params);
+  }
+
+  reqAccountUnfollowChannel(params: { channel_id_text: string }) {
+    return reqAccountUnfollowChannel(this, params);
   }
   
   /* AUTH */
