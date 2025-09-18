@@ -43,9 +43,15 @@ export function findImageBySize(
 ): ItemImagePartial | null {
   const extensions: ValidExtension[] = allowedExtensions.map(ext => ext === 'jpeg' ? 'jpg' : ext) as ValidExtension[];
   const isValidExtension = (url: string) => {
-    const urlWithoutParams = url.split('?')[0].split('#')[0];
-    const extension = urlWithoutParams.split('.').pop()?.toLowerCase();
-    return extension ? extensions.includes(extension === 'jpeg' ? 'jpg' : extension as ValidExtension) : false;
+    // Match .jpg, ?.jpg, etc. at the end of the URL (before query/hash)
+    const match = url.match(/(\?|\.)(jpg|jpeg|png|gif|webp|svg)(?=($|\?|#))/i);
+
+    if (!match) {
+      return false;
+    }
+
+    const ext = match[2].toLowerCase() === 'jpeg' ? 'jpg' : match[2].toLowerCase();
+    return extensions.includes(ext as ValidExtension);
   };
 
   if (size === 'largest') {
