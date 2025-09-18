@@ -5,6 +5,7 @@ import { reqAuthCheckSession, reqAuthLogin, reqAuthLogout, reqAuthMe } from './a
 import { reqCategoryGetAll } from './category/category';
 import { reqChannelGetByIdOrIdText, reqChannelGetMany } from './channel/channel';
 import { reqItemGetByIdOrIdText, reqItemGetMany, reqItemGetManyWithoutLiveItemByChannel } from './item/item';
+import { reqPodrollGetForChannel } from './podroll/podroll';
 import { QueryParamsChannel, QueryParamsChannels } from './queryParams';
 
 export type AbortOpts = { controller: AbortController; timeoutMs: number };
@@ -137,6 +138,12 @@ export class ApiRequestService {
     return reqItemGetManyWithoutLiveItemByChannel(this, channel_id, params);
   }
   
+  /* PODROLL */
+
+  reqPodrollGetForChannel(idOrIdText: string) {
+    return reqPodrollGetForChannel(this, idOrIdText);
+  }
+
 }
 
 export type ApiRequestServiceMethod = {

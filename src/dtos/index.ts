@@ -88,6 +88,8 @@ export * from './liveItem/liveItemStatus';
 export * from './playlist/playlist';
 export * from './playlist/playlistResource';
 
+export * from './podroll';
+
 export * from './queue/queue';
 export * from './queue/queueResource';
 
