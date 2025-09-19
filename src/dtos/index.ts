@@ -85,6 +85,8 @@ export * from './item/itemValueTimeSplitRemoteItem';
 export * from './liveItem/liveItem';
 export * from './liveItem/liveItemStatus';
 
+export * from './mediaPlayer/playbackSpeed';
+
 export * from './playlist/playlist';
 export * from './playlist/playlistResource';
 
