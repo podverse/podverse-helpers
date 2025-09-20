@@ -16,7 +16,10 @@ export * from './lib/guid';
 export * from './lib/hash';
 export * from './lib/html';
 export * from './lib/image';
-export * from './lib/item';
+
+export * from './lib/item/item';
+export * from './lib/item/itemEnclosure';
+
 export * from './lib/medium';
 export * from './lib/pagination';
 export * from './lib/playlistResource';
