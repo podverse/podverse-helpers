@@ -26,8 +26,8 @@ export interface QueryParamsChannel extends QueryParamsPage {
 
 // Channels
 
-export const QUERY_PARAMS_CHANNELS_TYPE_VALUES = ["all", "subscribed", "category"] as const;
-export const QUERY_PARAMS_CHANNELS_SORT_VALUES = ["recent", "oldest", "alphabetical", "top"] as const;
+export const QUERY_PARAMS_CHANNELS_TYPE_VALUES = ["global", "subscribed", "category"] as const;
+export const QUERY_PARAMS_CHANNELS_SORT_VALUES = ["recent", "oldest", "a_z", "top"] as const;
 
 export type QueryParamsChannelsType = typeof QUERY_PARAMS_CHANNELS_TYPE_VALUES[number];
 export type QueryParamsChannelsSort = typeof QUERY_PARAMS_CHANNELS_SORT_VALUES[number];
@@ -41,7 +41,7 @@ export interface QueryParamsChannels extends QueryParamsPage {
 
 // Items
 
-export const QUERY_PARAMS_ITEMS_TYPE_VALUES = ["all", "subscribed", "category"] as const;
+export const QUERY_PARAMS_ITEMS_TYPE_VALUES = ["global", "subscribed", "category"] as const;
 export const QUERY_PARAMS_ITEMS_SORT_VALUES = ["recent", "oldest", "top"] as const;
 
 export type QueryParamsItemsType = typeof QUERY_PARAMS_ITEMS_TYPE_VALUES[number];
@@ -52,4 +52,18 @@ export interface QueryParamsItems extends QueryParamsPage {
   sort?: QueryParamsItemsSort;
   range?: QueryParamsStatsRange;
   category?: CategoryMappingKeys;
+}
+
+// Playlists
+
+export const QUERY_PARAMS_PLAYLISTS_TYPE_VALUES = ["all", "audio", "video", "music", "global"] as const;
+export const QUERY_PARAMS_PLAYLISTS_SORT_VALUES = ["a_z", "top"] as const;
+
+export type QueryParamsPlaylistsType = typeof QUERY_PARAMS_PLAYLISTS_TYPE_VALUES[number];
+export type QueryParamsPlaylistsSort = typeof QUERY_PARAMS_PLAYLISTS_SORT_VALUES[number];
+
+export interface QueryParamsPlaylists extends QueryParamsPage {
+  type?: QueryParamsPlaylistsType;
+  sort?: QueryParamsPlaylistsSort;
+  range?: QueryParamsStatsRange;
 }

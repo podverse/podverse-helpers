@@ -5,9 +5,9 @@ import { reqAuthCheckSession, reqAuthLogin, reqAuthLogout, reqAuthMe } from './a
 import { reqCategoryGetAll } from './category/category';
 import { reqChannelGetByIdOrIdText, reqChannelGetMany } from './channel/channel';
 import { reqItemGetByIdOrIdText, reqItemGetMany, reqItemGetManyWithoutLiveItemByChannel } from './item/item';
-import { reqPlaylistGetAllFavoritesPrivate } from './playlist/playlist';
+import { reqPlaylistGetAllFavoritesPrivate, reqPlaylistGetManyPublic } from './playlist/playlist';
 import { reqPodrollGetForChannel } from './podroll/podroll';
-import { QueryParamsChannel, QueryParamsChannels } from './queryParams';
+import { QueryParamsChannel, QueryParamsChannels, QueryParamsPlaylists } from './queryParams';
 
 export type AbortOpts = { controller: AbortController; timeoutMs: number };
 
@@ -140,6 +140,11 @@ export class ApiRequestService {
   }
 
   /* PLAYLIST */
+
+  reqPlaylistGetManyPublic(params: QueryParamsPlaylists = {}) {
+    console.log('API: reqPlaylistGetManyPublic called with params:', params);
+    return reqPlaylistGetManyPublic(this, params);
+  }
 
   reqPlaylistGetAllFavoritesPrivate() {
     return reqPlaylistGetAllFavoritesPrivate(this);
