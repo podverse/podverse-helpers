@@ -13,6 +13,7 @@ export interface DTOPlaylist {
   is_default_favorites: boolean;
   item_count: number;
   medium: DTOMedium;
+  last_updated: string;
   playlist_resources?: DTOPlaylistResource[];
 }
 

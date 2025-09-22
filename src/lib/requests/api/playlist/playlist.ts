@@ -3,7 +3,17 @@ import { ApiListResponse } from "../..";
 import { DTOPlaylist, DTOPlaylistFavorites } from "../../../../dtos";
 import { ApiRequestService } from "../_request";
 import { QueryParamsPlaylists } from "../queryParams";
-import { SharableStatusEnum } from "src/lib/sharableStatus";
+import { SharableStatusEnum } from "../../../sharableStatus";
+
+export async function reqPlaylistGet(
+  api: ApiRequestService,
+  id_text: string
+) {
+  return api.apiRequest<DTOPlaylist>({
+    path: `/playlist/${id_text}`,
+    method: 'GET'
+  });
+}
 
 export async function reqPlaylistGetManyPublic(
   api: ApiRequestService,

@@ -1,11 +1,12 @@
 import { request } from '../_request';
 import { reqAccountGetManyPublic } from './account/account';
 import { reqAccountFollowChannel, reqAccountUnfollowChannel } from './account/follow/channel';
+import { reqAccountFollowPlaylist, reqAccountUnfollowPlaylist } from './account/follow/playlist';
 import { reqAuthCheckSession, reqAuthLogin, reqAuthLogout, reqAuthMe } from './auth/auth';
 import { reqCategoryGetAll } from './category/category';
 import { reqChannelGetByIdOrIdText, reqChannelGetMany } from './channel/channel';
 import { reqItemGetByIdOrIdText, reqItemGetMany, reqItemGetManyWithoutLiveItemByChannel } from './item/item';
-import { reqPlaylistCreate, ReqPlaylistCreateParams, reqPlaylistGetAllFavoritesPrivate, reqPlaylistGetManyPrivate, reqPlaylistGetManyPrivateFollowed, reqPlaylistGetManyPublic } from './playlist/playlist';
+import { reqPlaylistCreate, ReqPlaylistCreateParams, reqPlaylistGet, reqPlaylistGetAllFavoritesPrivate, reqPlaylistGetManyPrivate, reqPlaylistGetManyPrivateFollowed, reqPlaylistGetManyPublic } from './playlist/playlist';
 import { reqPodrollGetForChannel } from './podroll/podroll';
 import { QueryParamsChannel, QueryParamsChannels, QueryParamsPlaylists } from './queryParams';
 
@@ -87,6 +88,16 @@ export class ApiRequestService {
     return reqAccountUnfollowChannel(this, params);
   }
   
+  /* ACCOUNT > FOLLOW > PLAYLIST */
+
+  reqAccountFollowPlaylist(params: { playlist_id_text: string }) {
+    return reqAccountFollowPlaylist(this, params);
+  }
+
+  reqAccountUnfollowPlaylist(params: { playlist_id_text: string }) {
+    return reqAccountUnfollowPlaylist(this, params);
+  }
+
   /* AUTH */
 
   reqAuthLogin(params: {
@@ -140,6 +151,10 @@ export class ApiRequestService {
   }
 
   /* PLAYLIST */
+
+  reqPlaylistGet(id_text: string) {
+    return reqPlaylistGet(this, id_text);
+  }
 
   reqPlaylistGetManyPublic(params: QueryParamsPlaylists = {}) {
     return reqPlaylistGetManyPublic(this, params);
