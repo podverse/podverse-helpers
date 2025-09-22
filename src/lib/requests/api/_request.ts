@@ -5,7 +5,7 @@ import { reqAuthCheckSession, reqAuthLogin, reqAuthLogout, reqAuthMe } from './a
 import { reqCategoryGetAll } from './category/category';
 import { reqChannelGetByIdOrIdText, reqChannelGetMany } from './channel/channel';
 import { reqItemGetByIdOrIdText, reqItemGetMany, reqItemGetManyWithoutLiveItemByChannel } from './item/item';
-import { reqPlaylistGetAllFavoritesPrivate, reqPlaylistGetManyPrivate, reqPlaylistGetManyPrivateFollowed, reqPlaylistGetManyPublic } from './playlist/playlist';
+import { reqPlaylistCreate, ReqPlaylistCreateParams, reqPlaylistGetAllFavoritesPrivate, reqPlaylistGetManyPrivate, reqPlaylistGetManyPrivateFollowed, reqPlaylistGetManyPublic } from './playlist/playlist';
 import { reqPodrollGetForChannel } from './podroll/podroll';
 import { QueryParamsChannel, QueryParamsChannels, QueryParamsPlaylists } from './queryParams';
 
@@ -155,6 +155,10 @@ export class ApiRequestService {
 
   reqPlaylistGetAllFavoritesPrivate() {
     return reqPlaylistGetAllFavoritesPrivate(this);
+  }
+
+  reqPlaylistCreate(params: ReqPlaylistCreateParams) {
+    return reqPlaylistCreate(this, params);
   }
   
   /* PODROLL */

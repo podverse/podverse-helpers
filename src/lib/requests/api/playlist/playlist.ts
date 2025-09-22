@@ -1,7 +1,9 @@
+import { MediumEnum } from "src/lib/medium";
 import { ApiListResponse } from "../..";
 import { DTOPlaylist, DTOPlaylistFavorites } from "../../../../dtos";
 import { ApiRequestService } from "../_request";
 import { QueryParamsPlaylists } from "../queryParams";
+import { SharableStatusEnum } from "src/lib/sharableStatus";
 
 export async function reqPlaylistGetManyPublic(
   api: ApiRequestService,
@@ -66,5 +68,23 @@ export async function reqPlaylistGetAllFavoritesPrivate(api: ApiRequestService) 
     config: {
       withCredentials: true
     }
+  });
+}
+
+export type ReqPlaylistCreateParams = {
+  title: string;
+  description?: string;
+  medium_id: MediumEnum;
+  sharable_status_id: SharableStatusEnum;
+}
+
+export async function reqPlaylistCreate(api: ApiRequestService, params: ReqPlaylistCreateParams) {
+  return api.apiRequest<DTOPlaylist>({
+    path: '/playlist',
+    method: 'POST',
+    config: {
+      withCredentials: true,
+    },
+    data: params
   });
 }
