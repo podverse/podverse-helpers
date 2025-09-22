@@ -15,7 +15,8 @@ export async function reqPlaylistGetManyPublic(
         ...(params.page ? { page: params.page } : {}),
         ...(params.sort ? { sort: params.sort } : {}),
         ...(params.type ? { type: params.type } : {}),
-        ...(params.range ? { range: params.range } : {})
+        ...(params.range ? { range: params.range } : {}),
+        ...(params.medium_id ? { medium_id: params.medium_id } : {})
       }
     }
   });

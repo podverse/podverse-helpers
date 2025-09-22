@@ -1,3 +1,4 @@
+import { MediumEnum } from "../../../lib/medium";
 import { CategoryMappingKeys } from "../../category";
 
 export interface QueryParamsPage {
@@ -66,4 +67,5 @@ export interface QueryParamsPlaylists extends QueryParamsPage {
   type?: QueryParamsPlaylistsType;
   sort?: QueryParamsPlaylistsSort;
   range?: QueryParamsStatsRange;
+  medium_id?: MediumEnum | null;
 }
