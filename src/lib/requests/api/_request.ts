@@ -5,7 +5,7 @@ import { reqAuthCheckSession, reqAuthLogin, reqAuthLogout, reqAuthMe } from './a
 import { reqCategoryGetAll } from './category/category';
 import { reqChannelGetByIdOrIdText, reqChannelGetMany } from './channel/channel';
 import { reqItemGetByIdOrIdText, reqItemGetMany, reqItemGetManyWithoutLiveItemByChannel } from './item/item';
-import { reqPlaylistGetAllFavoritesPrivate, reqPlaylistGetManyPrivate, reqPlaylistGetManyPublic } from './playlist/playlist';
+import { reqPlaylistGetAllFavoritesPrivate, reqPlaylistGetManyPrivate, reqPlaylistGetManyPrivateFollowed, reqPlaylistGetManyPublic } from './playlist/playlist';
 import { reqPodrollGetForChannel } from './podroll/podroll';
 import { QueryParamsChannel, QueryParamsChannels, QueryParamsPlaylists } from './queryParams';
 
@@ -147,6 +147,10 @@ export class ApiRequestService {
 
   reqPlaylistGetManyPrivate(params: QueryParamsPlaylists = {}) {
     return reqPlaylistGetManyPrivate(this, params);
+  }
+
+  reqPlaylistGetManyPrivateFollowed(params: QueryParamsPlaylists = {}) {
+    return reqPlaylistGetManyPrivateFollowed(this, params);
   }
 
   reqPlaylistGetAllFavoritesPrivate() {
