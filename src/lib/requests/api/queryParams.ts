@@ -56,7 +56,7 @@ export interface QueryParamsItems extends QueryParamsPage {
 
 // Playlists
 
-export const QUERY_PARAMS_PLAYLISTS_TYPE_VALUES = ["all", "audio", "video", "music", "global"] as const;
+export const QUERY_PARAMS_PLAYLISTS_TYPE_VALUES = ["my_playlists", "subscribed", "global"] as const;
 export const QUERY_PARAMS_PLAYLISTS_SORT_VALUES = ["a_z", "top"] as const;
 
 export type QueryParamsPlaylistsType = typeof QUERY_PARAMS_PLAYLISTS_TYPE_VALUES[number];
