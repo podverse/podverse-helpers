@@ -142,7 +142,6 @@ export class ApiRequestService {
   /* PLAYLIST */
 
   reqPlaylistGetManyPublic(params: QueryParamsPlaylists = {}) {
-    console.log('API: reqPlaylistGetManyPublic called with params:', params);
     return reqPlaylistGetManyPublic(this, params);
   }
 
