@@ -38,7 +38,7 @@ export function formatInputToHHMMSS(input: string): string {
   return `${hours}:${minutes}:${seconds}`;
 }
 
-export function hhmmssToNumericSeconds(time: string): string {
+export function hhmmssToSecondsNumeric(time: string): string {
   if (!time) return "0.00";
   const parts = time.split(':').map(Number).reverse();
   let seconds = 0;
@@ -46,4 +46,14 @@ export function hhmmssToNumericSeconds(time: string): string {
   if (parts.length > 1) seconds += parts[1] * 60;
   if (parts.length > 2) seconds += parts[2] * 3600;
   return `${seconds.toFixed(2)}`;
+}
+
+export function hhmmssToSecondsNumber(time: string): number {
+  if (!time) return 0.00;
+  const parts = time.split(':').map(Number).reverse();
+  let seconds = 0;
+  if (parts.length > 0) seconds += parts[0];
+  if (parts.length > 1) seconds += parts[1] * 60;
+  if (parts.length > 2) seconds += parts[2] * 3600;
+  return Number(seconds.toFixed(2));
 }
