@@ -16,3 +16,34 @@ export function formatHHMMSS(sec: number) {
   }
   return `${minutes}:${seconds.toString().padStart(2, "0")}`;
 }
+
+export function formatInputToHHMMSS(input: string): string {
+  let sanitized = input.replace(/[^0-9:]/g, '');
+  let digits = sanitized.replace(/:/g, '');
+
+  if (digits.length === 0) return '';
+
+  if (digits.length <= 2) return digits;
+
+  if (digits.length <= 4) {
+    const minutes = digits.slice(0, digits.length - 2);
+    const seconds = digits.slice(-2);
+    return `${minutes}:${seconds}`;
+  }
+
+  const hours = digits.slice(0, digits.length - 4);
+  const minutes = digits.slice(-4, -2);
+  const seconds = digits.slice(-2);
+
+  return `${hours}:${minutes}:${seconds}`;
+}
+
+export function hhmmssToNumericSeconds(time: string): string {
+  if (!time) return "0.00";
+  const parts = time.split(':').map(Number).reverse();
+  let seconds = 0;
+  if (parts.length > 0) seconds += parts[0];
+  if (parts.length > 1) seconds += parts[1] * 60;
+  if (parts.length > 2) seconds += parts[2] * 3600;
+  return `${seconds.toFixed(2)}`;
+}
