@@ -6,7 +6,12 @@ import { reqAuthCheckSession, reqAuthLogin, reqAuthLogout, reqAuthMe } from './a
 import { reqCategoryGetAll } from './category/category';
 import { reqChannelGetByIdOrIdText, reqChannelGetMany } from './channel/channel';
 import { reqItemGetByIdOrIdText, reqItemGetMany, reqItemGetManyWithoutLiveItemByChannel } from './item/item';
-import { reqPlaylistCreate, ReqPlaylistCreateParams, reqPlaylistEdit, ReqPlaylistEditParams, reqPlaylistGet, reqPlaylistGetAllFavoritesPrivate, reqPlaylistGetManyPrivate, reqPlaylistGetManyPrivateFollowed, reqPlaylistGetManyPublic } from './playlist/playlist';
+import { reqPlaylistCreate, ReqPlaylistCreateParams, reqPlaylistEdit, ReqPlaylistEditParams, reqPlaylistGet,
+  reqPlaylistGetAllFavoritesPrivate, reqPlaylistGetManyPrivate, reqPlaylistGetManyPrivateFollowed, reqPlaylistGetManyPublic } from './playlist/playlist';
+import { reqPlaylistResourceClipAddBetween, reqPlaylistResourceClipAddFirst, reqPlaylistResourceClipAddLast } from './playlist/playlistResource/playlistResourceClip';
+import { reqPlaylistResourceItemAddFirst, reqPlaylistResourceItemAddBetween,
+  reqPlaylistResourceItemAddLast } from './playlist/playlistResource/playlistResourceItem';
+import { reqPlaylistResourceItemChapterAddBetween, reqPlaylistResourceItemChapterAddFirst, reqPlaylistResourceItemChapterAddLast } from './playlist/playlistResource/playlistResourceItemChapter';
 import { reqPodrollGetForChannel } from './podroll/podroll';
 import { QueryParamsChannel, QueryParamsChannels, QueryParamsPlaylists } from './queryParams';
 
@@ -178,6 +183,62 @@ export class ApiRequestService {
 
   reqPlaylistEdit(params: ReqPlaylistEditParams) {
     return reqPlaylistEdit(this, params);
+  }
+
+  /* PLAYLIST RESOURCE > CLIP */
+
+  reqPlaylistResourceClipAddFirst(playlist_id_text: string, clip_id_text: string) {
+    return reqPlaylistResourceClipAddFirst(this, playlist_id_text, clip_id_text);
+  }
+
+  reqPlaylistResourceClipAddBetween(playlist_id_text: string, clip_id_text: string) {
+    return reqPlaylistResourceClipAddBetween(this, playlist_id_text, clip_id_text);
+  }
+
+  reqPlaylistResourceClipAddLast(playlist_id_text: string, clip_id_text: string) {
+    return reqPlaylistResourceClipAddLast(this, playlist_id_text, clip_id_text);
+  }
+
+  /* PLAYLIST RESOURCE > ITEM */
+
+  reqPlaylistResourceItemAddFirst(playlist_id_text: string, item_id_text: string) {
+    return reqPlaylistResourceItemAddFirst(this, playlist_id_text, item_id_text);
+  }
+
+  reqPlaylistResourceItemAddBetween(playlist_id_text: string, item_id_text: string) {
+    return reqPlaylistResourceItemAddBetween(this, playlist_id_text, item_id_text);
+  }
+
+  reqPlaylistResourceItemAddLast(playlist_id_text: string, item_id_text: string) {
+    return reqPlaylistResourceItemAddLast(this, playlist_id_text, item_id_text);
+  }
+
+  /* PLAYLIST RESOURCE > ITEM CHAPTER */
+
+  reqPlaylistResourceItemChapterAddFirst(playlist_id_text: string, item_chapter_id_text: string) {
+    return reqPlaylistResourceItemChapterAddFirst(this, playlist_id_text, item_chapter_id_text);
+  }
+
+  reqPlaylistResourceItemChapterAddBetween(playlist_id_text: string, item_chapter_id_text: string) {
+    return reqPlaylistResourceItemChapterAddBetween(this, playlist_id_text, item_chapter_id_text);
+  }
+
+  reqPlaylistResourceItemChapterAddLast(playlist_id_text: string, item_chapter_id_text: string) {
+    return reqPlaylistResourceItemChapterAddLast(this, playlist_id_text, item_chapter_id_text);
+  }
+
+  /* PLAYLIST RESOURCE > ITEM SOUNDBITE */
+
+  reqPlaylistResourceItemSoundbiteAddFirst(playlist_id_text: string, item_soundbite_id_text: string) {
+    return reqPlaylistResourceItemChapterAddFirst(this, playlist_id_text, item_soundbite_id_text);
+  }
+
+  reqPlaylistResourceItemSoundbiteAddBetween(playlist_id_text: string, item_soundbite_id_text: string) {
+    return reqPlaylistResourceItemChapterAddBetween(this, playlist_id_text, item_soundbite_id_text);
+  }
+
+  reqPlaylistResourceItemSoundbiteAddLast(playlist_id_text: string, item_soundbite_id_text: string) {
+    return reqPlaylistResourceItemChapterAddLast(this, playlist_id_text, item_soundbite_id_text);
   }
 
   /* PODROLL */
