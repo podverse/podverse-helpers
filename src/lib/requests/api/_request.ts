@@ -6,7 +6,7 @@ import { reqAuthCheckSession, reqAuthLogin, reqAuthLogout, reqAuthMe } from './a
 import { reqCategoryGetAll } from './category/category';
 import { reqChannelGetByIdOrIdText, reqChannelGetMany } from './channel/channel';
 import { reqItemGetByIdOrIdText, reqItemGetMany, reqItemGetManyWithoutLiveItemByChannel } from './item/item';
-import { reqPlaylistCreate, ReqPlaylistCreateParams, reqPlaylistGet, reqPlaylistGetAllFavoritesPrivate, reqPlaylistGetManyPrivate, reqPlaylistGetManyPrivateFollowed, reqPlaylistGetManyPublic } from './playlist/playlist';
+import { reqPlaylistCreate, ReqPlaylistCreateParams, reqPlaylistEdit, ReqPlaylistEditParams, reqPlaylistGet, reqPlaylistGetAllFavoritesPrivate, reqPlaylistGetManyPrivate, reqPlaylistGetManyPrivateFollowed, reqPlaylistGetManyPublic } from './playlist/playlist';
 import { reqPodrollGetForChannel } from './podroll/podroll';
 import { QueryParamsChannel, QueryParamsChannels, QueryParamsPlaylists } from './queryParams';
 
@@ -14,7 +14,7 @@ export type AbortOpts = { controller: AbortController; timeoutMs: number };
 
 export interface ApiRequestParams {
   path: string;
-  method?: 'GET' | 'POST' | 'PUT' | 'DELETE';
+  method?: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
   data?: unknown;
   config?: Record<string, unknown>;
   abort?: AbortOpts;
@@ -175,7 +175,11 @@ export class ApiRequestService {
   reqPlaylistCreate(params: ReqPlaylistCreateParams) {
     return reqPlaylistCreate(this, params);
   }
-  
+
+  reqPlaylistEdit(params: ReqPlaylistEditParams) {
+    return reqPlaylistEdit(this, params);
+  }
+
   /* PODROLL */
 
   reqPodrollGetForChannel(idOrIdText: string) {

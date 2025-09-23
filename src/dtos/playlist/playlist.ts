@@ -1,18 +1,17 @@
 import { DTOAccount } from "../account/account";
 import { DTOMedium } from "../medium";
-import { DTOSharableStatus } from "../sharableStatus";
 import { DTOPlaylistResource, DTOPlaylistResourceIdsOnly } from "./playlistResource";
 
 export interface DTOPlaylist {
   id: number;
   id_text: string;
   account?: DTOAccount;
-  sharable_status?: DTOSharableStatus;
+  sharable_status_id: number;
   title?: string | null;
   description?: string | null;
   is_default_favorites: boolean;
   item_count: number;
-  medium: DTOMedium;
+  medium_id: number;
   last_updated: string;
   playlist_resources?: DTOPlaylistResource[];
 }
