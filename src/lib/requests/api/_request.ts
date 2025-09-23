@@ -5,6 +5,7 @@ import { reqAccountFollowPlaylist, reqAccountUnfollowPlaylist } from './account/
 import { reqAuthCheckSession, reqAuthLogin, reqAuthLogout, reqAuthMe } from './auth/auth';
 import { reqCategoryGetAll } from './category/category';
 import { reqChannelGetByIdOrIdText, reqChannelGetMany } from './channel/channel';
+import { reqClipCreate, ReqClipCreateParams } from './clip/clip';
 import { reqItemGetByIdOrIdText, reqItemGetMany, reqItemGetManyWithoutLiveItemByChannel } from './item/item';
 import { reqPlaylistCreate, ReqPlaylistCreateParams, reqPlaylistEdit, ReqPlaylistEditParams, reqPlaylistGet,
   reqPlaylistGetAllFavoritesPrivate, reqPlaylistGetManyPrivate, reqPlaylistGetManyPrivateFollowed, reqPlaylistGetManyPublic } from './playlist/playlist';
@@ -139,6 +140,12 @@ export class ApiRequestService {
 
   reqChannelGetMany(params: QueryParamsChannels = {}) {
     return reqChannelGetMany(this, params);
+  }
+
+  /* CLIP */
+
+  reqClipCreate(params: ReqClipCreateParams) {
+    return reqClipCreate(this, params);
   }
 
   /* ITEM */
