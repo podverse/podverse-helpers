@@ -29,7 +29,7 @@ export interface DTOItem {
   live_item?: DTOLiveItem | null;
   item_about: DTOItemAbout;
   item_chat: DTOItemChat;
-  item_description: DTOItemDescription;
+  item_description?: DTOItemDescription;
   item_license: DTOItemLicense;
   item_location: DTOItemLocation;
   item_season: DTOItemSeason;
