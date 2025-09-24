@@ -17,6 +17,20 @@ export function formatHHMMSS(sec: number) {
   return `${minutes}:${seconds.toString().padStart(2, "0")}`;
 }
 
+export function formatNumericToHHMMSS(sec: string): string {
+  const totalSeconds = Math.floor(parseFloat(sec));
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+
+  if (hours > 0) {
+    return `${hours}:${minutes.toString().padStart(2, "0")}:${seconds
+      .toString()
+      .padStart(2, "0")}`;
+  }
+  return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+}
+
 export function formatInputToHHMMSS(input: string): string {
   let sanitized = input.replace(/[^0-9:]/g, '');
   let digits = sanitized.replace(/:/g, '');

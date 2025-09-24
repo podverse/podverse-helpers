@@ -7,6 +7,7 @@ export type ReqClipCreateParams = {
   item_id_text: string;
   sharable_status_id: number;
   title?: string | null;
+  description?: string | null;
   start_time: string;
   end_time?: string | null;
 }
@@ -19,6 +20,31 @@ export async function reqClipCreate(api: ApiRequestService, params: ReqClipCreat
       withCredentials: true,
     },
     data: params
+  });
+}
+
+export async function reqClipUpdate(
+  api: ApiRequestService,
+  clip_id_text: string,
+  params: ReqClipCreateParams
+) {
+  return api.apiRequest<DTOClip>({
+    path: `/clip/${clip_id_text}`,
+    method: 'PATCH',
+    config: {
+      withCredentials: true,
+    },
+    data: params
+  });
+}
+
+export async function reqClipGet(api: ApiRequestService, clip_id_text: string) {
+  return api.apiRequest<DTOClip>({
+    path: `/clip/${clip_id_text}`,
+    method: 'GET',
+    config: {
+      withCredentials: true,
+    }
   });
 }
 
