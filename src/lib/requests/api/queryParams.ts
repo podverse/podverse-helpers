@@ -14,7 +14,7 @@ export type StatsSortColumn = typeof STATS_SORT_COLUMNS[number];
 // Channel
 
 export const QUERY_PARAMS_CHANNEL_TYPE_VALUES = ["episodes", "clips", "about", "podroll"] as const;
-export const QUERY_PARAMS_CHANNEL_SORT_VALUES = ["recent", "oldest", "random", "top"] as const;
+export const QUERY_PARAMS_CHANNEL_SORT_VALUES = ["recent", "oldest", "top"] as const;
 
 export type QueryParamsChannelType = typeof QUERY_PARAMS_CHANNEL_TYPE_VALUES[number];
 export type QueryParamsChannelSort = typeof QUERY_PARAMS_CHANNEL_SORT_VALUES[number];
@@ -38,6 +38,17 @@ export interface QueryParamsChannels extends QueryParamsPage {
   sort?: QueryParamsChannelsSort;
   range?: QueryParamsStatsRange;
   category?: CategoryMappingKeys;
+}
+
+// Clips
+
+export const QUERY_PARAMS_CLIPS_BY_CHANNEL_SORT_VALUES = ["recent", "oldest", "top"];
+
+export type QueryParamsClipsByChannelSort = typeof QUERY_PARAMS_CLIPS_BY_CHANNEL_SORT_VALUES[number];
+
+export interface QueryParamsClipsByChannel extends QueryParamsPage {
+  sort?: QueryParamsClipsByChannelSort;
+  range?: QueryParamsStatsRange;
 }
 
 // Items

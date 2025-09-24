@@ -1,3 +1,4 @@
+import { DTOChannel } from "../channel/channel";
 import { DTOLiveItem } from "../liveItem/liveItem";
 import { DTOItemAbout } from "./itemAbout";
 import { DTOItemChat } from "./itemChat";
@@ -43,4 +44,5 @@ export interface DTOItem {
   item_transcripts: DTOItemTranscript[];
   item_txts: DTOItemTxt[];
   item_values: DTOItemValue[];
+  channel?: DTOChannel;
 }

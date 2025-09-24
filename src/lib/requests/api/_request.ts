@@ -5,7 +5,7 @@ import { reqAccountFollowPlaylist, reqAccountUnfollowPlaylist } from './account/
 import { reqAuthCheckSession, reqAuthLogin, reqAuthLogout, reqAuthMe } from './auth/auth';
 import { reqCategoryGetAll } from './category/category';
 import { reqChannelGetByIdOrIdText, reqChannelGetMany } from './channel/channel';
-import { reqClipCreate, ReqClipCreateParams } from './clip/clip';
+import { reqClipCreate, ReqClipCreateParams, reqClipGetManyByChannelIdTextPublic } from './clip/clip';
 import { reqItemGetByIdOrIdText, reqItemGetMany, reqItemGetManyWithoutLiveItemByChannel } from './item/item';
 import { reqPlaylistCreate, ReqPlaylistCreateParams, reqPlaylistEdit, ReqPlaylistEditParams, reqPlaylistGet,
   reqPlaylistGetAllFavoritesPrivate, reqPlaylistGetManyPrivate, reqPlaylistGetManyPrivateFollowed, reqPlaylistGetManyPublic } from './playlist/playlist';
@@ -14,7 +14,7 @@ import { reqPlaylistResourceItemAddFirst, reqPlaylistResourceItemAddBetween,
   reqPlaylistResourceItemAddLast } from './playlist/playlistResource/playlistResourceItem';
 import { reqPlaylistResourceItemChapterAddBetween, reqPlaylistResourceItemChapterAddFirst, reqPlaylistResourceItemChapterAddLast } from './playlist/playlistResource/playlistResourceItemChapter';
 import { reqPodrollGetForChannel } from './podroll/podroll';
-import { QueryParamsChannel, QueryParamsChannels, QueryParamsPlaylists } from './queryParams';
+import { QueryParamsChannel, QueryParamsChannels, QueryParamsClipsByChannel, QueryParamsPlaylists } from './queryParams';
 
 export type AbortOpts = { controller: AbortController; timeoutMs: number };
 
@@ -146,6 +146,10 @@ export class ApiRequestService {
 
   reqClipCreate(params: ReqClipCreateParams) {
     return reqClipCreate(this, params);
+  }
+
+  reqClipGetManyByChannelIdTextPublic(channel_id_text: string, params: QueryParamsClipsByChannel) {
+    return reqClipGetManyByChannelIdTextPublic(this, channel_id_text, params);
   }
 
   /* ITEM */
