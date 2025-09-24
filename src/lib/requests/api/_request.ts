@@ -7,7 +7,7 @@ import { reqCategoryGetAll } from './category/category';
 import { reqChannelGetByIdOrIdText, reqChannelGetMany } from './channel/channel';
 import { reqClipCreate, ReqClipCreateParams, reqClipGetManyByChannelIdTextPublic } from './clip/clip';
 import { reqItemGetByIdOrIdText, reqItemGetMany, reqItemGetManyWithoutLiveItemByChannel } from './item/item';
-import { reqPlaylistCreate, ReqPlaylistCreateParams, reqPlaylistEdit, ReqPlaylistEditParams, reqPlaylistGet,
+import { reqPlaylistCreate, ReqPlaylistCreateParams, reqPlaylistDelete, reqPlaylistEdit, ReqPlaylistEditParams, reqPlaylistGet,
   reqPlaylistGetAllFavoritesPrivate, reqPlaylistGetManyPrivate, reqPlaylistGetManyPrivateFollowed, reqPlaylistGetManyPublic } from './playlist/playlist';
 import { reqPlaylistResourceClipAddBetween, reqPlaylistResourceClipAddFirst, reqPlaylistResourceClipAddLast } from './playlist/playlistResource/playlistResourceClip';
 import { reqPlaylistResourceItemAddFirst, reqPlaylistResourceItemAddBetween,
@@ -194,6 +194,10 @@ export class ApiRequestService {
 
   reqPlaylistEdit(params: ReqPlaylistEditParams) {
     return reqPlaylistEdit(this, params);
+  }
+
+  reqPlaylistDelete(id_text: string) {
+    return reqPlaylistDelete(this, id_text);
   }
 
   /* PLAYLIST RESOURCE > CLIP */

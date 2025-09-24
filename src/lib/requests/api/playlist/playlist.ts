@@ -123,3 +123,13 @@ export async function reqPlaylistEdit(api: ApiRequestService, params: ReqPlaylis
     }
   });
 }
+
+export async function reqPlaylistDelete(api: ApiRequestService, id_text: string) {
+  return api.apiRequest<void>({
+    path: `/playlist/${id_text}`,
+    method: 'DELETE',
+    config: {
+      withCredentials: true
+    }
+  });
+}
