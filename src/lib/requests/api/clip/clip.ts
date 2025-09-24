@@ -38,6 +38,19 @@ export async function reqClipUpdate(
   });
 }
 
+export async function reqClipDelete(
+  api: ApiRequestService,
+  clip_id_text: string
+) {
+  return api.apiRequest<{ success: boolean }>({
+    path: `/clip/${clip_id_text}`,
+    method: 'DELETE',
+    config: {
+      withCredentials: true,
+    }
+  });
+}
+
 export async function reqClipGet(api: ApiRequestService, clip_id_text: string) {
   return api.apiRequest<DTOClip>({
     path: `/clip/${clip_id_text}`,
