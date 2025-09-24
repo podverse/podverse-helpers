@@ -5,7 +5,7 @@ import { reqAccountFollowPlaylist, reqAccountUnfollowPlaylist } from './account/
 import { reqAuthCheckSession, reqAuthLogin, reqAuthLogout, reqAuthMe } from './auth/auth';
 import { reqCategoryGetAll } from './category/category';
 import { reqChannelGetByIdOrIdText, reqChannelGetMany } from './channel/channel';
-import { reqClipCreate, ReqClipCreateParams, reqClipDelete, reqClipGet, reqClipGetManyByChannelIdTextPublic, reqClipUpdate, ReqClipUpdateParams, ReqClipUpdateParams } from './clip/clip';
+import { reqClipCreate, ReqClipCreateParams, reqClipDelete, reqClipGet, reqClipGetManyByChannelIdTextPublic, reqClipUpdate } from './clip/clip';
 import { reqItemGetByIdOrIdText, reqItemGetMany, reqItemGetManyWithoutLiveItemByChannel } from './item/item';
 import { reqPlaylistCreate, ReqPlaylistCreateParams, reqPlaylistDelete, reqPlaylistEdit, ReqPlaylistEditParams, reqPlaylistGet,
   reqPlaylistGetAllFavoritesPrivate, reqPlaylistGetManyPrivate, reqPlaylistGetManyPrivateFollowed, reqPlaylistGetManyPublic } from './playlist/playlist';
@@ -148,7 +148,7 @@ export class ApiRequestService {
     return reqClipCreate(this, params);
   }
 
-  reqClipUpdate(clip_id_text: string, params: ReqClipUpdateParams) {
+  reqClipUpdate(clip_id_text: string, params: ReqClipCreateParams) {
     return reqClipUpdate(this, clip_id_text, params);
   }
 
