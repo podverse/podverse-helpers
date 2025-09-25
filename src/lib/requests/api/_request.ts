@@ -15,6 +15,7 @@ import { reqPlaylistResourceItemAddFirst, reqPlaylistResourceItemAddBetween,
 import { reqPlaylistResourceItemChapterAddBetween, reqPlaylistResourceItemChapterAddFirst, reqPlaylistResourceItemChapterAddLast } from './playlist/playlistResource/playlistResourceItemChapter';
 import { reqPodrollGetForChannel } from './podroll/podroll';
 import { QueryParamsChannel, QueryParamsChannels, QueryParamsClipsByChannel, QueryParamsPlaylists } from './queryParams';
+import { reqQueueGetAllForAccountPrivate } from './queue/queue';
 
 export type AbortOpts = { controller: AbortController; timeoutMs: number };
 
@@ -272,6 +273,12 @@ export class ApiRequestService {
 
   reqPodrollGetForChannel(idOrIdText: string) {
     return reqPodrollGetForChannel(this, idOrIdText);
+  }
+
+  /* QUEUE */
+
+  reqQueueGetAllForAccountPrivate() {
+    return reqQueueGetAllForAccountPrivate(this);
   }
 
 }
