@@ -1,5 +1,6 @@
 import { DTOPlaylistResource } from "src/dtos";
 import { ApiRequestService } from "../../_request";
+import { BetweenParams } from "../../../../../dtos/betweenParams";
 
 export async function reqPlaylistResourceItemAddFirst(
   api: ApiRequestService,
@@ -18,14 +19,16 @@ export async function reqPlaylistResourceItemAddFirst(
 export async function reqPlaylistResourceItemAddBetween(
   api: ApiRequestService,
   playlist_id_text: string,
-  item_id_text: string
+  item_id_text: string,
+  params: BetweenParams
 ) {
   return api.apiRequest<DTOPlaylistResource>({
     path: `/playlist/${playlist_id_text}/item/${item_id_text}/between`,
     method: 'POST',
     config: {
       withCredentials: true
-    }
+    },
+    data: params
   });
 }
 

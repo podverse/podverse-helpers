@@ -1,3 +1,5 @@
 export interface DTOQueue {
-  // Define DTO fields here
+  id: number;
+  id_text: string;
+  medium_id: number;
 }

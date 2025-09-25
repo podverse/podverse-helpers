@@ -1,3 +1,5 @@
+import { QueueExtraParams } from '../../../dtos/queueExtraParams';
+import { BetweenParams } from '../../../dtos/betweenParams';
 import { request } from '../_request';
 import { reqAccountGetManyPublic } from './account/account';
 import { reqAccountFollowChannel, reqAccountUnfollowChannel } from './account/follow/channel';
@@ -16,6 +18,9 @@ import { reqPlaylistResourceItemChapterAddBetween, reqPlaylistResourceItemChapte
 import { reqPodrollGetForChannel } from './podroll/podroll';
 import { QueryParamsChannel, QueryParamsChannels, QueryParamsClipsByChannel, QueryParamsPlaylists } from './queryParams';
 import { reqQueueGetAllForAccountPrivate } from './queue/queue';
+import { reqQueueResourceItemAddBetween, reqQueueResourceItemAddHistory,
+  reqQueueResourceItemAddLast, reqQueueResourceItemAddNext,
+  reqQueueResourceItemAddNowPlaying } from './queue/queueResource/queueResourceItem';
 
 export type AbortOpts = { controller: AbortController; timeoutMs: number };
 
@@ -233,8 +238,8 @@ export class ApiRequestService {
     return reqPlaylistResourceItemAddFirst(this, playlist_id_text, item_id_text);
   }
 
-  reqPlaylistResourceItemAddBetween(playlist_id_text: string, item_id_text: string) {
-    return reqPlaylistResourceItemAddBetween(this, playlist_id_text, item_id_text);
+  reqPlaylistResourceItemAddBetween(playlist_id_text: string, item_id_text: string, params: BetweenParams) {
+    return reqPlaylistResourceItemAddBetween(this, playlist_id_text, item_id_text, params);
   }
 
   reqPlaylistResourceItemAddLast(playlist_id_text: string, item_id_text: string) {
@@ -279,6 +284,28 @@ export class ApiRequestService {
 
   reqQueueGetAllForAccountPrivate() {
     return reqQueueGetAllForAccountPrivate(this);
+  }
+
+  /* QUEUE RESOURCE > ITEM */
+
+  reqQueueResourceItemAddNowPlaying(queue_id_text: string, item_id_text: string) {
+    return reqQueueResourceItemAddNowPlaying(this, queue_id_text, item_id_text);
+  }
+
+  reqQueueResourceItemAddNext(queue_id_text: string, item_id_text: string) {
+    return reqQueueResourceItemAddNext(this, queue_id_text, item_id_text);
+  }
+
+  reqQueueResourceItemAddBetween(queue_id_text: string, item_id_text: string, params: BetweenParams) {
+    return reqQueueResourceItemAddBetween(this, queue_id_text, item_id_text, params);
+  }
+
+  reqQueueResourceItemAddLast(queue_id_text: string, item_id_text: string) {
+    return reqQueueResourceItemAddLast(this, queue_id_text, item_id_text);
+  }
+
+  reqQueueResourceItemAddHistory(queue_id_text: string, item_id_text: string, params: QueueExtraParams) {
+    return reqQueueResourceItemAddHistory(this, queue_id_text, item_id_text, params);
   }
 
 }

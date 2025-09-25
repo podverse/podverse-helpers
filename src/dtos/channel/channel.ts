@@ -27,7 +27,7 @@ export interface DTOChannel {
   podcast_guid: string | null;
   title: string | null;
   sortable_title: string | null;
-  medium_id: number | null;
+  medium_id: number;
   has_podcast_index_value: boolean;
   has_value_time_splits: boolean;
   feed?: DTOFeed;
