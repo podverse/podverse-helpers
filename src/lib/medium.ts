@@ -50,28 +50,14 @@ export function getMediumEnumValue(input: string | null): MediumEnum | null {
   return (sanitizedInput && mapping[sanitizedInput]) || null;
 }
 
-const supportedMediums: { [key: number]: boolean } = {
-  [MediumEnum.Publisher]: true,
+export const supportedPlaylistMediums: { [key: number]: boolean } = {
   [MediumEnum.Podcast]: true,
   [MediumEnum.Music]: true,
-  [MediumEnum.Video]: true,
-  [MediumEnum.Film]: true,
-  [MediumEnum.Audiobook]: true,
-  [MediumEnum.Newsletter]: false,
-  [MediumEnum.Blog]: false,
-  [MediumEnum.Course]: false,
-  [MediumEnum.Mixed]: false,
-  [MediumEnum.PodcastL]: false,
-  [MediumEnum.MusicL]: false,
-  [MediumEnum.VideoL]: false,
-  [MediumEnum.FilmL]: false,
-  [MediumEnum.AudiobookL]: false,
-  [MediumEnum.NewsletterL]: false,
-  [MediumEnum.BlogL]: false,
-  [MediumEnum.PublisherL]: false,
-  [MediumEnum.CourseL]: false
+  [MediumEnum.Video]: true
 };
 
-export const checkIfSupportedMedium = (mediumEnumKey: number | null): boolean => {
-  return (mediumEnumKey && supportedMediums[mediumEnumKey]) || false;
+export const supportedQueueMediums: { [key: number]: boolean } = {
+  [MediumEnum.Podcast]: true,
+  [MediumEnum.Music]: true,
+  [MediumEnum.Video]: true
 };
