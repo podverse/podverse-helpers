@@ -3,14 +3,13 @@ import { DTOQueueResource } from "../../../../../dtos";
 import { BetweenParams } from "../../../../../dtos/betweenParams";
 import { QueueExtraParams } from "../../../../../dtos/queueExtraParams";
 
-export async function reqQueueResourceItemAddNowPlaying(
+export async function reqQueueResourceItemAddByRSSAddNowPlaying(
   api: ApiRequestService,
   queue_id_text: string,
-  item_id_text: string,
-  params?: QueueExtraParams
+  params: QueueExtraParams & { add_by_rss_resource_data: object }
 ) {
   return api.apiRequest<DTOQueueResource>({
-    path: `/queue/${queue_id_text}/item/${item_id_text}/now-playing`,
+    path: `/queue/${queue_id_text}/item-add-by-rss/now-playing`,
     method: 'POST',
     config: {
       withCredentials: true
@@ -19,28 +18,13 @@ export async function reqQueueResourceItemAddNowPlaying(
   });
 }
 
-export async function reqQueueResourceItemAddNext(
+export async function reqQueueResourceItemAddByRSSAddNext(
   api: ApiRequestService,
   queue_id_text: string,
-  item_id_text: string
+  params: { add_by_rss_resource_data: object }
 ) {
   return api.apiRequest<DTOQueueResource>({
-    path: `/queue/${queue_id_text}/item/${item_id_text}/next`,
-    method: 'POST',
-    config: {
-      withCredentials: true
-    }
-  });
-}
-
-export async function reqQueueResourceItemAddBetween(
-  api: ApiRequestService,
-  queue_id_text: string,
-  item_id_text: string,
-  params: BetweenParams
-) {
-  return api.apiRequest<DTOQueueResource>({
-    path: `/queue/${queue_id_text}/item/${item_id_text}/between`,
+    path: `/queue/${queue_id_text}/item-add-by-rss/next`,
     method: 'POST',
     config: {
       withCredentials: true
@@ -49,32 +33,47 @@ export async function reqQueueResourceItemAddBetween(
   });
 }
 
-export async function reqQueueResourceItemAddLast(
+export async function reqQueueResourceItemAddByRSSAddBetween(
   api: ApiRequestService,
   queue_id_text: string,
-  item_id_text: string
+  params: BetweenParams & { add_by_rss_resource_data: object }
 ) {
   return api.apiRequest<DTOQueueResource>({
-    path: `/queue/${queue_id_text}/item/${item_id_text}/last`,
-    method: 'POST',
-    config: {
-      withCredentials: true
-    }
-  });
-}
-
-export async function reqQueueResourceItemAddHistory(
-  api: ApiRequestService,
-  queue_id_text: string,
-  item_id_text: string,
-  params?: QueueExtraParams
-) {
-  return api.apiRequest<DTOQueueResource>({
-    path: `/queue/${queue_id_text}/item/${item_id_text}/history`,
+    path: `/queue/${queue_id_text}/item-add-by-rss/between`,
     method: 'POST',
     config: {
       withCredentials: true
     },
     data: params
   });
-};
+}
+
+export async function reqQueueResourceItemAddByRSSAddLast(
+  api: ApiRequestService,
+  queue_id_text: string,
+  params: { add_by_rss_resource_data: object }
+) {
+  return api.apiRequest<DTOQueueResource>({
+    path: `/queue/${queue_id_text}/item-add-by-rss/last`,
+    method: 'POST',
+    config: {
+      withCredentials: true
+    },
+    data: params
+  });
+}
+
+export async function reqQueueResourceItemAddByRSSAddHistory(
+  api: ApiRequestService,
+  queue_id_text: string,
+  params: QueueExtraParams & { add_by_rss_resource_data: object }
+) {
+  return api.apiRequest<DTOQueueResource>({
+    path: `/queue/${queue_id_text}/item-add-by-rss/history`,
+    method: 'POST',
+    config: {
+      withCredentials: true
+    },
+    data: params
+  });
+}

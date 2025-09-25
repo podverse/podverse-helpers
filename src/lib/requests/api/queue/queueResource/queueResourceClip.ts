@@ -3,14 +3,14 @@ import { DTOQueueResource } from "../../../../../dtos";
 import { BetweenParams } from "../../../../../dtos/betweenParams";
 import { QueueExtraParams } from "../../../../../dtos/queueExtraParams";
 
-export async function reqQueueResourceItemAddNowPlaying(
+export async function reqQueueResourceClipAddNowPlaying(
   api: ApiRequestService,
   queue_id_text: string,
-  item_id_text: string,
+  clip_id_text: string,
   params?: QueueExtraParams
 ) {
   return api.apiRequest<DTOQueueResource>({
-    path: `/queue/${queue_id_text}/item/${item_id_text}/now-playing`,
+    path: `/queue/${queue_id_text}/clip/${clip_id_text}/now-playing`,
     method: 'POST',
     config: {
       withCredentials: true
@@ -19,13 +19,13 @@ export async function reqQueueResourceItemAddNowPlaying(
   });
 }
 
-export async function reqQueueResourceItemAddNext(
+export async function reqQueueResourceClipAddNext(
   api: ApiRequestService,
   queue_id_text: string,
-  item_id_text: string
+  clip_id_text: string
 ) {
   return api.apiRequest<DTOQueueResource>({
-    path: `/queue/${queue_id_text}/item/${item_id_text}/next`,
+    path: `/queue/${queue_id_text}/clip/${clip_id_text}/next`,
     method: 'POST',
     config: {
       withCredentials: true
@@ -33,14 +33,14 @@ export async function reqQueueResourceItemAddNext(
   });
 }
 
-export async function reqQueueResourceItemAddBetween(
+export async function reqQueueResourceClipAddBetween(
   api: ApiRequestService,
   queue_id_text: string,
-  item_id_text: string,
+  clip_id_text: string,
   params: BetweenParams
 ) {
   return api.apiRequest<DTOQueueResource>({
-    path: `/queue/${queue_id_text}/item/${item_id_text}/between`,
+    path: `/queue/${queue_id_text}/clip/${clip_id_text}/between`,
     method: 'POST',
     config: {
       withCredentials: true
@@ -49,13 +49,13 @@ export async function reqQueueResourceItemAddBetween(
   });
 }
 
-export async function reqQueueResourceItemAddLast(
+export async function reqQueueResourceClipAddLast(
   api: ApiRequestService,
   queue_id_text: string,
-  item_id_text: string
+  clip_id_text: string
 ) {
   return api.apiRequest<DTOQueueResource>({
-    path: `/queue/${queue_id_text}/item/${item_id_text}/last`,
+    path: `/queue/${queue_id_text}/clip/${clip_id_text}/last`,
     method: 'POST',
     config: {
       withCredentials: true
@@ -63,18 +63,18 @@ export async function reqQueueResourceItemAddLast(
   });
 }
 
-export async function reqQueueResourceItemAddHistory(
+export async function reqQueueResourceClipAddHistory(
   api: ApiRequestService,
   queue_id_text: string,
-  item_id_text: string,
+  clip_id_text: string,
   params?: QueueExtraParams
 ) {
   return api.apiRequest<DTOQueueResource>({
-    path: `/queue/${queue_id_text}/item/${item_id_text}/history`,
+    path: `/queue/${queue_id_text}/clip/${clip_id_text}/history`,
     method: 'POST',
     config: {
       withCredentials: true
     },
     data: params
   });
-};
+}

@@ -21,6 +21,18 @@ import { reqQueueGetAllForAccountPrivate } from './queue/queue';
 import { reqQueueResourceItemAddBetween, reqQueueResourceItemAddHistory,
   reqQueueResourceItemAddLast, reqQueueResourceItemAddNext,
   reqQueueResourceItemAddNowPlaying } from './queue/queueResource/queueResourceItem';
+import { reqQueueResourceClipAddBetween, reqQueueResourceClipAddHistory,
+  reqQueueResourceClipAddLast, reqQueueResourceClipAddNext,
+  reqQueueResourceClipAddNowPlaying } from './queue/queueResource/queueResourceClip';
+import { reqQueueResourceItemAddByRSSAddBetween, reqQueueResourceItemAddByRSSAddHistory,
+  reqQueueResourceItemAddByRSSAddLast, reqQueueResourceItemAddByRSSAddNext,
+  reqQueueResourceItemAddByRSSAddNowPlaying } from './queue/queueResource/queueResourceItemAddByRSS';
+import { reqQueueResourceItemChapterAddBetween, reqQueueResourceItemChapterAddHistory,
+  reqQueueResourceItemChapterAddLast, reqQueueResourceItemChapterAddNext, 
+  reqQueueResourceItemChapterAddNowPlaying } from './queue/queueResource/queueResourceItemChapter';
+import { reqQueueResourceItemSoundbiteAddBetween, reqQueueResourceItemSoundbiteAddHistory,
+  reqQueueResourceItemSoundbiteAddLast, reqQueueResourceItemSoundbiteAddNext,
+  reqQueueResourceItemSoundbiteAddNowPlaying } from './queue/queueResource/queueResourceItemSoundbite';
 
 export type AbortOpts = { controller: AbortController; timeoutMs: number };
 
@@ -286,10 +298,31 @@ export class ApiRequestService {
     return reqQueueGetAllForAccountPrivate(this);
   }
 
+  /* QUEUE RESOURCE > CLIP */
+  reqQueueResourceClipAddNowPlaying(queue_id_text: string, clip_id_text: string, params?: QueueExtraParams) {
+    return reqQueueResourceClipAddNowPlaying(this, queue_id_text, clip_id_text, params);
+  }
+
+  reqQueueResourceClipAddNext(queue_id_text: string, clip_id_text: string) {
+    return reqQueueResourceClipAddNext(this, queue_id_text, clip_id_text);
+  }
+
+  reqQueueResourceClipAddBetween(queue_id_text: string, clip_id_text: string, params: BetweenParams) {
+    return reqQueueResourceClipAddBetween(this, queue_id_text, clip_id_text, params);
+  }
+
+  reqQueueResourceClipAddLast(queue_id_text: string, clip_id_text: string) {
+    return reqQueueResourceClipAddLast(this, queue_id_text, clip_id_text);
+  }
+
+  reqQueueResourceClipAddHistory(queue_id_text: string, clip_id_text: string, params?: QueueExtraParams) {
+    return reqQueueResourceClipAddHistory(this, queue_id_text, clip_id_text, params);
+  }
+
   /* QUEUE RESOURCE > ITEM */
 
-  reqQueueResourceItemAddNowPlaying(queue_id_text: string, item_id_text: string) {
-    return reqQueueResourceItemAddNowPlaying(this, queue_id_text, item_id_text);
+  reqQueueResourceItemAddNowPlaying(queue_id_text: string, item_id_text: string, params?: QueueExtraParams) {
+    return reqQueueResourceItemAddNowPlaying(this, queue_id_text, item_id_text, params);
   }
 
   reqQueueResourceItemAddNext(queue_id_text: string, item_id_text: string) {
@@ -304,8 +337,71 @@ export class ApiRequestService {
     return reqQueueResourceItemAddLast(this, queue_id_text, item_id_text);
   }
 
-  reqQueueResourceItemAddHistory(queue_id_text: string, item_id_text: string, params: QueueExtraParams) {
+  reqQueueResourceItemAddHistory(queue_id_text: string, item_id_text: string, params?: QueueExtraParams) {
     return reqQueueResourceItemAddHistory(this, queue_id_text, item_id_text, params);
+  }
+
+  /* QUEUE RESOURCE > ITEM ADD BY RSS */
+  reqQueueResourceItemAddByRSSAddNowPlaying(queue_id_text: string, params: QueueExtraParams & { add_by_rss_resource_data: object }) {
+    return reqQueueResourceItemAddByRSSAddNowPlaying(this, queue_id_text, params);
+  }
+
+  reqQueueResourceItemAddByRSSAddNext(queue_id_text: string, params: { add_by_rss_resource_data: object }) {
+    return reqQueueResourceItemAddByRSSAddNext(this, queue_id_text, params);
+  }
+
+  reqQueueResourceItemAddByRSSAddBetween(queue_id_text: string, params: BetweenParams & { add_by_rss_resource_data: object }) {
+    return reqQueueResourceItemAddByRSSAddBetween(this, queue_id_text, params);
+  }
+
+  reqQueueResourceItemAddByRSSAddLast(queue_id_text: string, params: { add_by_rss_resource_data: object }) {
+    return reqQueueResourceItemAddByRSSAddLast(this, queue_id_text, params);
+  }
+
+  reqQueueResourceItemAddByRSSAddHistory(queue_id_text: string, params: QueueExtraParams & { add_by_rss_resource_data: object }) {
+    return reqQueueResourceItemAddByRSSAddHistory(this, queue_id_text, params);
+  }
+
+  /* QUEUE RESOURCE > ITEM CHAPTER */
+  reqQueueResourceItemChapterAddNowPlaying(queue_id_text: string, item_chapter_id_text: string, params?: QueueExtraParams) {
+    return reqQueueResourceItemChapterAddNowPlaying(this, queue_id_text, item_chapter_id_text, params);
+  }
+
+  reqQueueResourceItemChapterAddNext(queue_id_text: string, item_chapter_id_text: string) {
+    return reqQueueResourceItemChapterAddNext(this, queue_id_text, item_chapter_id_text);
+  }
+
+  reqQueueResourceItemChapterAddBetween(queue_id_text: string, item_chapter_id_text: string, params: BetweenParams) {
+    return reqQueueResourceItemChapterAddBetween(this, queue_id_text, item_chapter_id_text, params);
+  }
+
+  reqQueueResourceItemChapterAddLast(queue_id_text: string, item_chapter_id_text: string) {
+    return reqQueueResourceItemChapterAddLast(this, queue_id_text, item_chapter_id_text);
+  }
+
+  reqQueueResourceItemChapterAddHistory(queue_id_text: string, item_chapter_id_text: string, params?: QueueExtraParams) {
+    return reqQueueResourceItemChapterAddHistory(this, queue_id_text, item_chapter_id_text, params);
+  }
+
+  /* QUEUE RESOURCE > ITEM SOUNDBITE */
+  reqQueueResourceItemSoundbiteAddNowPlaying(queue_id_text: string, item_soundbite_id_text: string, params?: QueueExtraParams) {
+    return reqQueueResourceItemSoundbiteAddNowPlaying(this, queue_id_text, item_soundbite_id_text, params);
+  }
+
+  reqQueueResourceItemSoundbiteAddNext(queue_id_text: string, item_soundbite_id_text: string) {
+    return reqQueueResourceItemSoundbiteAddNext(this, queue_id_text, item_soundbite_id_text);
+  }
+
+  reqQueueResourceItemSoundbiteAddBetween(queue_id_text: string, item_soundbite_id_text: string, params: BetweenParams) {
+    return reqQueueResourceItemSoundbiteAddBetween(this, queue_id_text, item_soundbite_id_text, params);
+  }
+
+  reqQueueResourceItemSoundbiteAddLast(queue_id_text: string, item_soundbite_id_text: string) {
+    return reqQueueResourceItemSoundbiteAddLast(this, queue_id_text, item_soundbite_id_text);
+  }
+
+  reqQueueResourceItemSoundbiteAddHistory(queue_id_text: string, item_soundbite_id_text: string, params?: QueueExtraParams) {
+    return reqQueueResourceItemSoundbiteAddHistory(this, queue_id_text, item_soundbite_id_text, params);
   }
 
 }
