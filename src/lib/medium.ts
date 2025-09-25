@@ -20,7 +20,7 @@ export enum MediumEnum {
   CourseL = 19
 }
 
-export function getMediumEnumValue(input: string | null): MediumEnum | null {
+export function getMediumEnumValue(input: string | null): MediumEnum {
   const sanitizedInput = input?.toLowerCase()
     .replace(/\s+/g, '')
     .replace(/[^a-z0-9]/g, '');
@@ -47,7 +47,7 @@ export function getMediumEnumValue(input: string | null): MediumEnum | null {
     coursel: MediumEnum.CourseL
   };
 
-  return (sanitizedInput && mapping[sanitizedInput]) || null;
+  return (sanitizedInput && mapping[sanitizedInput]) || MediumEnum.Podcast;
 }
 
 export const supportedPlaylistMediums: { [key: number]: boolean } = {
