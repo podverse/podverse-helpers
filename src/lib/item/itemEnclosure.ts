@@ -9,7 +9,7 @@ const ALLOWED_TYPES = [
   "application/x-mpegURL"
 ];
 
-export function getEnclosure(
+export function getItemEnclosure(
   enclosures: DTOItemEnclosure[],
   type: string
 ): DTOItemEnclosure | undefined {
@@ -22,8 +22,14 @@ export function getEnclosure(
   return undefined;
 }
 
-export function getEnclosureSource(
+export function getItemEnclosureSource(
   enclosure?: DTOItemEnclosure
 ): DTOItemEnclosureSource | undefined {
   return enclosure?.item_enclosure_sources?.[0];
+}
+
+export function getSelectedItemEnclosureUrl(item_enclosures: DTOItemEnclosure[]): string | undefined {
+  const selectedItemEnclosure = getItemEnclosure(item_enclosures, "default");
+  const selectedItemEnclosureSource = getItemEnclosureSource(selectedItemEnclosure);
+  return selectedItemEnclosureSource?.uri;
 }
