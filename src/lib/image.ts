@@ -58,13 +58,23 @@ export function findImageBySize(
     const filtered = itemImages
       .filter(image => image.image_width_size !== null && isValidExtension(image.url))
       .sort((a, b) => (b.image_width_size! - a.image_width_size!));
-    return filtered[0] || null;
+    if (filtered.length > 0) {
+      return filtered[0];
+    }
+
+    const nullSizeImage = itemImages.find(image => image.image_width_size === null && isValidExtension(image.url));
+    return nullSizeImage || null;
   }
   if (size === 'smallest') {
     const filtered = itemImages
       .filter(image => image.image_width_size !== null && isValidExtension(image.url))
       .sort((a, b) => (a.image_width_size! - b.image_width_size!));
-    return filtered[0] || null;
+    if (filtered.length > 0) {
+      return filtered[0];
+    }
+    
+    const nullSizeImage = itemImages.find(image => image.image_width_size === null && isValidExtension(image.url));
+    return nullSizeImage || null;
   }
 
   let filteredImages: ItemImagePartial[] = [];
@@ -98,5 +108,6 @@ export function findImageBySize(
   }
 
   const nullSizeImage = itemImages.find(image => image.image_width_size === null && isValidExtension(image.url));
+  
   return nullSizeImage || null;
 }
