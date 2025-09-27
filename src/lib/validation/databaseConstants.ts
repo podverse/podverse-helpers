@@ -3,6 +3,7 @@ export const DATABASE_CONSTANTS = {
   varchar_short: 50,
   varchar_normal: 255,
   varchar_long: 2500,
+  varchar_longer: 10000,
   varchar_email: 255,
   varchar_fqdn: 253,
   varchar_guid: 36,
