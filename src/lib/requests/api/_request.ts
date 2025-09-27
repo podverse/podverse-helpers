@@ -152,7 +152,7 @@ export class ApiRequestService {
 
   /* CHANNEL */
 
-  reqChannelGetByIdOrIdText(idOrIdText: string) {
+  reqChannelGetByIdOrIdText(idOrIdText: number | string) {
     return reqChannelGetByIdOrIdText(this, idOrIdText);
   }
 

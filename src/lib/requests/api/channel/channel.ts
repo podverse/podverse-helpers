@@ -25,7 +25,7 @@ export async function reqChannelGetMany(
 
 export async function reqChannelGetByIdOrIdText(
   api: ApiRequestService,
-  idOrIdText: string
+  idOrIdText: number | string
 ) {
   return api.apiRequest<DTOChannel>({
     path: `/channel/${idOrIdText}`,
