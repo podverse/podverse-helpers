@@ -51,6 +51,20 @@ export interface QueryParamsClipsByChannel extends QueryParamsPage {
   range?: QueryParamsStatsRange;
 }
 
+// Item
+
+export const QUERY_PARAMS_ITEM_TYPE_VALUES = ["summary", "chapters", "soundbites", "clips", "transcript"] as const;
+export const QUERY_PARAMS_ITEM_SORT_VALUES = ["recent", "oldest", "top"] as const;
+
+export type QueryParamsItemType = typeof QUERY_PARAMS_ITEM_TYPE_VALUES[number];
+export type QueryParamsItemSort = typeof QUERY_PARAMS_ITEM_SORT_VALUES[number];
+
+export interface QueryParamsItem extends QueryParamsPage {
+  type?: typeof QUERY_PARAMS_ITEM_TYPE_VALUES[number];
+  sort?: typeof QUERY_PARAMS_ITEM_SORT_VALUES[number];
+  range?: QueryParamsStatsRange;
+}
+
 // Items
 
 export const QUERY_PARAMS_ITEMS_TYPE_VALUES = ["global", "subscribed", "category"] as const;
