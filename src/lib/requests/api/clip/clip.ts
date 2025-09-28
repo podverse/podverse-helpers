@@ -79,3 +79,22 @@ export async function reqClipGetManyByChannelIdTextPublic(
     }
   });
 }
+
+export async function reqClipGetManyByItemIdTextPublic(
+  api: ApiRequestService,
+  item_id_text: string,
+  params: QueryParamsClipsByChannel = {}
+) {
+  return api.apiRequest<ApiListResponse<DTOClip>>({
+    path: `/clip/public/item/${item_id_text}`,
+    method: 'GET',
+    config: {
+      params: {
+        ...(params.page ? { page: params.page } : {}),
+        ...(params.sort ? { sort: params.sort } : {}),
+        ...(params.range ? { range: params.range } : {})
+      },
+      withCredentials: true
+    }
+  });
+}
