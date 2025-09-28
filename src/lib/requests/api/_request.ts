@@ -16,7 +16,7 @@ import { reqPlaylistResourceItemAddFirst, reqPlaylistResourceItemAddBetween,
   reqPlaylistResourceItemAddLast } from './playlist/playlistResource/playlistResourceItem';
 import { reqPlaylistResourceItemChapterAddBetween, reqPlaylistResourceItemChapterAddFirst, reqPlaylistResourceItemChapterAddLast } from './playlist/playlistResource/playlistResourceItemChapter';
 import { reqPodrollGetForChannel } from './podroll/podroll';
-import { QueryParamsChannel, QueryParamsChannels, QueryParamsClipsByChannel, QueryParamsPlaylists } from './queryParams';
+import { QueryParamsChannel, QueryParamsChannels, QueryParamsClipsByChannel, QueryParamsItemSoundbitesByChannel, QueryParamsItemSoundbitesByItem, QueryParamsPlaylists } from './queryParams';
 import { reqQueueGetAllForAccountPrivate } from './queue/queue';
 import { reqQueueResourceItemAddBetween, reqQueueResourceItemAddHistory,
   reqQueueResourceItemAddLast, reqQueueResourceItemAddNext,
@@ -33,6 +33,7 @@ import { reqQueueResourceItemChapterAddBetween, reqQueueResourceItemChapterAddHi
 import { reqQueueResourceItemSoundbiteAddBetween, reqQueueResourceItemSoundbiteAddHistory,
   reqQueueResourceItemSoundbiteAddLast, reqQueueResourceItemSoundbiteAddNext,
   reqQueueResourceItemSoundbiteAddNowPlaying } from './queue/queueResource/queueResourceItemSoundbite';
+import { reqItemSoundbiteGet, reqItemSoundbiteGetManyByChannelIdText, reqItemSoundbiteGetManyByItemIdText } from './itemSoundbite/itemSoundbite';
 
 export type AbortOpts = { controller: AbortController; timeoutMs: number };
 
@@ -198,6 +199,20 @@ export class ApiRequestService {
 
   reqItemGetManyWithoutLiveItemByChannel(channel_id: string, params: QueryParamsChannel = {}) {
     return reqItemGetManyWithoutLiveItemByChannel(this, channel_id, params);
+  }
+
+  /* ITEM SOUNDBITE */
+
+  reqItemSoundbiteGet(item_soundbite_id_text: string) {
+    return reqItemSoundbiteGet(this, item_soundbite_id_text);
+  }
+
+  reqItemSoundbiteGetManyByChannelIdText(channel_id_text: string, params: QueryParamsItemSoundbitesByChannel = {}) {
+    return reqItemSoundbiteGetManyByChannelIdText(this, channel_id_text, params);
+  }
+
+  reqItemSoundbiteGetManyByItemIdText(item_id_text: string, params: QueryParamsItemSoundbitesByItem = {}) {
+    return reqItemSoundbiteGetManyByItemIdText(this, item_id_text, params);
   }
 
   /* PLAYLIST */
