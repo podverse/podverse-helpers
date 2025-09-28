@@ -2,6 +2,7 @@ export interface DTOItemChapter {
   id: number;
   id_text: string;
   item_chapters_feed_id: number;
+  data_hash: string;
   start_time: string;
   end_time?: string | null;
   title?: string | null;
