@@ -1,6 +1,6 @@
 import { ApiRequestService } from '../_request';
 import { ApiListResponse } from '../_response';
-import { DTOChannel, DTOItem } from 'src/dtos';
+import { DTOChannel, DTOItem, DTOItemChapter } from 'src/dtos';
 import { QueryParamsChannel, QueryParamsChannels } from '../queryParams';
 
 export async function reqItemGetMany(
@@ -50,5 +50,15 @@ export async function reqItemGetManyWithoutLiveItemByChannel(
       },
       withCredentials: true
     }
+  });
+}
+
+export async function reqItemParseAndGetChapters(
+  api: ApiRequestService,
+  item_id_text: string
+) {
+  return api.apiRequest<ApiListResponse<DTOItemChapter>>({
+    path: `/item/chapters/${item_id_text}/`,
+    method: 'GET'
   });
 }
