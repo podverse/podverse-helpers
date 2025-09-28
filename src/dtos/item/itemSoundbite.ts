@@ -1,3 +1,5 @@
+import { DTOItem } from "./item";
+
 export interface DTOItemSoundbite {
   id: number;
   id_text: string;
@@ -5,4 +7,5 @@ export interface DTOItemSoundbite {
   start_time: string;
   duration: string;
   title?: string | null;
+  item?: DTOItem | null;
 }
