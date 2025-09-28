@@ -80,6 +80,24 @@ export interface QueryParamsItems extends QueryParamsPage {
   category?: CategoryMappingKeys;
 }
 
+// Item Soundbites
+
+export const QUERY_PARAMS_ITEM_SOUNDBITES_BY_CHANNEL_SORT_VALUES = ["recent", "oldest"] as const;
+
+export type QueryParamsItemSoundbitesByChannelSort = typeof QUERY_PARAMS_ITEM_SOUNDBITES_BY_CHANNEL_SORT_VALUES[number];
+
+export interface QueryParamsItemSoundbitesByChannel extends QueryParamsPage {
+  sort?: QueryParamsItemSoundbitesByChannelSort;
+}
+
+export const QUERY_PARAMS_ITEM_SOUNDBITES_BY_ITEM_SORT_VALUES = ["recent", "oldest"] as const;
+
+export type QueryParamsItemSoundbitesByItemSort = typeof QUERY_PARAMS_ITEM_SOUNDBITES_BY_ITEM_SORT_VALUES[number];
+
+export interface QueryParamsItemSoundbitesByItem extends QueryParamsPage {
+  sort?: QueryParamsItemSoundbitesByItemSort;
+}
+
 // Playlists
 
 export const QUERY_PARAMS_PLAYLISTS_TYPE_VALUES = ["my_playlists", "subscribed", "global"] as const;
