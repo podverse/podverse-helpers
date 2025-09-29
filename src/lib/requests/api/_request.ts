@@ -34,6 +34,7 @@ import { reqQueueResourceItemSoundbiteAddBetween, reqQueueResourceItemSoundbiteA
   reqQueueResourceItemSoundbiteAddLast, reqQueueResourceItemSoundbiteAddNext,
   reqQueueResourceItemSoundbiteAddNowPlaying } from './queue/queueResource/queueResourceItemSoundbite';
 import { reqItemSoundbiteGet, reqItemSoundbiteGetManyByChannelIdText, reqItemSoundbiteGetManyByItemIdText } from './itemSoundbite/itemSoundbite';
+import { reqItemTranscriptGet } from './itemTranscript/itemTranscript';
 
 export type AbortOpts = { controller: AbortController; timeoutMs: number };
 
@@ -219,6 +220,12 @@ export class ApiRequestService {
 
   reqItemSoundbiteGetManyByItemIdText(item_id_text: string, params: QueryParamsItemSoundbitesByItem = {}) {
     return reqItemSoundbiteGetManyByItemIdText(this, item_id_text, params);
+  }
+
+  /* ITEM TRANSCRIPT */
+
+  reqItemTranscriptGet(item_transcript_id_text: string) {
+    return reqItemTranscriptGet(this, item_transcript_id_text);
   }
 
   /* PLAYLIST */

@@ -6,3 +6,13 @@ export interface DTOItemTranscript {
   language?: string | null;
   rel?: string | null;
 }
+
+export interface TranscriptRow {
+  line?: number
+  startTime: number
+  startTimeFormatted: string | null
+  endTime: number
+  endTimeFormatted: string | null
+  body: string
+  speaker?: string
+}
