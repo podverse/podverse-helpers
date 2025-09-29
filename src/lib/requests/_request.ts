@@ -1,5 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 
+export type { AxiosRequestConfig } from 'axios';
+
 export const request = async <T>(
   url: string,
   requestConfig?: AxiosRequestConfig,
