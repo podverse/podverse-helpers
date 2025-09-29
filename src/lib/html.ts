@@ -5,7 +5,7 @@ function stripHtmlTags(input?: string): string {
   return input.replace(/<[^>]*>/g, "");
 }
 
-function decodeHtmlEntities(input?: string): string {
+export function decodeHtmlEntities(input?: string): string {
   if (!input) return "";
   return decode(input);
 }

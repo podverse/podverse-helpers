@@ -1,6 +1,7 @@
 import { DTOChannel } from "../channel/channel";
 import { DTOLiveItem } from "../liveItem/liveItem";
 import { DTOItemAbout } from "./itemAbout";
+import { DTOItemChaptersFeed } from "./itemChaptersFeed";
 import { DTOItemChat } from "./itemChat";
 import { DTOItemContentLink } from "./itemContentLink";
 import { DTOItemDescription } from "./itemDescription";
@@ -29,6 +30,7 @@ export interface DTOItem {
   item_flag_status_id: number;
   live_item?: DTOLiveItem | null;
   item_about: DTOItemAbout;
+  item_chapters_feed?: DTOItemChaptersFeed | null;
   item_chat: DTOItemChat;
   item_description?: DTOItemDescription;
   item_license: DTOItemLicense;
