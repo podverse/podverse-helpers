@@ -17,7 +17,7 @@ import { reqPlaylistResourceItemAddFirst, reqPlaylistResourceItemAddBetween,
 import { reqPlaylistResourceItemChapterAddBetween, reqPlaylistResourceItemChapterAddFirst, reqPlaylistResourceItemChapterAddLast } from './playlist/playlistResource/playlistResourceItemChapter';
 import { reqPodrollGetForChannel } from './podroll/podroll';
 import { QueryParamsChannel, QueryParamsChannels, QueryParamsClipsByChannel, QueryParamsItemSoundbitesByChannel, QueryParamsItemSoundbitesByItem, QueryParamsPlaylists } from './queryParams';
-import { reqQueueGetAllForAccountPrivate } from './queue/queue';
+import { reqQueueGetAllForAccountPrivate, reqQueueUpdateIsActiveQueue } from './queue/queue';
 import { reqQueueResourceItemAddBetween, reqQueueResourceItemAddHistory,
   reqQueueResourceItemAddLast, reqQueueResourceItemAddNext,
   reqQueueResourceItemAddNowPlaying } from './queue/queueResource/queueResourceItem';
@@ -35,6 +35,7 @@ import { reqQueueResourceItemSoundbiteAddBetween, reqQueueResourceItemSoundbiteA
   reqQueueResourceItemSoundbiteAddNowPlaying } from './queue/queueResource/queueResourceItemSoundbite';
 import { reqItemSoundbiteGet, reqItemSoundbiteGetManyByChannelIdText, reqItemSoundbiteGetManyByItemIdText } from './itemSoundbite/itemSoundbite';
 import { reqItemTranscriptGet } from './itemTranscript/itemTranscript';
+import { reqQueueGetAllNowPlayingOrUpcomingByQueueIdText } from './queue/queueResource/queueResource';
 
 export type AbortOpts = { controller: AbortController; timeoutMs: number };
 
@@ -328,6 +329,16 @@ export class ApiRequestService {
 
   reqQueueGetAllForAccountPrivate() {
     return reqQueueGetAllForAccountPrivate(this);
+  }
+
+  reqQueueUpdateIsActiveQueue(queue_id_text: string, is_active_queue: boolean) {
+    return reqQueueUpdateIsActiveQueue(this, { queue_id_text, is_active_queue });
+  }
+
+  /* QUEUE RESOURCE */
+
+  reqQueueGetAllNowPlayingOrUpcomingByQueueIdText(queue_id_text: string) {
+    return reqQueueGetAllNowPlayingOrUpcomingByQueueIdText(this, { queue_id_text });
   }
 
   /* QUEUE RESOURCE > CLIP */
