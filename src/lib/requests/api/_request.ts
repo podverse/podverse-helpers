@@ -36,6 +36,7 @@ import { reqQueueResourceItemSoundbiteAddBetween, reqQueueResourceItemSoundbiteA
 import { reqItemSoundbiteGet, reqItemSoundbiteGetManyByChannelIdText, reqItemSoundbiteGetManyByItemIdText } from './itemSoundbite/itemSoundbite';
 import { reqItemTranscriptGet } from './itemTranscript/itemTranscript';
 import { reqQueueGetAllNowPlayingOrUpcomingByQueueIdText } from './queue/queueResource/queueResource';
+import { reqItemChapterGetByIdText } from './itemChapter/itemChapter';
 
 export type AbortOpts = { controller: AbortController; timeoutMs: number };
 
@@ -207,6 +208,10 @@ export class ApiRequestService {
 
   reqItemParseAndGetChapters(item_id_text: string) {
     return reqItemParseAndGetChapters(this, item_id_text);
+  }
+
+  reqItemChapterGetByIdText(item_chapter_id_text: string) {
+    return reqItemChapterGetByIdText(this, item_chapter_id_text);
   }
 
   /* ITEM SOUNDBITE */

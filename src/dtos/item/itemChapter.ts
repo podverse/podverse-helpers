@@ -1,3 +1,5 @@
+import { DTOItemChaptersFeed } from "./itemChaptersFeed";
+
 export interface DTOItemChapter {
   id: number;
   id_text: string;
@@ -9,4 +11,5 @@ export interface DTOItemChapter {
   img?: string | null;
   web_url?: string | null;
   table_of_contents: boolean;
+  item_chapters_feed?: DTOItemChaptersFeed | null;
 }
