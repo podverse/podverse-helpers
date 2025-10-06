@@ -1,6 +1,5 @@
 import { DTOClip } from "../clip";
 import { DTOItem } from "../item/item";
-import { DTOItemChapter } from "../item/itemChapter";
 import { DTOItemSoundbite } from "../item/itemSoundbite";
 
 export interface DTOQueueResource {
@@ -12,7 +11,6 @@ export interface DTOQueueResource {
   completed: boolean;
   clip?: DTOClip;
   item?: DTOItem;
-  item_chapter?: DTOItemChapter;
   item_soundbite?: DTOItemSoundbite;
   add_by_rss_hash_id?: string;
   add_by_rss_resource_data?: object;

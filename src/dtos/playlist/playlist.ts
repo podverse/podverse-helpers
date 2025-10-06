@@ -30,9 +30,6 @@ export interface PlaylistFavoritesIndexRows {
   clip_ids: {
     [clip_id: number]: boolean;
   }
-  item_chapter_ids: {
-    [item_chapter_id: number]: boolean;
-  }
   item_soundbite_ids: {
     [item_soundbite_id: number]: boolean;
   }
@@ -54,7 +51,6 @@ export const generatePlaylistFavoritesIndex = (playlists: DTOPlaylistFavorites[]
       index[mediumId] = {
         item_ids: {},
         clip_ids: {},
-        item_chapter_ids: {},
         item_soundbite_ids: {},
         add_by_rss_hash_ids: {}
       };
@@ -66,9 +62,6 @@ export const generatePlaylistFavoritesIndex = (playlists: DTOPlaylistFavorites[]
       }
       if (resource.clip_id) {
         index[mediumId].clip_ids[resource.clip_id] = true;
-      }
-      if (resource.item_chapter_id) {
-        index[mediumId].item_chapter_ids[resource.item_chapter_id] = true;
       }
       if (resource.item_soundbite_id) {
         index[mediumId].item_soundbite_ids[resource.item_soundbite_id] = true;
