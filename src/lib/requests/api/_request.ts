@@ -35,7 +35,7 @@ import { reqQueueResourceItemSoundbiteAddBetween, reqQueueResourceItemSoundbiteA
   reqQueueResourceItemSoundbiteAddNowPlaying } from './queue/queueResource/queueResourceItemSoundbite';
 import { reqItemSoundbiteGet, reqItemSoundbiteGetManyByChannelIdText, reqItemSoundbiteGetManyByItemIdText } from './itemSoundbite/itemSoundbite';
 import { reqItemTranscriptGet } from './itemTranscript/itemTranscript';
-import { reqQueueGetAllNowPlayingOrUpcomingByQueueIdText } from './queue/queueResource/queueResource';
+import { reqQueueGetAllUpcomingByQueueIdText, reqQueueGetNowPlayingByQueueIdText } from './queue/queueResource/queueResource';
 import { reqItemChapterGetByIdText } from './itemChapter/itemChapter';
 
 export type AbortOpts = { controller: AbortController; timeoutMs: number };
@@ -342,11 +342,16 @@ export class ApiRequestService {
 
   /* QUEUE RESOURCE */
 
-  reqQueueGetAllNowPlayingOrUpcomingByQueueIdText(queue_id_text: string) {
-    return reqQueueGetAllNowPlayingOrUpcomingByQueueIdText(this, { queue_id_text });
+  reqQueueGetNowPlayingByQueueIdText(queue_id_text: string) {
+    return reqQueueGetNowPlayingByQueueIdText(this, { queue_id_text });
+  }
+
+  reqQueueGetAllUpcomingByQueueIdText(queue_id_text: string) {
+    return reqQueueGetAllUpcomingByQueueIdText(this, { queue_id_text });
   }
 
   /* QUEUE RESOURCE > CLIP */
+  
   reqQueueResourceClipAddNowPlaying(queue_id_text: string, clip_id_text: string, params?: QueueExtraParams) {
     return reqQueueResourceClipAddNowPlaying(this, queue_id_text, clip_id_text, params);
   }
