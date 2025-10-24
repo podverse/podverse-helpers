@@ -87,6 +87,7 @@ export * from './item/itemValueTimeSplitRemoteItem';
 export * from './liveItem/liveItem';
 export * from './liveItem/liveItemStatus';
 
+export * from './mediaPlayer/playbackMode';
 export * from './mediaPlayer/playbackSpeed';
 
 export * from './playlist/playlist';
