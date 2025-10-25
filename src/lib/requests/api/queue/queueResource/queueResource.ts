@@ -1,8 +1,20 @@
 import { ApiListResponse } from "../..";
-import { DTOQueueResource } from "../../../../../dtos";
+import { DTOQueueResource, DTOQueueResourceAbridged } from "../../../../../dtos";
 import { ApiRequestService } from "../../_request";
 
-export async function reqQueueGetNowPlayingByQueueIdText(
+export async function reqQueueResourcesGetAllByAccountAbridged(
+  api: ApiRequestService
+) {
+  return api.apiRequest<DTOQueueResourceAbridged[]>({
+    path: `/queue/resources/all-by-account-abridged`,
+    method: 'GET',
+    config: {
+      withCredentials: true
+    }
+  });
+}
+
+export async function reqQueueResourcesGetNowPlayingByQueueIdText(
   api: ApiRequestService,
   params: { queue_id_text: string }
 ) {
@@ -15,7 +27,7 @@ export async function reqQueueGetNowPlayingByQueueIdText(
   });
 }
 
-export async function reqQueueGetAllUpcomingByQueueIdText(
+export async function reqQueueResourcesGetAllUpcomingByQueueIdText(
   api: ApiRequestService,
   params: { queue_id_text: string }
 ) {
@@ -28,7 +40,7 @@ export async function reqQueueGetAllUpcomingByQueueIdText(
   });
 }
 
-export async function reqQueueGetHistoryByQueueIdTextPaginated(
+export async function reqQueueResourcesGetHistoryByQueueIdTextPaginated(
   api: ApiRequestService,
   params: { queue_id_text: string; page?: number; }
 ) {

@@ -35,7 +35,9 @@ import { reqQueueResourceItemSoundbiteAddBetween, reqQueueResourceItemSoundbiteA
   reqQueueResourceItemSoundbiteAddNowPlaying } from './queue/queueResource/queueResourceItemSoundbite';
 import { reqItemSoundbiteGet, reqItemSoundbiteGetManyByChannelIdText, reqItemSoundbiteGetManyByItemIdText } from './itemSoundbite/itemSoundbite';
 import { reqItemTranscriptGet } from './itemTranscript/itemTranscript';
-import { reqQueueGetAllUpcomingByQueueIdText, reqQueueGetHistoryByQueueIdTextPaginated, reqQueueGetNowPlayingByQueueIdText } from './queue/queueResource/queueResource';
+import { reqQueueResourcesGetAllByAccountAbridged, reqQueueResourcesGetAllUpcomingByQueueIdText,
+  reqQueueResourcesGetHistoryByQueueIdTextPaginated, reqQueueResourcesGetNowPlayingByQueueIdText
+} from './queue/queueResource/queueResource';
 import { reqItemChapterGetByIdText } from './itemChapter/itemChapter';
 
 export type AbortOpts = { controller: AbortController; timeoutMs: number };
@@ -342,16 +344,20 @@ export class ApiRequestService {
 
   /* QUEUE RESOURCE */
 
-  reqQueueGetNowPlayingByQueueIdText(queue_id_text: string) {
-    return reqQueueGetNowPlayingByQueueIdText(this, { queue_id_text });
+  reqQueueResourcesGetNowPlayingByQueueIdText(queue_id_text: string) {
+    return reqQueueResourcesGetNowPlayingByQueueIdText(this, { queue_id_text });
   }
 
-  reqQueueGetAllUpcomingByQueueIdText(queue_id_text: string) {
-    return reqQueueGetAllUpcomingByQueueIdText(this, { queue_id_text });
+  reqQueueResourcesGetAllUpcomingByQueueIdText(queue_id_text: string) {
+    return reqQueueResourcesGetAllUpcomingByQueueIdText(this, { queue_id_text });
   }
 
-  reqQueueGetHistoryByQueueIdTextPaginated(queue_id_text: string, page?: number) {
-    return reqQueueGetHistoryByQueueIdTextPaginated(this, { queue_id_text, page });
+  reqQueueResourcesGetHistoryByQueueIdTextPaginated(queue_id_text: string, page?: number) {
+    return reqQueueResourcesGetHistoryByQueueIdTextPaginated(this, { queue_id_text, page });
+  }
+
+  reqQueueResourcesGetAllByAccountAbridged() {
+    return reqQueueResourcesGetAllByAccountAbridged(this);
   }
 
   /* QUEUE RESOURCE > CLIP */
