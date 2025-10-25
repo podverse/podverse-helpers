@@ -35,7 +35,7 @@ import { reqQueueResourceItemSoundbiteAddBetween, reqQueueResourceItemSoundbiteA
   reqQueueResourceItemSoundbiteAddNowPlaying } from './queue/queueResource/queueResourceItemSoundbite';
 import { reqItemSoundbiteGet, reqItemSoundbiteGetManyByChannelIdText, reqItemSoundbiteGetManyByItemIdText } from './itemSoundbite/itemSoundbite';
 import { reqItemTranscriptGet } from './itemTranscript/itemTranscript';
-import { reqQueueGetAllUpcomingByQueueIdText, reqQueueGetNowPlayingByQueueIdText } from './queue/queueResource/queueResource';
+import { reqQueueGetAllUpcomingByQueueIdText, reqQueueGetHistoryByQueueIdTextPaginated, reqQueueGetNowPlayingByQueueIdText } from './queue/queueResource/queueResource';
 import { reqItemChapterGetByIdText } from './itemChapter/itemChapter';
 
 export type AbortOpts = { controller: AbortController; timeoutMs: number };
@@ -348,6 +348,10 @@ export class ApiRequestService {
 
   reqQueueGetAllUpcomingByQueueIdText(queue_id_text: string) {
     return reqQueueGetAllUpcomingByQueueIdText(this, { queue_id_text });
+  }
+
+  reqQueueGetHistoryByQueueIdTextPaginated(queue_id_text: string, page?: number) {
+    return reqQueueGetHistoryByQueueIdTextPaginated(this, { queue_id_text, page });
   }
 
   /* QUEUE RESOURCE > CLIP */
