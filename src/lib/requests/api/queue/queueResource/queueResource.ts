@@ -1,11 +1,11 @@
 import { ApiListResponse } from "../..";
-import { DTOQueueResource, DTOQueueResourceAbridged } from "../../../../../dtos";
+import { DTOQueueResource, DTOQueueResourceAbridgedResponseData } from "../../../../../dtos";
 import { ApiRequestService } from "../../_request";
 
 export async function reqQueueResourcesGetAllByAccountAbridged(
   api: ApiRequestService
 ) {
-  return api.apiRequest<DTOQueueResourceAbridged[]>({
+  return api.apiRequest<DTOQueueResourceAbridgedResponseData[]>({
     path: `/queue/resources/all-by-account-abridged`,
     method: 'GET',
     config: {

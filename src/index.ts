@@ -23,6 +23,7 @@ export * from './lib/item/itemEnclosure';
 export * from './lib/medium';
 export * from './lib/pagination';
 export * from './lib/playlistResource';
+export * from './lib/queue/queueResourceAbridged';
 export * from './lib/remoteItem';
 export * from './lib/sharableStatus';
 export * from './lib/sleep';

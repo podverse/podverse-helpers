@@ -97,6 +97,7 @@ export * from './podroll';
 
 export * from './queue/queue';
 export * from './queue/queueResource';
+export * from './queue/queueResourceAbridged';
 
 export * from './stats/statsAggregatedAccount';
 export * from './stats/statsAggregatedChannel';
