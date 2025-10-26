@@ -15,8 +15,8 @@ export const generateQueueResourceAbridgedIndex = (queueResourcesAbridged: DTOQu
       index.item_soundbites[resource.s] = resource;
     } else if (resource.a) {
       index.add_by_rss_resource_datas[resource.a] = resource;
-    } else if (resource.i) {
-      index.items[resource.i] = resource;
+    } else if (resource.t) {
+      index.items[resource.t] = resource;
     }
   });
 
