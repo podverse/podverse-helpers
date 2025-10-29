@@ -77,3 +77,17 @@ export async function reqQueueResourceItemAddByRSSAddHistory(
     data: params
   });
 }
+
+export async function reqQueueResourceItemAddByRSSDelete(
+  api: ApiRequestService,
+  queue_id_text: string,
+  add_by_rss_hash_id: string
+) {
+  return api.apiRequest<void>({
+    path: `/queue/${queue_id_text}/item-add-by-rss/${add_by_rss_hash_id}`,
+    method: 'DELETE',
+    config: {
+      withCredentials: true
+    }
+  });
+}

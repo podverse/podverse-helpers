@@ -78,3 +78,17 @@ export async function reqQueueResourceItemSoundbiteAddHistory(
     data: params
   });
 }
+
+export async function reqQueueResourceItemSoundbiteDelete(
+  api: ApiRequestService,
+  queue_id_text: string,
+  item_soundbite_id_text: string
+) {
+  return api.apiRequest<void>({
+    path: `/queue/${queue_id_text}/item-soundbite/${item_soundbite_id_text}`,
+    method: 'DELETE',
+    config: {
+      withCredentials: true
+    }
+  });
+}

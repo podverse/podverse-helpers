@@ -78,3 +78,17 @@ export async function reqQueueResourceClipAddHistory(
     data: params
   });
 }
+
+export async function reqQueueResourceClipDelete(
+  api: ApiRequestService,
+  queue_id_text: string,
+  clip_id_text: string
+) {
+  return api.apiRequest<void>({
+    path: `/queue/${queue_id_text}/clip/${clip_id_text}`,
+    method: 'DELETE',
+    config: {
+      withCredentials: true
+    }
+  });
+}

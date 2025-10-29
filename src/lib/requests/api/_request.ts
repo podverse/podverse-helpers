@@ -20,19 +20,16 @@ import { QueryParamsChannel, QueryParamsChannels, QueryParamsClipsByChannel, Que
 import { reqQueueGetAllForAccountPrivate, reqQueueUpdateIsActiveQueue } from './queue/queue';
 import { reqQueueResourceItemAddBetween, reqQueueResourceItemAddHistory,
   reqQueueResourceItemAddLast, reqQueueResourceItemAddNext,
-  reqQueueResourceItemAddNowPlaying } from './queue/queueResource/queueResourceItem';
+  reqQueueResourceItemAddNowPlaying, reqQueueResourceItemDelete } from './queue/queueResource/queueResourceItem';
 import { reqQueueResourceClipAddBetween, reqQueueResourceClipAddHistory,
   reqQueueResourceClipAddLast, reqQueueResourceClipAddNext,
-  reqQueueResourceClipAddNowPlaying } from './queue/queueResource/queueResourceClip';
+  reqQueueResourceClipAddNowPlaying, reqQueueResourceClipDelete } from './queue/queueResource/queueResourceClip';
 import { reqQueueResourceItemAddByRSSAddBetween, reqQueueResourceItemAddByRSSAddHistory,
   reqQueueResourceItemAddByRSSAddLast, reqQueueResourceItemAddByRSSAddNext,
-  reqQueueResourceItemAddByRSSAddNowPlaying } from './queue/queueResource/queueResourceItemAddByRSS';
-import { reqQueueResourceItemChapterAddBetween, reqQueueResourceItemChapterAddHistory,
-  reqQueueResourceItemChapterAddLast, reqQueueResourceItemChapterAddNext, 
-  reqQueueResourceItemChapterAddNowPlaying } from './queue/queueResource/queueResourceItemChapter';
+  reqQueueResourceItemAddByRSSAddNowPlaying, reqQueueResourceItemAddByRSSDelete } from './queue/queueResource/queueResourceItemAddByRSS';
 import { reqQueueResourceItemSoundbiteAddBetween, reqQueueResourceItemSoundbiteAddHistory,
   reqQueueResourceItemSoundbiteAddLast, reqQueueResourceItemSoundbiteAddNext,
-  reqQueueResourceItemSoundbiteAddNowPlaying } from './queue/queueResource/queueResourceItemSoundbite';
+  reqQueueResourceItemSoundbiteAddNowPlaying, reqQueueResourceItemSoundbiteDelete } from './queue/queueResource/queueResourceItemSoundbite';
 import { reqItemSoundbiteGet, reqItemSoundbiteGetManyByChannelIdText, reqItemSoundbiteGetManyByItemIdText } from './itemSoundbite/itemSoundbite';
 import { reqItemTranscriptGet } from './itemTranscript/itemTranscript';
 import { reqQueueResourcesGetAllByAccountAbridged, reqQueueResourcesGetAllUpcomingByQueueIdText,
@@ -369,6 +366,9 @@ export class ApiRequestService {
   reqQueueResourceClipAddNext(queue_id_text: string, clip_id_text: string) {
     return reqQueueResourceClipAddNext(this, queue_id_text, clip_id_text);
   }
+  reqQueueResourceClipDelete(queue_id_text: string, clip_id_text: string) {
+    return reqQueueResourceClipDelete(this, queue_id_text, clip_id_text);
+  }
 
   reqQueueResourceClipAddBetween(queue_id_text: string, clip_id_text: string, params: BetweenParams) {
     return reqQueueResourceClipAddBetween(this, queue_id_text, clip_id_text, params);
@@ -391,6 +391,9 @@ export class ApiRequestService {
   reqQueueResourceItemAddNext(queue_id_text: string, item_id_text: string) {
     return reqQueueResourceItemAddNext(this, queue_id_text, item_id_text);
   }
+  reqQueueResourceItemDelete(queue_id_text: string, item_id_text: string) {
+    return reqQueueResourceItemDelete(this, queue_id_text, item_id_text);
+  }
 
   reqQueueResourceItemAddBetween(queue_id_text: string, item_id_text: string, params: BetweenParams) {
     return reqQueueResourceItemAddBetween(this, queue_id_text, item_id_text, params);
@@ -407,6 +410,9 @@ export class ApiRequestService {
   /* QUEUE RESOURCE > ITEM ADD BY RSS */
   reqQueueResourceItemAddByRSSAddNowPlaying(queue_id_text: string, params: QueueExtraParams & { add_by_rss_resource_data: object }) {
     return reqQueueResourceItemAddByRSSAddNowPlaying(this, queue_id_text, params);
+  }
+  reqQueueResourceItemAddByRSSDelete(queue_id_text: string, add_by_rss_hash_id: string) {
+    return reqQueueResourceItemAddByRSSDelete(this, queue_id_text, add_by_rss_hash_id);
   }
 
   reqQueueResourceItemAddByRSSAddNext(queue_id_text: string, params: { add_by_rss_resource_data: object }) {
@@ -425,30 +431,12 @@ export class ApiRequestService {
     return reqQueueResourceItemAddByRSSAddHistory(this, queue_id_text, params);
   }
 
-  /* QUEUE RESOURCE > ITEM CHAPTER */
-  reqQueueResourceItemChapterAddNowPlaying(queue_id_text: string, item_chapter_id_text: string, params?: QueueExtraParams) {
-    return reqQueueResourceItemChapterAddNowPlaying(this, queue_id_text, item_chapter_id_text, params);
-  }
-
-  reqQueueResourceItemChapterAddNext(queue_id_text: string, item_chapter_id_text: string) {
-    return reqQueueResourceItemChapterAddNext(this, queue_id_text, item_chapter_id_text);
-  }
-
-  reqQueueResourceItemChapterAddBetween(queue_id_text: string, item_chapter_id_text: string, params: BetweenParams) {
-    return reqQueueResourceItemChapterAddBetween(this, queue_id_text, item_chapter_id_text, params);
-  }
-
-  reqQueueResourceItemChapterAddLast(queue_id_text: string, item_chapter_id_text: string) {
-    return reqQueueResourceItemChapterAddLast(this, queue_id_text, item_chapter_id_text);
-  }
-
-  reqQueueResourceItemChapterAddHistory(queue_id_text: string, item_chapter_id_text: string, params?: QueueExtraParams) {
-    return reqQueueResourceItemChapterAddHistory(this, queue_id_text, item_chapter_id_text, params);
-  }
-
   /* QUEUE RESOURCE > ITEM SOUNDBITE */
   reqQueueResourceItemSoundbiteAddNowPlaying(queue_id_text: string, item_soundbite_id_text: string, params?: QueueExtraParams) {
     return reqQueueResourceItemSoundbiteAddNowPlaying(this, queue_id_text, item_soundbite_id_text, params);
+  }
+  reqQueueResourceItemSoundbiteDelete(queue_id_text: string, item_soundbite_id_text: string) {
+    return reqQueueResourceItemSoundbiteDelete(this, queue_id_text, item_soundbite_id_text);
   }
 
   reqQueueResourceItemSoundbiteAddNext(queue_id_text: string, item_soundbite_id_text: string) {
