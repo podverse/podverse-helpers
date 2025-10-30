@@ -45,3 +45,17 @@ export async function reqPlaylistResourceItemAddLast(
     }
   });
 }
+
+export async function reqPlaylistResourceItemDelete(
+  api: ApiRequestService,
+  playlist_id_text: string,
+  item_id_text: string
+) {
+  return api.apiRequest<void>({
+    path: `/playlist/${playlist_id_text}/item/${item_id_text}`,
+    method: 'DELETE',
+    config: {
+      withCredentials: true
+    }
+  });
+}

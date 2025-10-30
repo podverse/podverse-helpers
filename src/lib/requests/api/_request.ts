@@ -11,10 +11,10 @@ import { reqClipCreate, ReqClipCreateParams, reqClipDelete, reqClipGet, reqClipG
 import { reqItemGetByIdOrIdText, reqItemGetMany, reqItemGetManyWithoutLiveItemByChannel, reqItemParseAndGetChapters } from './item/item';
 import { reqPlaylistCreate, ReqPlaylistCreateParams, reqPlaylistDelete, reqPlaylistEdit, ReqPlaylistEditParams, reqPlaylistGet,
   reqPlaylistGetAllFavoritesPrivate, reqPlaylistGetManyPrivate, reqPlaylistGetManyPrivateFollowed, reqPlaylistGetManyPublic } from './playlist/playlist';
-import { reqPlaylistResourceClipAddBetween, reqPlaylistResourceClipAddFirst, reqPlaylistResourceClipAddLast } from './playlist/playlistResource/playlistResourceClip';
+import { reqPlaylistResourceClipAddBetween, reqPlaylistResourceClipAddFirst, reqPlaylistResourceClipAddLast, reqPlaylistResourceClipDelete } from './playlist/playlistResource/playlistResourceClip';
 import { reqPlaylistResourceItemAddFirst, reqPlaylistResourceItemAddBetween,
-  reqPlaylistResourceItemAddLast } from './playlist/playlistResource/playlistResourceItem';
-import { reqPlaylistResourceItemChapterAddBetween, reqPlaylistResourceItemChapterAddFirst, reqPlaylistResourceItemChapterAddLast } from './playlist/playlistResource/playlistResourceItemChapter';
+  reqPlaylistResourceItemAddLast, 
+  reqPlaylistResourceItemDelete} from './playlist/playlistResource/playlistResourceItem';
 import { reqPodrollGetForChannel } from './podroll/podroll';
 import { QueryParamsChannel, QueryParamsChannels, QueryParamsClipsByChannel, QueryParamsItemSoundbitesByChannel, QueryParamsItemSoundbitesByItem, QueryParamsPlaylists } from './queryParams';
 import { reqQueueGetAllForAccountPrivate, reqQueueUpdateIsActiveQueue } from './queue/queue';
@@ -36,6 +36,9 @@ import { reqQueueResourcesGetAllByAccountAbridged, reqQueueResourcesGetAllUpcomi
   reqQueueResourcesGetHistoryByQueueIdTextPaginated, reqQueueResourcesGetNowPlayingByQueueIdText
 } from './queue/queueResource/queueResource';
 import { reqItemChapterGetByIdText } from './itemChapter/itemChapter';
+import { reqPlaylistResourceItemSoundbiteAddFirst, reqPlaylistResourceItemSoundbiteAddLast,
+  reqPlaylistResourceItemSoundbiteAddBetween, 
+  reqPlaylistResourceItemSoundbiteDelete } from './playlist/playlistResource/playlistResourceItemSoundbite';
 
 export type AbortOpts = { controller: AbortController; timeoutMs: number };
 
@@ -273,12 +276,16 @@ export class ApiRequestService {
     return reqPlaylistResourceClipAddFirst(this, playlist_id_text, clip_id_text);
   }
 
-  reqPlaylistResourceClipAddBetween(playlist_id_text: string, clip_id_text: string) {
-    return reqPlaylistResourceClipAddBetween(this, playlist_id_text, clip_id_text);
+  reqPlaylistResourceClipAddBetween(playlist_id_text: string, clip_id_text: string, params: BetweenParams) {
+    return reqPlaylistResourceClipAddBetween(this, playlist_id_text, clip_id_text, params);
   }
 
   reqPlaylistResourceClipAddLast(playlist_id_text: string, clip_id_text: string) {
     return reqPlaylistResourceClipAddLast(this, playlist_id_text, clip_id_text);
+  }
+
+  reqPlaylistResourceClipDelete(playlist_id_text: string, clip_id_text: string) {
+    return reqPlaylistResourceClipDelete(this, playlist_id_text, clip_id_text);
   }
 
   /* PLAYLIST RESOURCE > ITEM */
@@ -295,32 +302,26 @@ export class ApiRequestService {
     return reqPlaylistResourceItemAddLast(this, playlist_id_text, item_id_text);
   }
 
-  /* PLAYLIST RESOURCE > ITEM CHAPTER */
-
-  reqPlaylistResourceItemChapterAddFirst(playlist_id_text: string, item_chapter_id_text: string) {
-    return reqPlaylistResourceItemChapterAddFirst(this, playlist_id_text, item_chapter_id_text);
-  }
-
-  reqPlaylistResourceItemChapterAddBetween(playlist_id_text: string, item_chapter_id_text: string) {
-    return reqPlaylistResourceItemChapterAddBetween(this, playlist_id_text, item_chapter_id_text);
-  }
-
-  reqPlaylistResourceItemChapterAddLast(playlist_id_text: string, item_chapter_id_text: string) {
-    return reqPlaylistResourceItemChapterAddLast(this, playlist_id_text, item_chapter_id_text);
+  reqPlaylistResourceItemDelete(playlist_id_text: string, item_id_text: string) {
+    return reqPlaylistResourceItemDelete(this, playlist_id_text, item_id_text);
   }
 
   /* PLAYLIST RESOURCE > ITEM SOUNDBITE */
 
   reqPlaylistResourceItemSoundbiteAddFirst(playlist_id_text: string, item_soundbite_id_text: string) {
-    return reqPlaylistResourceItemChapterAddFirst(this, playlist_id_text, item_soundbite_id_text);
+    return reqPlaylistResourceItemSoundbiteAddFirst(this, playlist_id_text, item_soundbite_id_text);
   }
 
-  reqPlaylistResourceItemSoundbiteAddBetween(playlist_id_text: string, item_soundbite_id_text: string) {
-    return reqPlaylistResourceItemChapterAddBetween(this, playlist_id_text, item_soundbite_id_text);
+  reqPlaylistResourceItemSoundbiteAddBetween(playlist_id_text: string, item_soundbite_id_text: string, params: BetweenParams) {
+    return reqPlaylistResourceItemSoundbiteAddBetween(this, playlist_id_text, item_soundbite_id_text, params);
   }
 
   reqPlaylistResourceItemSoundbiteAddLast(playlist_id_text: string, item_soundbite_id_text: string) {
-    return reqPlaylistResourceItemChapterAddLast(this, playlist_id_text, item_soundbite_id_text);
+    return reqPlaylistResourceItemSoundbiteAddLast(this, playlist_id_text, item_soundbite_id_text);
+  }
+
+  reqPlaylistResourceItemSoundbiteDelete(playlist_id_text: string, item_soundbite_id_text: string) {
+    return reqPlaylistResourceItemSoundbiteDelete(this, playlist_id_text, item_soundbite_id_text);
   }
 
   /* PODROLL */
@@ -366,9 +367,6 @@ export class ApiRequestService {
   reqQueueResourceClipAddNext(queue_id_text: string, clip_id_text: string) {
     return reqQueueResourceClipAddNext(this, queue_id_text, clip_id_text);
   }
-  reqQueueResourceClipDelete(queue_id_text: string, clip_id_text: string) {
-    return reqQueueResourceClipDelete(this, queue_id_text, clip_id_text);
-  }
 
   reqQueueResourceClipAddBetween(queue_id_text: string, clip_id_text: string, params: BetweenParams) {
     return reqQueueResourceClipAddBetween(this, queue_id_text, clip_id_text, params);
@@ -382,6 +380,10 @@ export class ApiRequestService {
     return reqQueueResourceClipAddHistory(this, queue_id_text, clip_id_text, params);
   }
 
+  reqQueueResourceClipDelete(queue_id_text: string, clip_id_text: string) {
+    return reqQueueResourceClipDelete(this, queue_id_text, clip_id_text);
+  }
+
   /* QUEUE RESOURCE > ITEM */
 
   reqQueueResourceItemAddNowPlaying(queue_id_text: string, item_id_text: string, params?: QueueExtraParams) {
@@ -390,9 +392,6 @@ export class ApiRequestService {
 
   reqQueueResourceItemAddNext(queue_id_text: string, item_id_text: string) {
     return reqQueueResourceItemAddNext(this, queue_id_text, item_id_text);
-  }
-  reqQueueResourceItemDelete(queue_id_text: string, item_id_text: string) {
-    return reqQueueResourceItemDelete(this, queue_id_text, item_id_text);
   }
 
   reqQueueResourceItemAddBetween(queue_id_text: string, item_id_text: string, params: BetweenParams) {
@@ -407,12 +406,14 @@ export class ApiRequestService {
     return reqQueueResourceItemAddHistory(this, queue_id_text, item_id_text, params);
   }
 
+  reqQueueResourceItemDelete(queue_id_text: string, item_id_text: string) {
+    return reqQueueResourceItemDelete(this, queue_id_text, item_id_text);
+  }
+
   /* QUEUE RESOURCE > ITEM ADD BY RSS */
+
   reqQueueResourceItemAddByRSSAddNowPlaying(queue_id_text: string, params: QueueExtraParams & { add_by_rss_resource_data: object }) {
     return reqQueueResourceItemAddByRSSAddNowPlaying(this, queue_id_text, params);
-  }
-  reqQueueResourceItemAddByRSSDelete(queue_id_text: string, add_by_rss_hash_id: string) {
-    return reqQueueResourceItemAddByRSSDelete(this, queue_id_text, add_by_rss_hash_id);
   }
 
   reqQueueResourceItemAddByRSSAddNext(queue_id_text: string, params: { add_by_rss_resource_data: object }) {
@@ -431,12 +432,14 @@ export class ApiRequestService {
     return reqQueueResourceItemAddByRSSAddHistory(this, queue_id_text, params);
   }
 
+  reqQueueResourceItemAddByRSSDelete(queue_id_text: string, add_by_rss_hash_id: string) {
+    return reqQueueResourceItemAddByRSSDelete(this, queue_id_text, add_by_rss_hash_id);
+  }
+
   /* QUEUE RESOURCE > ITEM SOUNDBITE */
+
   reqQueueResourceItemSoundbiteAddNowPlaying(queue_id_text: string, item_soundbite_id_text: string, params?: QueueExtraParams) {
     return reqQueueResourceItemSoundbiteAddNowPlaying(this, queue_id_text, item_soundbite_id_text, params);
-  }
-  reqQueueResourceItemSoundbiteDelete(queue_id_text: string, item_soundbite_id_text: string) {
-    return reqQueueResourceItemSoundbiteDelete(this, queue_id_text, item_soundbite_id_text);
   }
 
   reqQueueResourceItemSoundbiteAddNext(queue_id_text: string, item_soundbite_id_text: string) {
@@ -453,6 +456,10 @@ export class ApiRequestService {
 
   reqQueueResourceItemSoundbiteAddHistory(queue_id_text: string, item_soundbite_id_text: string, params?: QueueExtraParams) {
     return reqQueueResourceItemSoundbiteAddHistory(this, queue_id_text, item_soundbite_id_text, params);
+  }
+
+  reqQueueResourceItemSoundbiteDelete(queue_id_text: string, item_soundbite_id_text: string) {
+    return reqQueueResourceItemSoundbiteDelete(this, queue_id_text, item_soundbite_id_text);
   }
 
 }
