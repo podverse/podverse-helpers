@@ -113,6 +113,10 @@ export interface QueryParamsPlaylists extends QueryParamsPage {
   medium_id?: MediumEnum | null;
 }
 
+// Playlist Resources
+
+export type QueryParamsPlaylistResources = QueryParamsPage;
+
 // Queues
 
 export type QueryParamsQueues = QueryParamsPage & {

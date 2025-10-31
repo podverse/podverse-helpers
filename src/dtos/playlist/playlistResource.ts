@@ -7,10 +7,13 @@ export interface DTOPlaylistResource {
   playlist_id: number;
   list_position: string;
   clip?: DTOClip;
+  clip_id: number | null;
   item?: DTOItem;
+  item_id: number | null;
   item_soundbite?: DTOItemSoundbite;
-  add_by_rss_hash_id?: string;
-  add_by_rss_resource_data?: object;
+  item_soundbite_id: number | null;
+  add_by_rss_resource_data?: object | null;
+  add_by_rss_hash_id?: string | null;
 }
 
 export interface DTOPlaylistResourceIdsOnly {

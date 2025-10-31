@@ -16,7 +16,7 @@ import { reqPlaylistResourceItemAddFirst, reqPlaylistResourceItemAddBetween,
   reqPlaylistResourceItemAddLast, 
   reqPlaylistResourceItemDelete} from './playlist/playlistResource/playlistResourceItem';
 import { reqPodrollGetForChannel } from './podroll/podroll';
-import { QueryParamsChannel, QueryParamsChannels, QueryParamsClipsByChannel, QueryParamsItemSoundbitesByChannel, QueryParamsItemSoundbitesByItem, QueryParamsPlaylists } from './queryParams';
+import { QueryParamsChannel, QueryParamsChannels, QueryParamsClipsByChannel, QueryParamsItemSoundbitesByChannel, QueryParamsItemSoundbitesByItem, QueryParamsPlaylistResources, QueryParamsPlaylists } from './queryParams';
 import { reqQueueGetAllForAccountPrivate, reqQueueUpdateIsActiveQueue } from './queue/queue';
 import { reqQueueResourceItemAddBetween, reqQueueResourceItemAddHistory,
   reqQueueResourceItemAddLast, reqQueueResourceItemAddNext,
@@ -39,6 +39,7 @@ import { reqItemChapterGetByIdText } from './itemChapter/itemChapter';
 import { reqPlaylistResourceItemSoundbiteAddFirst, reqPlaylistResourceItemSoundbiteAddLast,
   reqPlaylistResourceItemSoundbiteAddBetween, 
   reqPlaylistResourceItemSoundbiteDelete } from './playlist/playlistResource/playlistResourceItemSoundbite';
+import { reqPlaylistResourceGetAllByPlaylistIdTextPrivate, reqPlaylistResourceGetManyByPlaylistIdText } from './playlist/playlistResource/playlistResource';
 
 export type AbortOpts = { controller: AbortController; timeoutMs: number };
 
@@ -268,6 +269,16 @@ export class ApiRequestService {
 
   reqPlaylistDelete(id_text: string) {
     return reqPlaylistDelete(this, id_text);
+  }
+
+  /* PLAYLIST RESOURCE */
+
+  reqPlaylistResourceGetAllByPlaylistIdTextPrivate(playlist_id_text: string) {
+    return reqPlaylistResourceGetAllByPlaylistIdTextPrivate(this, playlist_id_text);
+  }
+
+  reqPlaylistResourceGetManyByPlaylistIdText(playlist_id_text: string, params: QueryParamsPlaylistResources = {}) {
+    return reqPlaylistResourceGetManyByPlaylistIdText(this, playlist_id_text, params);
   }
 
   /* PLAYLIST RESOURCE > CLIP */
