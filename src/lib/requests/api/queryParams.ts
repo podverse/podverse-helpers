@@ -126,3 +126,11 @@ export type QueryParamsQueues = QueryParamsPage & {
 export type QueryParamsHistory = QueryParamsPage & {
   medium_id?: MediumEnum | null;
 }
+
+// MISC
+
+export type QueryParamsDirection = {
+  direction: "forward" | "backward";
+}
+
+export const QUERY_PARAMS_DIRECTION_VALUES = ["forward", "backward"] as const;
