@@ -48,3 +48,19 @@ export interface DTOItem {
   item_values: DTOItemValue[];
   channel?: DTOChannel;
 }
+
+export interface DTOItemQueueItem {
+  id: number;
+  id_text: string;
+  slug?: string | null;
+  channel_id: number;
+  guid?: string | null;
+  guid_enclosure_url?: string | null;
+  pub_date?: string | null;
+  title?: string | null;
+  item_flag_status_id: number;
+  item_about: DTOItemAbout;
+  item_enclosures: DTOItemEnclosure[];
+  item_images: DTOItemImage[];
+  channel?: DTOChannel;
+}
