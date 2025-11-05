@@ -1,6 +1,6 @@
 import { ApiRequestService } from '../_request';
 import { ApiListResponse } from '../_response';
-import { DTOChannel, DTOItem, DTOItemChapter } from 'src/dtos';
+import { DTOChannel, DTOItem, DTOItemChapter, DTOItemQueueItem } from 'src/dtos';
 import { QueryParamsChannel, QueryParamsChannels } from '../queryParams';
 
 export async function reqItemGetMany(
@@ -49,6 +49,22 @@ export async function reqItemGetManyWithoutLiveItemByChannel(
         ...(params.range ? { range: params.range } : {})
       },
       withCredentials: true
+    }
+  });
+}
+
+export async function reqItemGetManyForQueueByPubDate(
+  api: ApiRequestService,
+  idText: string,
+  direction: 'forward' | 'backward'
+) {
+  return api.apiRequest<DTOItemQueueItem[]>({
+    path: `/item/queue/pub-date/${idText}`,
+    method: 'GET',
+    config: {
+      params: {
+        direction
+      }
     }
   });
 }

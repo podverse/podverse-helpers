@@ -8,7 +8,7 @@ import { reqAuthCheckSession, reqAuthLogin, reqAuthLogout, reqAuthMe } from './a
 import { reqCategoryGetAll } from './category/category';
 import { reqChannelGetByIdOrIdText, reqChannelGetMany } from './channel/channel';
 import { reqClipCreate, ReqClipCreateParams, reqClipDelete, reqClipGet, reqClipGetManyByChannelIdTextPublic, reqClipGetManyByItemIdTextPublic, reqClipUpdate } from './clip/clip';
-import { reqItemGetByIdOrIdText, reqItemGetMany, reqItemGetManyWithoutLiveItemByChannel, reqItemParseAndGetChapters } from './item/item';
+import { reqItemGetByIdOrIdText, reqItemGetMany, reqItemGetManyForQueueByPubDate, reqItemGetManyWithoutLiveItemByChannel, reqItemParseAndGetChapters } from './item/item';
 import { reqPlaylistCreate, ReqPlaylistCreateParams, reqPlaylistDelete, reqPlaylistEdit, ReqPlaylistEditParams, reqPlaylistGet,
   reqPlaylistGetAllFavoritesPrivate, reqPlaylistGetManyPrivate, reqPlaylistGetManyPrivateFollowed, reqPlaylistGetManyPublic } from './playlist/playlist';
 import { reqPlaylistResourceClipAddBetween, reqPlaylistResourceClipAddFirst, reqPlaylistResourceClipAddLast, reqPlaylistResourceClipDelete } from './playlist/playlistResource/playlistResourceClip';
@@ -205,6 +205,10 @@ export class ApiRequestService {
 
   reqItemGetManyWithoutLiveItemByChannel(channel_id: string, params: QueryParamsChannel = {}) {
     return reqItemGetManyWithoutLiveItemByChannel(this, channel_id, params);
+  }
+
+  reqItemGetManyForQueueByPubDate(idText: string, direction: 'forward' | 'backward') {
+    return reqItemGetManyForQueueByPubDate(this, idText, direction);
   }
 
   /* ITEM CHAPTER */
