@@ -40,6 +40,7 @@ import { reqPlaylistResourceItemSoundbiteAddFirst, reqPlaylistResourceItemSoundb
   reqPlaylistResourceItemSoundbiteAddBetween, 
   reqPlaylistResourceItemSoundbiteDelete } from './playlist/playlistResource/playlistResourceItemSoundbite';
 import { reqPlaylistResourceGetAllByPlaylistIdTextPrivate, reqPlaylistResourceGetManyByPlaylistIdText } from './playlist/playlistResource/playlistResource';
+import { reqLiveItemGetManyByChannel } from './liveItem/liveItem';
 
 export type AbortOpts = { controller: AbortController; timeoutMs: number };
 
@@ -239,6 +240,12 @@ export class ApiRequestService {
 
   reqItemTranscriptGet(item_transcript_id_text: string) {
     return reqItemTranscriptGet(this, item_transcript_id_text);
+  }
+
+  /* LIVE ITEM */
+
+  reqLiveItemGetManyByChannel(channelIdOrIdText: string) {
+    return reqLiveItemGetManyByChannel(this, channelIdOrIdText);
   }
 
   /* PLAYLIST */
