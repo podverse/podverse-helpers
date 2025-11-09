@@ -6,14 +6,14 @@ type ItemImagePartial = {
 }
 
 type Comparison = 'greater' | 'lesser' | null;
-type AllowedExtension = 'png' | 'jpg' | 'gif' | 'jpeg';
-type ValidExtension = 'png' | 'jpg' | 'gif';
+type AllowedExtension = 'png' | 'jpg' | 'gif' | 'jpeg' | 'webp';
+type ValidExtension = 'png' | 'jpg' | 'gif' | 'webp';
 
 export function findDTOChannelImageBySize(
   channelImages: DTOChannelImage[] | null | undefined,
   size: number | 'largest' | 'smallest',
   comparison: Comparison = null,
-  allowedExtensions: AllowedExtension[] = ['png', 'jpg']
+  allowedExtensions: AllowedExtension[] = ['png', 'jpg', 'webp']
 ): ItemImagePartial | null {
   if (!channelImages || channelImages.length === 0) {
     return null;
@@ -26,7 +26,7 @@ export function findDTOItemImageBySize(
   itemImages: DTOItemImage[] | null | undefined,
   size: number | 'largest' | 'smallest',
   comparison: Comparison = null,
-  allowedExtensions: AllowedExtension[] = ['png', 'jpg']
+  allowedExtensions: AllowedExtension[] = ['png', 'jpg', 'webp']
 ): ItemImagePartial | null {
   if (!itemImages || itemImages.length === 0) {
     return null;
@@ -39,19 +39,27 @@ export function findImageBySize(
   itemImages: ItemImagePartial[],
   size: number | 'largest' | 'smallest',
   comparison: Comparison = null,
-  allowedExtensions: AllowedExtension[] = ['png', 'jpg']
+  allowedExtensions: AllowedExtension[] = ['png', 'jpg', 'webp']
 ): ItemImagePartial | null {
   const extensions: ValidExtension[] = allowedExtensions.map(ext => ext === 'jpeg' ? 'jpg' : ext) as ValidExtension[];
   const isValidExtension = (url: string) => {
     // Match .jpg, ?.jpg, etc. at the end of the URL (before query/hash)
-    const match = url.match(/(\?|\.)(jpg|jpeg|png|gif|webp|svg)(?=($|\?|#))/i);
-
+    const match = url.match(/(\?|\.)(jpg|jpeg|png|gif|webp)(?=($|\?|#))/i);
     if (!match) {
       return false;
     }
-
     const ext = match[2].toLowerCase() === 'jpeg' ? 'jpg' : match[2].toLowerCase();
     return extensions.includes(ext as ValidExtension);
+  };
+
+  // Helper to check if URL has no extension
+  const hasNoExtension = (url: string) => {
+    // Remove query/hash
+    const cleanUrl = url.split(/[?#]/)[0];
+    // Get last segment after last '/'
+    const lastSegment = cleanUrl.split('/').pop() || '';
+    // If there's no dot in last segment, it's likely no extension
+    return lastSegment && !lastSegment.includes('.') && lastSegment.length > 0;
   };
 
   if (size === 'largest') {
@@ -63,7 +71,11 @@ export function findImageBySize(
     }
 
     const nullSizeImage = itemImages.find(image => image.image_width_size === null && isValidExtension(image.url));
-    return nullSizeImage || null;
+    if (nullSizeImage) return nullSizeImage;
+
+    // Last resort: image with no extension
+    const noExtImage = itemImages.find(image => hasNoExtension(image.url));
+    return noExtImage || null;
   }
   if (size === 'smallest') {
     const filtered = itemImages
@@ -74,7 +86,11 @@ export function findImageBySize(
     }
     
     const nullSizeImage = itemImages.find(image => image.image_width_size === null && isValidExtension(image.url));
-    return nullSizeImage || null;
+    if (nullSizeImage) return nullSizeImage;
+
+    // Last resort: image with no extension
+    const noExtImage = itemImages.find(image => hasNoExtension(image.url));
+    return noExtImage || null;
   }
 
   let filteredImages: ItemImagePartial[] = [];
@@ -86,7 +102,7 @@ export function findImageBySize(
   } else if (comparison === 'lesser') {
     filteredImages = itemImages
       .filter(image => image.image_width_size !== null && image.image_width_size <= size && isValidExtension(image.url))
-      .sort((a, b) => (b.image_width_size! - a.image_width_size!));
+      .sort((b, a) => (b.image_width_size! - a.image_width_size!));
   }
 
   if (filteredImages.length > 0) {
@@ -96,7 +112,7 @@ export function findImageBySize(
   if (comparison === 'greater') {
     filteredImages = itemImages
       .filter(image => image.image_width_size !== null && image.image_width_size < size && isValidExtension(image.url))
-      .sort((a, b) => (b.image_width_size! - a.image_width_size!));
+      .sort((b, a) => (b.image_width_size! - a.image_width_size!));
   } else if (comparison === 'lesser') {
     filteredImages = itemImages
       .filter(image => image.image_width_size !== null && image.image_width_size > size && isValidExtension(image.url))
@@ -108,6 +124,9 @@ export function findImageBySize(
   }
 
   const nullSizeImage = itemImages.find(image => image.image_width_size === null && isValidExtension(image.url));
-  
-  return nullSizeImage || null;
+  if (nullSizeImage) return nullSizeImage;
+
+  // Last resort: image with no extension
+  const noExtImage = itemImages.find(image => hasNoExtension(image.url));
+  return noExtImage || null;
 }
