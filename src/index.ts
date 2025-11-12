@@ -20,6 +20,8 @@ export * from './lib/image';
 export * from './lib/item/item';
 export * from './lib/item/itemEnclosure';
 
+export * from './lib/liveItem/liveItemEnclosure';
+
 export * from './lib/medium';
 export * from './lib/pagination';
 export * from './lib/playlistResource';
