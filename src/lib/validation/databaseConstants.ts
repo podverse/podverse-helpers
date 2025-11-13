@@ -1,5 +1,5 @@
 export const DATABASE_CONSTANTS = {
-  short_id_v2: 15,
+  nano_id_v2: 15,
   varchar_short: 50,
   varchar_normal: 255,
   varchar_long: 2500,
