@@ -9,9 +9,11 @@ export * from './lib/web';
 
 export * from './lib/accountMembership';
 export * from './lib/array';
+export * from './lib/bitrate';
 export * from './lib/boolean';
 export * from './lib/category';
 export * from './lib/date';
+export * from './lib/fileSize';
 export * from './lib/guid';
 export * from './lib/hash';
 export * from './lib/html';

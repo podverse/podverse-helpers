@@ -2,14 +2,6 @@ import { DTOItemEnclosureSource } from "src/dtos";
 import { DTOItemEnclosure } from "../../dtos/item/itemEnclosure";
 import { formatBitrate, FormattedBitrate } from "../bitrate";
 
-const ALLOWED_TYPES = [
-  "audio/mpeg",
-  "audio/opus",
-  "audio/aac",
-  "video/mp4",
-  "application/x-mpegURL"
-];
-
 const EXTENSION_MEDIA_TYPE_MAP: Record<string, "audio" | "video"> = {
   "mp3": "audio",
   "aac": "audio",
@@ -32,29 +24,85 @@ export function getMediaTypeFromSource(uri: string): "audio" | "video" | undefin
   return EXTENSION_MEDIA_TYPE_MAP[ext];
 }
 
-function getItemEnclosure(
-  enclosures: DTOItemEnclosure[],
-  type: string
-): DTOItemEnclosure | undefined {
-  if (type === "default") {
-    return enclosures.find(e => e.item_enclosure_default);
-  }
-  if (ALLOWED_TYPES.includes(type)) {
-    return enclosures.find(e => e.type === type);
-  }
-  return undefined;
-}
+export type EnclosureSelectedParams = {
+  type: "default" | "audio" | "video" | null,
+  enclosureRowSelected: number | null,
+  sourceRowSelected: number | null
+};
 
-function getItemEnclosureSource(
-  enclosure?: DTOItemEnclosure
-): DTOItemEnclosureSource | undefined {
-  return enclosure?.item_enclosure_sources?.[0];
-}
+export type SelectedLabeledItemEnclosureAndSource = {
+  labeledItemEnclosure: LabeledItemEnclosure | null;
+  source: DTOItemEnclosureSource | null;
+};
 
-export function getSelectedItemEnclosureUrl(item_enclosures: DTOItemEnclosure[]): string | undefined {
-  const selectedItemEnclosure = getItemEnclosure(item_enclosures, "default");
-  const selectedItemEnclosureSource = getItemEnclosureSource(selectedItemEnclosure);
-  return selectedItemEnclosureSource?.uri;
+export function getSelectedLabeledItemEnclosureAndSource({
+  labeledItemEnclosures,
+  type,
+  enclosureRowIndex,
+  sourceRowIndex
+}: {
+  labeledItemEnclosures: LabeledItemEnclosure[],
+  type: "default" | "audio" | "video" | null,
+  enclosureRowIndex: number | null,
+  sourceRowIndex: number | null
+}): SelectedLabeledItemEnclosureAndSource {
+  if (!labeledItemEnclosures || labeledItemEnclosures.length === 0) {
+    return { labeledItemEnclosure: null, source: null };
+  }
+
+  let labeledItemEnclosure: LabeledItemEnclosure | null = null;
+  let source: DTOItemEnclosureSource | null = null;
+
+  // Helper to get first enclosure of a given mediaType
+  const getFirstOfType = (mediaType: "audio" | "video") =>
+    labeledItemEnclosures.find((e: LabeledItemEnclosure) => e.mediaType === mediaType) || null;
+
+  // Helper to get enclosure by index and type
+  const getByTypeAndIndex = (mediaType: "audio" | "video", idx: number) => {
+    const filtered = labeledItemEnclosures.filter((e: LabeledItemEnclosure) => e.mediaType === mediaType);
+    return filtered[idx] || filtered[0] || null;
+  };
+
+  // Default type logic
+  if (type === "default" || !type) {
+    labeledItemEnclosure = labeledItemEnclosures.find((e: LabeledItemEnclosure) => e.enclosure.item_enclosure_default) || labeledItemEnclosures[0] || null;
+    const sources = labeledItemEnclosure?.enclosure.item_enclosure_sources || [];
+    const srcIdx = typeof sourceRowIndex === "number" ? sourceRowIndex : 0;
+    source = sources[srcIdx] || sources[0] || null;
+    return { labeledItemEnclosure, source };
+  }
+
+  // Audio type logic
+  if (type === "audio") {
+    const encIdx = typeof enclosureRowIndex === "number" ? enclosureRowIndex : 0;
+    labeledItemEnclosure = getByTypeAndIndex("audio", encIdx);
+    if (!labeledItemEnclosure) {
+      labeledItemEnclosure = getFirstOfType("audio");
+    }
+    const sources = labeledItemEnclosure?.enclosure.item_enclosure_sources || [];
+    const srcIdx = typeof sourceRowIndex === "number" ? sourceRowIndex : 0;
+    source = sources[srcIdx] || sources[0] || null;
+    return { labeledItemEnclosure, source };
+  }
+
+  // Video type logic
+  if (type === "video") {
+    const encIdx = typeof enclosureRowIndex === "number" ? enclosureRowIndex : 0;
+    labeledItemEnclosure = getByTypeAndIndex("video", encIdx);
+    if (!labeledItemEnclosure) {
+      labeledItemEnclosure = getFirstOfType("video");
+    }
+    const sources = labeledItemEnclosure?.enclosure.item_enclosure_sources || [];
+    const srcIdx = typeof sourceRowIndex === "number" ? sourceRowIndex : 0;
+    source = sources[srcIdx] || sources[0] || null;
+    return { labeledItemEnclosure, source };
+  }
+
+  // Fallback: just return first enclosure and source
+  labeledItemEnclosure = labeledItemEnclosures[0] || null;
+  const sources = labeledItemEnclosure?.enclosure.item_enclosure_sources || [];
+  source = sources[0] || null;
+  return { labeledItemEnclosure, source };
 }
 
 export interface LabeledItemEnclosure {
