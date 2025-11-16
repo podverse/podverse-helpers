@@ -487,7 +487,7 @@ export class ApiRequestService {
 
   /* SEARCH */
 
-  reqSearchPodcasts(options: { q: string; p: number }) {
+  reqSearchPodcasts(options: { q: string; }) {
     return reqSearchPodcasts(this, options);
   }
 
