@@ -93,6 +93,12 @@ export * from './mediaPlayer/playbackSpeed';
 export * from './playlist/playlist';
 export * from './playlist/playlistResource';
 
+export * from './podcast-index/podcastByGuid';
+export * from './podcast-index/podcastsByTag';
+export * from './podcast-index/searchPodcasts';
+export * from './podcast-index/valueBatchByEpisodeGuid';
+export * from './podcast-index/valueByEpisodeGuid';
+
 export * from './podroll';
 
 export * from './queue/queue';
