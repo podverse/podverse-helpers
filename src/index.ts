@@ -12,6 +12,7 @@ export * from './lib/array';
 export * from './lib/bitrate';
 export * from './lib/boolean';
 export * from './lib/category';
+export * from './lib/comparison/isEqual';
 export * from './lib/date';
 export * from './lib/fileSize';
 export * from './lib/guid';
