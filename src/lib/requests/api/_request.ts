@@ -41,6 +41,7 @@ import { reqPlaylistResourceItemSoundbiteAddFirst, reqPlaylistResourceItemSoundb
   reqPlaylistResourceItemSoundbiteDelete } from './playlist/playlistResource/playlistResourceItemSoundbite';
 import { reqPlaylistResourceGetAllByPlaylistIdTextPrivate, reqPlaylistResourceGetManyByPlaylistIdText } from './playlist/playlistResource/playlistResource';
 import { reqLiveItemGetManyByChannel } from './liveItem/liveItem';
+import { reqSearchPodcasts } from './search/search';
 
 export type AbortOpts = { controller: AbortController; timeoutMs: number };
 
@@ -482,6 +483,12 @@ export class ApiRequestService {
 
   reqQueueResourceItemSoundbiteDelete(queue_id_text: string, item_soundbite_id_text: string) {
     return reqQueueResourceItemSoundbiteDelete(this, queue_id_text, item_soundbite_id_text);
+  }
+
+  /* SEARCH */
+
+  reqSearchPodcasts(options: { q: string; p: number }) {
+    return reqSearchPodcasts(this, options);
   }
 
 }
