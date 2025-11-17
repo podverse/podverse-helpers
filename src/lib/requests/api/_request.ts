@@ -42,6 +42,7 @@ import { reqPlaylistResourceItemSoundbiteAddFirst, reqPlaylistResourceItemSoundb
 import { reqPlaylistResourceGetAllByPlaylistIdTextPrivate, reqPlaylistResourceGetManyByPlaylistIdText } from './playlist/playlistResource/playlistResource';
 import { reqLiveItemGetManyByChannel } from './liveItem/liveItem';
 import { reqPodcastIndexFeedById, reqPodcastIndexSearchPodcasts } from './externalServices/podcastIndex';
+import { reqMQRSSAddOnDemand } from './mq/mq';
 
 export type AbortOpts = { controller: AbortController; timeoutMs: number };
 
@@ -261,6 +262,15 @@ export class ApiRequestService {
 
   reqLiveItemGetManyByChannel(channelIdOrIdText: string) {
     return reqLiveItemGetManyByChannel(this, channelIdOrIdText);
+  }
+
+  /* MQ */
+
+  reqMQRSSAddOnDemand(params: {
+    url: string;
+    podcast_index_id: number;
+  }) {
+    return reqMQRSSAddOnDemand(this, params);
   }
 
   /* PLAYLIST */
