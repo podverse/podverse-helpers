@@ -6,7 +6,7 @@ export const validQueueNamesParamKeys: QueueNameParamKey[]
 
 type MQQueueName = 'rss-normal' | 'rss-on-demand' | 'rss-live';
 
-interface MQQueueConfig {
+export type MQQueueConfig = {
   queueName: MQQueueName;
   dedupeCacheTimeMS: number | null;
   priority: 'normal' | 'slow';
