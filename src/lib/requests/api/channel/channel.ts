@@ -32,3 +32,13 @@ export async function reqChannelGetByIdOrIdText(
     method: 'GET'
   });
 }
+
+export async function reqChannelGetByPodcastIndexId(
+  api: ApiRequestService,
+  podcastIndexId: number | string
+) {
+  return api.apiRequest<DTOChannel>({
+    path: `/channel/podcast-index/${podcastIndexId}`,
+    method: 'GET'
+  });
+}

@@ -6,7 +6,7 @@ import { reqAccountFollowChannel, reqAccountUnfollowChannel } from './account/fo
 import { reqAccountFollowPlaylist, reqAccountUnfollowPlaylist } from './account/follow/playlist';
 import { reqAuthCheckSession, reqAuthLogin, reqAuthLogout, reqAuthMe } from './auth/auth';
 import { reqCategoryGetAll } from './category/category';
-import { reqChannelGetByIdOrIdText, reqChannelGetMany } from './channel/channel';
+import { reqChannelGetByIdOrIdText, reqChannelGetByPodcastIndexId, reqChannelGetMany } from './channel/channel';
 import { reqClipCreate, ReqClipCreateParams, reqClipDelete, reqClipGet, reqClipGetManyByChannelIdTextPublic, reqClipGetManyByItemIdTextPublic, reqClipUpdate } from './clip/clip';
 import { reqItemGetByIdOrIdText, reqItemGetMany, reqItemGetManyForQueueByPubDate, reqItemGetManyWithoutLiveItemByChannel, reqItemParseAndGetChapters } from './item/item';
 import { reqPlaylistCreate, ReqPlaylistCreateParams, reqPlaylistDelete, reqPlaylistEdit, ReqPlaylistEditParams, reqPlaylistGet,
@@ -164,6 +164,10 @@ export class ApiRequestService {
 
   reqChannelGetByIdOrIdText(idOrIdText: number | string) {
     return reqChannelGetByIdOrIdText(this, idOrIdText);
+  }
+
+  reqChannelGetByPodcastIndexId(podcastIndexId: number | string) {
+    return reqChannelGetByPodcastIndexId(this, podcastIndexId);
   }
 
   reqChannelGetMany(params: QueryParamsChannels = {}) {
