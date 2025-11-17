@@ -5,9 +5,6 @@ export const formatDateAbbrev = (
   date: Date | number | string,
   localeString: string
 ): string => {
-
-  console.log("Formatting date:", date, "with locale:", localeString);
-
   const d =
     typeof date === "string" || typeof date === "number"
       ? new Date(
