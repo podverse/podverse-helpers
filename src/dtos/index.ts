@@ -94,6 +94,7 @@ export * from './playlist/playlist';
 export * from './playlist/playlistResource';
 
 export * from './podcast-index/podcastByGuid';
+export * from './podcast-index/podcastById';
 export * from './podcast-index/podcastsByTag';
 export * from './podcast-index/searchPodcasts';
 export * from './podcast-index/valueBatchByEpisodeGuid';

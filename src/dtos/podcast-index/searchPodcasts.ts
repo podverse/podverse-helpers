@@ -44,7 +44,7 @@ export interface SearchPodcastsFeed {
 	funding: SearchPodcastsFeedFunding;
 }
 
-export interface SearchPodcastsResponse {
+export interface PodcastIndexSearchPodcastsResponse {
 	status: string; // e.g. "true"
 	feeds: SearchPodcastsFeed[];
 	count: number;
