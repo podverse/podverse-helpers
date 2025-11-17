@@ -41,8 +41,7 @@ import { reqPlaylistResourceItemSoundbiteAddFirst, reqPlaylistResourceItemSoundb
   reqPlaylistResourceItemSoundbiteDelete } from './playlist/playlistResource/playlistResourceItemSoundbite';
 import { reqPlaylistResourceGetAllByPlaylistIdTextPrivate, reqPlaylistResourceGetManyByPlaylistIdText } from './playlist/playlistResource/playlistResource';
 import { reqLiveItemGetManyByChannel } from './liveItem/liveItem';
-import { reqPodcastIndexSearchPodcasts } from './search/search';
-import { reqPodcastIndexFeedById } from './externalServices/podcastIndex';
+import { reqPodcastIndexFeedById, reqPodcastIndexSearchPodcasts } from './externalServices/podcastIndex';
 
 export type AbortOpts = { controller: AbortController; timeoutMs: number };
 
