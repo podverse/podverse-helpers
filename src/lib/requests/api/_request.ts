@@ -1,7 +1,7 @@
 import { QueueExtraParams } from '../../../dtos/queueExtraParams';
 import { BetweenParams } from '../../../dtos/betweenParams';
 import { request } from '../_request';
-import { reqAccountCreate, reqAccountGetManyPublic, reqAccountSendVerificationEmail, reqAccountVerifyEmail } from './account/account';
+import { reqAccountCreate, reqAccountGetManyPublic, reqAccountResetPassword, reqAccountSendResetPasswordEmail, reqAccountSendVerificationEmail, reqAccountVerifyEmail } from './account/account';
 import { reqAccountFollowChannel, reqAccountUnfollowChannel } from './account/follow/channel';
 import { reqAccountFollowPlaylist, reqAccountUnfollowPlaylist } from './account/follow/playlist';
 import { reqAuthCheckSession, reqAuthLogin, reqAuthLogout, reqAuthMe } from './auth/auth';
@@ -122,6 +122,14 @@ export class ApiRequestService {
 
   reqAccountVerifyEmail(params: { token: string }) {
     return reqAccountVerifyEmail(this, params);
+  }
+
+  reqAccountSendResetPasswordEmail(params: { email: string }) {
+    return reqAccountSendResetPasswordEmail(this, params);
+  }
+
+  reqAccountResetPassword(params: { token: string; password: string }) {
+    return reqAccountResetPassword(this, params);
   }
 
   /* ACCOUNT > FOLLOW > CHANNEL */

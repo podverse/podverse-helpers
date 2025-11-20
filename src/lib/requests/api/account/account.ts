@@ -43,3 +43,25 @@ export async function reqAccountVerifyEmail(
     data: params
   });
 }
+
+export async function reqAccountSendResetPasswordEmail(
+  api: ApiRequestService,
+  params: { email: string }
+): Promise<{ message: string }> {
+  return api.apiRequest<{ message: string }>({
+    path: '/account/send-reset-password-email',
+    method: 'POST',
+    data: params
+  });
+}
+
+export async function reqAccountResetPassword(
+  api: ApiRequestService,
+  params: { token: string; password: string }
+): Promise<{ message: string }> {
+  return api.apiRequest<{ message: string }>({
+    path: '/account/reset-password',
+    method: 'POST',
+    data: params
+  });
+}
