@@ -1,7 +1,7 @@
 import { QueueExtraParams } from '../../../dtos/queueExtraParams';
 import { BetweenParams } from '../../../dtos/betweenParams';
 import { request } from '../_request';
-import { reqAccountGetManyPublic } from './account/account';
+import { reqAccountCreate, reqAccountGetManyPublic, reqAccountSendVerificationEmail, reqAccountVerifyEmail } from './account/account';
 import { reqAccountFollowChannel, reqAccountUnfollowChannel } from './account/follow/channel';
 import { reqAccountFollowPlaylist, reqAccountUnfollowPlaylist } from './account/follow/playlist';
 import { reqAuthCheckSession, reqAuthLogin, reqAuthLogout, reqAuthMe } from './auth/auth';
@@ -110,6 +110,18 @@ export class ApiRequestService {
 
   reqAccountGetManyPublic() {
     return reqAccountGetManyPublic(this);
+  }
+
+  reqAccountCreate(params: { email: string; password: string }) {
+    return reqAccountCreate(this, params);
+  }
+
+  reqAccountSendVerificationEmail(params: { email: string }) {
+    return reqAccountSendVerificationEmail(this, params);
+  }
+
+  reqAccountVerifyEmail(params: { token: string }) {
+    return reqAccountVerifyEmail(this, params);
   }
 
   /* ACCOUNT > FOLLOW > CHANNEL */

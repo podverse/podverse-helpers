@@ -10,3 +10,36 @@ export async function reqAccountGetManyPublic(
     method: 'GET'
   });
 }
+
+export async function reqAccountCreate(
+  api: ApiRequestService,
+  params: { email: string; password: string }
+): Promise<{ message: string }> {
+  return api.apiRequest<{ message: string }>({
+    path: '/account',
+    method: 'POST',
+    data: params
+  });
+}
+
+export async function reqAccountSendVerificationEmail(
+  api: ApiRequestService,
+  params: { email: string }
+): Promise<{ message: string }> {
+  return api.apiRequest<{ message: string }>({
+    path: '/account/send-verification-email',
+    method: 'POST',
+    data: params
+  });
+}
+
+export async function reqAccountVerifyEmail(
+  api: ApiRequestService,
+  params: { token: string }
+): Promise<{ message: string }> {
+  return api.apiRequest<{ message: string }>({
+    path: '/account/verify-email',
+    method: 'POST',
+    data: params
+  });
+}
