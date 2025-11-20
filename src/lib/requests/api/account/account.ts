@@ -65,3 +65,26 @@ export async function reqAccountResetPassword(
     data: params
   });
 }
+
+export async function reqAccountSendChangeEmailAddressEmail(
+  api: ApiRequestService,
+  params: { new_email: string }
+): Promise<{ message: string }> {
+  return api.apiRequest<{ message: string }>({
+    path: '/account/send-change-email-address-email',
+    method: 'POST',
+    data: params,
+    config: { withCredentials: true }
+  });
+}
+
+export async function reqAccountChangeEmailAddress(
+  api: ApiRequestService,
+  params: { token: string }
+): Promise<{ message: string }> {
+  return api.apiRequest<{ message: string }>({
+    path: '/account/verify-email-change',
+    method: 'POST',
+    data: params
+  });
+}

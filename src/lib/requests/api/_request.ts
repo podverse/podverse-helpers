@@ -1,7 +1,7 @@
 import { QueueExtraParams } from '../../../dtos/queueExtraParams';
 import { BetweenParams } from '../../../dtos/betweenParams';
 import { request } from '../_request';
-import { reqAccountCreate, reqAccountGetManyPublic, reqAccountResetPassword, reqAccountSendResetPasswordEmail, reqAccountSendVerificationEmail, reqAccountVerifyEmail } from './account/account';
+import { reqAccountChangeEmailAddress, reqAccountCreate, reqAccountGetManyPublic, reqAccountResetPassword, reqAccountSendChangeEmailAddressEmail, reqAccountSendResetPasswordEmail, reqAccountSendVerificationEmail, reqAccountVerifyEmail } from './account/account';
 import { reqAccountFollowChannel, reqAccountUnfollowChannel } from './account/follow/channel';
 import { reqAccountFollowPlaylist, reqAccountUnfollowPlaylist } from './account/follow/playlist';
 import { reqAuthCheckSession, reqAuthLogin, reqAuthLogout, reqAuthMe } from './auth/auth';
@@ -130,6 +130,14 @@ export class ApiRequestService {
 
   reqAccountResetPassword(params: { token: string; password: string }) {
     return reqAccountResetPassword(this, params);
+  }
+
+  reqAccountSendChangeEmailAddressEmail(params: { new_email: string }) {
+    return reqAccountSendChangeEmailAddressEmail(this, params);
+  }
+
+  reqAccountChangeEmailAddress(params: { token: string }) {
+    return reqAccountChangeEmailAddress(this, params);
   }
 
   /* ACCOUNT > FOLLOW > CHANNEL */
