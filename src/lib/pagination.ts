@@ -1,6 +1,6 @@
 export const PAGINATION = {
   MAX_COUNT: 1000,
-  DEFAULT_LIMIT: 30
+  DEFAULT_LIMIT: 24
 };
 
 export function getTotalPages(count: number | null, limit: number): number {
