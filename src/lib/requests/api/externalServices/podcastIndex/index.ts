@@ -4,10 +4,10 @@ import { PodcastIndexPodcastByIdResponse } from "src/dtos/podcast-index/podcastB
 
 export async function reqPodcastIndexFeedById(
   api: ApiRequestService,
-  podcastIndexId: string
+  podcast_index_id: string
 ) {
   return api.apiRequest<PodcastIndexPodcastByIdResponse>({
-    path: `/external-services/podcast-index/feed/${encodeURIComponent(podcastIndexId)}`,
+    path: `/external-services/podcast-index/feed/${encodeURIComponent(podcast_index_id)}`,
     method: 'GET'
   });
 }

@@ -194,8 +194,8 @@ export class ApiRequestService {
     return reqChannelGetByIdOrIdText(this, idOrIdText);
   }
 
-  reqChannelGetByPodcastIndexId(podcastIndexId: number | string) {
-    return reqChannelGetByPodcastIndexId(this, podcastIndexId);
+  reqChannelGetByPodcastIndexId(podcast_index_id: number | string) {
+    return reqChannelGetByPodcastIndexId(this, podcast_index_id);
   }
 
   reqChannelGetMany(params: QueryParamsChannels = {}) {
@@ -230,8 +230,8 @@ export class ApiRequestService {
 
   /* EXTERNAL SERVICES > PODCAST INDEX */
 
-  reqPodcastIndexFeedById(podcastIndexId: string) {
-    return reqPodcastIndexFeedById(this, podcastIndexId);
+  reqPodcastIndexFeedById(podcast_index_id: string) {
+    return reqPodcastIndexFeedById(this, podcast_index_id);
   }
 
   reqPodcastIndexSearchPodcasts(options: { q: string; }) {
