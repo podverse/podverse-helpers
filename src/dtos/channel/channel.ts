@@ -23,7 +23,6 @@ export interface DTOChannel {
   id_text: string;
   slug: string | null;
   feed_id: number;
-  podcast_index_id: number;
   podcast_guid: string | null;
   title: string | null;
   sortable_title: string | null;
