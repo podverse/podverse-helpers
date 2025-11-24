@@ -5,7 +5,7 @@ import { QueryParamsChannel, QueryParamsChannels } from '../queryParams';
 
 export async function reqItemGetMany(
   api: ApiRequestService,
-  params: QueryParamsChannels = {}
+  params: QueryParamsChannels
 ) {
   return api.apiRequest<ApiListResponse<DTOChannel>>({
     path: '/item',
@@ -17,7 +17,7 @@ export async function reqItemGetMany(
         ...(params.type ? { type: params.type } : {}),
         ...(params.range ? { range: params.range } : {}),
         ...(params.category ? { category: params.category } : {}),
-        // ...(params.medium ? { medium: params.medium } : {})
+        medium: params.medium
       },
       withCredentials: true
     }

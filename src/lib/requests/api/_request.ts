@@ -199,7 +199,7 @@ export class ApiRequestService {
     return reqChannelGetByPodcastIndexId(this, podcast_index_id);
   }
 
-  reqChannelGetMany(params: QueryParamsChannels = {}) {
+  reqChannelGetMany(params: QueryParamsChannels) {
     return reqChannelGetMany(this, params);
   }
 
@@ -251,7 +251,7 @@ export class ApiRequestService {
     return reqItemGetByIdOrIdText(this, idOrIdText);
   }
 
-  reqItemGetMany(params: QueryParamsChannels = {}) {
+  reqItemGetMany(params: QueryParamsChannels) {
     return reqItemGetMany(this, params);
   }
 
