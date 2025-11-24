@@ -38,7 +38,7 @@ export interface QueryParamsChannels extends QueryParamsPage {
   sort?: QueryParamsChannelsSort;
   range?: QueryParamsStatsRange;
   category?: CategoryMappingKeys;
-  medium?: QueryParamsMedium;
+  medium: QueryParamsMedium;
 }
 
 // Clips
@@ -59,7 +59,7 @@ export const QUERY_PARAMS_HOME_SORT_VALUES = ["a_z", "recent", "oldest"] as cons
 export type QueryParamsHomeSort = typeof QUERY_PARAMS_HOME_SORT_VALUES[number];
 
 export interface QueryParamsHome extends QueryParamsPage {
-  medium?: QueryParamsMedium;
+  medium: QueryParamsMedium;
   sort?: QueryParamsHomeSort;
 }
 
