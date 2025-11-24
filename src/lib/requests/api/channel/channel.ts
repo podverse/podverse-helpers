@@ -16,7 +16,8 @@ export async function reqChannelGetMany(
         ...(params.sort ? { sort: params.sort } : {}),
         ...(params.type ? { type: params.type } : {}),
         ...(params.range ? { range: params.range } : {}),
-        ...(params.category ? { category: params.category } : {})
+        ...(params.category ? { category: params.category } : {}),
+        ...(params.medium ? { medium: params.medium } : {})
       },
       withCredentials: true
     }

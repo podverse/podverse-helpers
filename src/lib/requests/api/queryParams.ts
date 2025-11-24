@@ -1,4 +1,4 @@
-import { MediumEnum } from "../../../lib/medium";
+import { MediumEnum, QueryParamsMedium } from "../../../lib/medium";
 import { CategoryMappingKeys } from "../../category";
 
 export interface QueryParamsPage {
@@ -38,6 +38,7 @@ export interface QueryParamsChannels extends QueryParamsPage {
   sort?: QueryParamsChannelsSort;
   range?: QueryParamsStatsRange;
   category?: CategoryMappingKeys;
+  medium?: QueryParamsMedium;
 }
 
 // Clips
@@ -49,6 +50,17 @@ export type QueryParamsClipsByChannelSort = typeof QUERY_PARAMS_CLIPS_BY_CHANNEL
 export interface QueryParamsClipsByChannel extends QueryParamsPage {
   sort?: QueryParamsClipsByChannelSort;
   range?: QueryParamsStatsRange;
+}
+
+// Home
+
+export const QUERY_PARAMS_HOME_SORT_VALUES = ["a_z", "recent", "oldest"] as const;
+
+export type QueryParamsHomeSort = typeof QUERY_PARAMS_HOME_SORT_VALUES[number];
+
+export interface QueryParamsHome extends QueryParamsPage {
+  medium?: QueryParamsMedium;
+  sort?: QueryParamsHomeSort;
 }
 
 // Item

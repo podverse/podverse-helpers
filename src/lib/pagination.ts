@@ -6,7 +6,7 @@ export const PAGINATION = {
 export function getTotalPages(count: number | null, limit: number): number {
   const totalCount = count === null ? PAGINATION.MAX_COUNT : count;
   if (!limit || limit <= 0) return 1;
-  return Math.ceil(totalCount / limit);
+  return Math.max(1, Math.ceil(totalCount / limit)); // ensure at least 1
 }
 
 export function getUndeterminedTotalPages() {

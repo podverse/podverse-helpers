@@ -61,3 +61,20 @@ export const supportedQueueMediums: { [key: number]: boolean } = {
   [MediumEnum.Music]: true,
   [MediumEnum.Video]: true
 };
+
+export const QUERY_PARAMS_MEDIUMS = ["all", "podcasts", "videos", "music"] as const;
+export type QueryParamsMedium = typeof QUERY_PARAMS_MEDIUMS[number];
+
+export const getMediumFromQueryParam = (val: QueryParamsMedium): MediumEnum | null => {
+  switch (val) {
+  case "podcasts":
+    return MediumEnum.Podcast;
+  case "videos":
+    return MediumEnum.Video;
+  case "music":
+    return MediumEnum.Music;
+  case "all":
+  default:
+    return null;
+  }
+};
