@@ -146,3 +146,8 @@ export type QueryParamsDirection = {
 }
 
 export const QUERY_PARAMS_DIRECTION_VALUES = ["forward", "backward"] as const;
+
+// GLOBAL
+
+export const QUERY_PARAMS_GLOBAL_GET_MANY_SORT_VALUES = ["top", "recent"] as const;
+export type QueryParamsGlobalGetManySort = typeof QUERY_PARAMS_GLOBAL_GET_MANY_SORT_VALUES[number];
