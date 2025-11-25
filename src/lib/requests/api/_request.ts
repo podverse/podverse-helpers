@@ -1,22 +1,29 @@
 import { QueueExtraParams } from '../../../dtos/queueExtraParams';
 import { BetweenParams } from '../../../dtos/betweenParams';
 import { request } from '../_request';
-import { reqAccountChangeEmailAddress, reqAccountCreate, reqAccountGetManyPublic, reqAccountResetPassword, reqAccountSendChangeEmailAddressEmail, reqAccountSendResetPasswordEmail, reqAccountSendVerificationEmail, reqAccountVerifyEmail } from './account/account';
+import { reqAccountChangeEmailAddress, reqAccountCreate, reqAccountGetManyPublic, reqAccountResetPassword,
+  reqAccountSendChangeEmailAddressEmail, reqAccountSendResetPasswordEmail, reqAccountSendVerificationEmail,
+  reqAccountVerifyEmail } from './account/account';
 import { reqAccountFollowChannel, reqAccountUnfollowChannel } from './account/follow/channel';
 import { reqAccountFollowPlaylist, reqAccountUnfollowPlaylist } from './account/follow/playlist';
 import { reqAuthCheckSession, reqAuthLogin, reqAuthLogout, reqAuthMe } from './auth/auth';
 import { reqCategoryGetAll } from './category/category';
 import { reqChannelGetByIdOrIdText, reqChannelGetByPodcastIndexId, reqChannelGetMany } from './channel/channel';
-import { reqClipCreate, ReqClipCreateParams, reqClipDelete, reqClipGet, reqClipGetManyByChannelIdTextPublic, reqClipGetManyByItemIdTextPublic, reqClipUpdate } from './clip/clip';
-import { reqItemGetByIdOrIdText, reqItemGetMany, reqItemGetManyForQueueByPubDate, reqItemGetManyWithoutLiveItemByChannel, reqItemParseAndGetChapters } from './item/item';
-import { reqPlaylistCreate, ReqPlaylistCreateParams, reqPlaylistDelete, reqPlaylistEdit, ReqPlaylistEditParams, reqPlaylistGet,
-  reqPlaylistGetAllFavoritesPrivate, reqPlaylistGetManyPrivate, reqPlaylistGetManyPrivateFollowed, reqPlaylistGetManyPublic } from './playlist/playlist';
-import { reqPlaylistResourceClipAddBetween, reqPlaylistResourceClipAddFirst, reqPlaylistResourceClipAddLast, reqPlaylistResourceClipDelete } from './playlist/playlistResource/playlistResourceClip';
+import { reqClipCreate, ReqClipCreateParams, reqClipDelete, reqClipGet, reqClipGetManyByChannelIdTextPublic,
+  reqClipGetManyByItemIdTextPublic, reqClipUpdate } from './clip/clip';
+import { reqItemGetByIdOrIdText, reqItemGetMany, reqItemGetManyForQueueByPubDate, reqItemGetManyWithoutLiveItemByChannel,
+  reqItemParseAndGetChapters } from './item/item';
+import { reqPlaylistCreate, ReqPlaylistCreateParams, reqPlaylistDelete, reqPlaylistEdit, ReqPlaylistEditParams,
+  reqPlaylistGet, reqPlaylistGetAllFavoritesPrivate, reqPlaylistGetManyPrivate, reqPlaylistGetManyPrivateFollowed,
+  reqPlaylistGetManyPublic } from './playlist/playlist';
+import { reqPlaylistResourceClipAddBetween, reqPlaylistResourceClipAddFirst, reqPlaylistResourceClipAddLast,
+  reqPlaylistResourceClipDelete } from './playlist/playlistResource/playlistResourceClip';
 import { reqPlaylistResourceItemAddFirst, reqPlaylistResourceItemAddBetween,
   reqPlaylistResourceItemAddLast, 
   reqPlaylistResourceItemDelete} from './playlist/playlistResource/playlistResourceItem';
 import { reqPodrollGetForChannel } from './podroll/podroll';
-import { QueryParamsChannel, QueryParamsChannels, QueryParamsClipsByChannel, QueryParamsItemSoundbitesByChannel, QueryParamsItemSoundbitesByItem, QueryParamsPlaylistResources, QueryParamsPlaylists } from './queryParams';
+import { QueryParamsChannel, QueryParamsClipsByChannel, QueryParamsGetMany, QueryParamsItemSoundbitesByChannel,
+  QueryParamsItemSoundbitesByItem, QueryParamsPlaylistResources, QueryParamsPlaylists } from './queryParams';
 import { reqQueueGetAllForAccountPrivate, reqQueueUpdateIsActiveQueue } from './queue/queue';
 import { reqQueueResourceItemAddBetween, reqQueueResourceItemAddHistory,
   reqQueueResourceItemAddLast, reqQueueResourceItemAddNext,
@@ -26,11 +33,14 @@ import { reqQueueResourceClipAddBetween, reqQueueResourceClipAddHistory,
   reqQueueResourceClipAddNowPlaying, reqQueueResourceClipDelete } from './queue/queueResource/queueResourceClip';
 import { reqQueueResourceItemAddByRSSAddBetween, reqQueueResourceItemAddByRSSAddHistory,
   reqQueueResourceItemAddByRSSAddLast, reqQueueResourceItemAddByRSSAddNext,
-  reqQueueResourceItemAddByRSSAddNowPlaying, reqQueueResourceItemAddByRSSDelete } from './queue/queueResource/queueResourceItemAddByRSS';
+  reqQueueResourceItemAddByRSSAddNowPlaying, reqQueueResourceItemAddByRSSDelete
+} from './queue/queueResource/queueResourceItemAddByRSS';
 import { reqQueueResourceItemSoundbiteAddBetween, reqQueueResourceItemSoundbiteAddHistory,
   reqQueueResourceItemSoundbiteAddLast, reqQueueResourceItemSoundbiteAddNext,
-  reqQueueResourceItemSoundbiteAddNowPlaying, reqQueueResourceItemSoundbiteDelete } from './queue/queueResource/queueResourceItemSoundbite';
-import { reqItemSoundbiteGet, reqItemSoundbiteGetManyByChannelIdText, reqItemSoundbiteGetManyByItemIdText } from './itemSoundbite/itemSoundbite';
+  reqQueueResourceItemSoundbiteAddNowPlaying, reqQueueResourceItemSoundbiteDelete
+} from './queue/queueResource/queueResourceItemSoundbite';
+import { reqItemSoundbiteGet, reqItemSoundbiteGetManyByChannelIdText,
+  reqItemSoundbiteGetManyByItemIdText } from './itemSoundbite/itemSoundbite';
 import { reqItemTranscriptGet } from './itemTranscript/itemTranscript';
 import { reqQueueResourcesGetAllByAccountAbridged, reqQueueResourcesGetAllUpcomingByQueueIdText,
   reqQueueResourcesGetHistoryByQueueIdTextPaginated, reqQueueResourcesGetNowPlayingByQueueIdText
@@ -39,7 +49,8 @@ import { reqItemChapterGetByIdText } from './itemChapter/itemChapter';
 import { reqPlaylistResourceItemSoundbiteAddFirst, reqPlaylistResourceItemSoundbiteAddLast,
   reqPlaylistResourceItemSoundbiteAddBetween, 
   reqPlaylistResourceItemSoundbiteDelete } from './playlist/playlistResource/playlistResourceItemSoundbite';
-import { reqPlaylistResourceGetAllByPlaylistIdTextPrivate, reqPlaylistResourceGetManyByPlaylistIdText } from './playlist/playlistResource/playlistResource';
+import { reqPlaylistResourceGetAllByPlaylistIdTextPrivate,
+  reqPlaylistResourceGetManyByPlaylistIdText } from './playlist/playlistResource/playlistResource';
 import { reqLiveItemGetManyByChannel } from './liveItem/liveItem';
 import { reqPodcastIndexFeedById, reqPodcastIndexSearchPodcasts } from './externalServices/podcastIndex';
 import { reqMQRSSAddOnDemand } from './mq/mq';
@@ -199,7 +210,7 @@ export class ApiRequestService {
     return reqChannelGetByPodcastIndexId(this, podcast_index_id);
   }
 
-  reqChannelGetMany(params: QueryParamsChannels) {
+  reqChannelGetMany(params: QueryParamsGetMany) {
     return reqChannelGetMany(this, params);
   }
 
@@ -251,7 +262,7 @@ export class ApiRequestService {
     return reqItemGetByIdOrIdText(this, idOrIdText);
   }
 
-  reqItemGetMany(params: QueryParamsChannels) {
+  reqItemGetMany(params: QueryParamsGetMany) {
     return reqItemGetMany(this, params);
   }
 
