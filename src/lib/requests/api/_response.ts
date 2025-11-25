@@ -10,3 +10,12 @@ export interface ApiListResponse<T> {
     limit: number;
   };
 }
+
+export const emptyApiListResponse = {
+  data: [],
+  meta: {
+    page: 1,
+    count: 0,
+    limit: 0
+  }
+};
