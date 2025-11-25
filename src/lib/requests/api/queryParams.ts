@@ -5,6 +5,35 @@ export interface QueryParamsPage {
   page?: number;
 }
 
+// Helpers
+
+export const getValidQueryParam = <T extends string>(
+  validParams: readonly T[],
+  param: string | undefined,
+  defaultParam: T
+): T => {
+  if (param && (validParams as readonly string[]).includes(param)) {
+    return param as T;
+  }
+  return defaultParam;
+};
+
+// Global
+
+export const QUERY_PARAMS_SUBSCRIBED_TYPE = ["global", "subscribed", "category"] as const;
+export type QueryParamsSubscribedType = typeof QUERY_PARAMS_SUBSCRIBED_TYPE[number];
+
+export const QUERY_PARAMS_GLOBAL_SORT_VALUES = ["top", "recent"] as const;
+export type QueryParamsGlobalSort = typeof QUERY_PARAMS_GLOBAL_SORT_VALUES[number];
+
+export const QUERY_PARAMS_SUBSCRIBED_FULL_SORT = ["recent", "oldest", "a_z", "top"] as const;
+export type QueryParamsSubscribedFullSort = typeof QUERY_PARAMS_SUBSCRIBED_FULL_SORT[number];
+
+export const QUERY_PARAMS_SUBSCRIBED_PARTIAL_SORT = QUERY_PARAMS_GLOBAL_SORT_VALUES;
+export type QueryParamsSubscribedPartialSort = typeof QUERY_PARAMS_SUBSCRIBED_PARTIAL_SORT[number];
+
+// Stats
+
 export const QUERY_PARAMS_STATS_RANGE_VALUES = ["day", "week", "month", "all-time"] as const;
 export type QueryParamsStatsRange = typeof QUERY_PARAMS_STATS_RANGE_VALUES[number];
 
@@ -27,15 +56,9 @@ export interface QueryParamsChannel extends QueryParamsPage {
 
 // Channels
 
-export const QUERY_PARAMS_CHANNELS_TYPE_VALUES = ["global", "subscribed", "category"] as const;
-export const QUERY_PARAMS_CHANNELS_SORT_VALUES = ["recent", "oldest", "a_z", "top"] as const;
-
-export type QueryParamsChannelsType = typeof QUERY_PARAMS_CHANNELS_TYPE_VALUES[number];
-export type QueryParamsChannelsSort = typeof QUERY_PARAMS_CHANNELS_SORT_VALUES[number];
-
 export interface QueryParamsChannels extends QueryParamsPage {
-  type?: QueryParamsChannelsType;
-  sort?: QueryParamsChannelsSort;
+  type?: QueryParamsSubscribedType;
+  sort?: QueryParamsSubscribedFullSort;
   range?: QueryParamsStatsRange;
   category?: CategoryMappingKeys;
   medium: QueryParamsMedium;
@@ -146,8 +169,3 @@ export type QueryParamsDirection = {
 }
 
 export const QUERY_PARAMS_DIRECTION_VALUES = ["forward", "backward"] as const;
-
-// GLOBAL
-
-export const QUERY_PARAMS_GLOBAL_GET_MANY_SORT_VALUES = ["top", "recent"] as const;
-export type QueryParamsGlobalGetManySort = typeof QUERY_PARAMS_GLOBAL_GET_MANY_SORT_VALUES[number];
