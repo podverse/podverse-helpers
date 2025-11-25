@@ -18,7 +18,7 @@ export async function reqPlaylistGet(
 
 export async function reqPlaylistGetManyPublic(
   api: ApiRequestService,
-  params: QueryParamsPlaylists = {}
+  params: QueryParamsPlaylists
 ) {
   return api.apiRequest<ApiListResponse<DTOPlaylist>>({
     path: '/playlist/public',
@@ -36,7 +36,7 @@ export async function reqPlaylistGetManyPublic(
 
 export async function reqPlaylistGetManyPrivate(
   api: ApiRequestService,
-  params: QueryParamsPlaylists = {}
+  params: QueryParamsPlaylists
 ) {
   return api.apiRequest<ApiListResponse<DTOPlaylist>>({
     path: '/playlist/private',
@@ -55,7 +55,7 @@ export async function reqPlaylistGetManyPrivate(
 
 export async function reqPlaylistGetManyPrivateFollowed(
   api: ApiRequestService,
-  params: QueryParamsPlaylists = {}
+  params: QueryParamsPlaylists
 ) {
   return api.apiRequest<ApiListResponse<DTOPlaylist>>({
     path: '/playlist/private/followed',

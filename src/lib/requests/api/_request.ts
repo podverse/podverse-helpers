@@ -11,7 +11,7 @@ import { reqCategoryGetAll } from './category/category';
 import { reqChannelGetByIdOrIdText, reqChannelGetByPodcastIndexId, reqChannelGetMany } from './channel/channel';
 import { reqClipCreate, ReqClipCreateParams, reqClipDelete, reqClipGet, reqClipGetManyByChannelIdTextPublic,
   reqClipGetManyByItemIdTextPublic, reqClipUpdate } from './clip/clip';
-import { reqItemGetByIdOrIdText, reqItemGetMany, reqItemGetManyForQueueByPubDate, reqItemGetManyWithoutLiveItemByChannel,
+import { reqItemGetByIdOrIdText, reqItemGetMany, reqItemGetManyByChannel, reqItemGetManyForQueueByPubDate,
   reqItemParseAndGetChapters } from './item/item';
 import { reqPlaylistCreate, ReqPlaylistCreateParams, reqPlaylistDelete, reqPlaylistEdit, ReqPlaylistEditParams,
   reqPlaylistGet, reqPlaylistGetAllFavoritesPrivate, reqPlaylistGetManyPrivate, reqPlaylistGetManyPrivateFollowed,
@@ -22,7 +22,7 @@ import { reqPlaylistResourceItemAddFirst, reqPlaylistResourceItemAddBetween,
   reqPlaylistResourceItemAddLast, 
   reqPlaylistResourceItemDelete} from './playlist/playlistResource/playlistResourceItem';
 import { reqPodrollGetForChannel } from './podroll/podroll';
-import { QueryParamsChannel, QueryParamsClipsByChannel, QueryParamsGetMany, QueryParamsItemSoundbitesByChannel,
+import { QueryParamsChannel, QueryParamsClipsByChannel, QueryParamsGetMany, QueryParamsGetManyPartial, QueryParamsIndividualList, QueryParamsItemSoundbitesByChannel,
   QueryParamsItemSoundbitesByItem, QueryParamsPlaylistResources, QueryParamsPlaylists } from './queryParams';
 import { reqQueueGetAllForAccountPrivate, reqQueueUpdateIsActiveQueue } from './queue/queue';
 import { reqQueueResourceItemAddBetween, reqQueueResourceItemAddHistory,
@@ -262,12 +262,12 @@ export class ApiRequestService {
     return reqItemGetByIdOrIdText(this, idOrIdText);
   }
 
-  reqItemGetMany(params: QueryParamsGetMany) {
+  reqItemGetMany(params: QueryParamsGetManyPartial) {
     return reqItemGetMany(this, params);
   }
 
-  reqItemGetManyWithoutLiveItemByChannel(channel_id: string, params: QueryParamsChannel = {}) {
-    return reqItemGetManyWithoutLiveItemByChannel(this, channel_id, params);
+  reqItemGetManyByChannel(params: QueryParamsIndividualList) {
+    return reqItemGetManyByChannel(this, params);
   }
 
   reqItemGetManyForQueueByPubDate(idText: string, direction: 'forward' | 'backward') {
@@ -290,11 +290,11 @@ export class ApiRequestService {
     return reqItemSoundbiteGet(this, item_soundbite_id_text);
   }
 
-  reqItemSoundbiteGetManyByChannelIdText(channel_id_text: string, params: QueryParamsItemSoundbitesByChannel = {}) {
+  reqItemSoundbiteGetManyByChannelIdText(channel_id_text: string, params: QueryParamsItemSoundbitesByChannel) {
     return reqItemSoundbiteGetManyByChannelIdText(this, channel_id_text, params);
   }
 
-  reqItemSoundbiteGetManyByItemIdText(item_id_text: string, params: QueryParamsItemSoundbitesByItem = {}) {
+  reqItemSoundbiteGetManyByItemIdText(item_id_text: string, params: QueryParamsItemSoundbitesByItem) {
     return reqItemSoundbiteGetManyByItemIdText(this, item_id_text, params);
   }
 
@@ -325,15 +325,15 @@ export class ApiRequestService {
     return reqPlaylistGet(this, id_text);
   }
 
-  reqPlaylistGetManyPublic(params: QueryParamsPlaylists = {}) {
+  reqPlaylistGetManyPublic(params: QueryParamsPlaylists) {
     return reqPlaylistGetManyPublic(this, params);
   }
 
-  reqPlaylistGetManyPrivate(params: QueryParamsPlaylists = {}) {
+  reqPlaylistGetManyPrivate(params: QueryParamsPlaylists) {
     return reqPlaylistGetManyPrivate(this, params);
   }
 
-  reqPlaylistGetManyPrivateFollowed(params: QueryParamsPlaylists = {}) {
+  reqPlaylistGetManyPrivateFollowed(params: QueryParamsPlaylists) {
     return reqPlaylistGetManyPrivateFollowed(this, params);
   }
 
@@ -359,7 +359,7 @@ export class ApiRequestService {
     return reqPlaylistResourceGetAllByPlaylistIdTextPrivate(this, playlist_id_text);
   }
 
-  reqPlaylistResourceGetManyByPlaylistIdText(playlist_id_text: string, params: QueryParamsPlaylistResources = {}) {
+  reqPlaylistResourceGetManyByPlaylistIdText(playlist_id_text: string, params: QueryParamsPlaylistResources) {
     return reqPlaylistResourceGetManyByPlaylistIdText(this, playlist_id_text, params);
   }
 

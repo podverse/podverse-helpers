@@ -1,28 +1,10 @@
 import { ApiRequestService } from '../_request';
-import { ApiListResponse } from '../_response';
-import { DTOChannel, DTOItem, DTOItemChapter, DTOItemQueueItem } from 'src/dtos';
-import { QueryParamsChannel, QueryParamsGetMany } from '../queryParams';
-
-export async function reqItemGetMany(
-  api: ApiRequestService,
-  params: QueryParamsGetMany
-) {
-  return api.apiRequest<ApiListResponse<DTOChannel>>({
-    path: '/item',
-    method: 'GET',
-    config: {
-      params: {
-        ...(params.page ? { page: params.page } : {}),
-        ...(params.sort ? { sort: params.sort } : {}),
-        ...(params.type ? { type: params.type } : {}),
-        ...(params.range ? { range: params.range } : {}),
-        ...(params.category ? { category: params.category } : {}),
-        medium: params.medium
-      },
-      withCredentials: true
-    }
-  });
-}
+import { ApiListResponse, emptyApiListResponse } from '../_response';
+import { DTOItem, DTOItemChapter, DTOItemQueueItem } from '../../../../dtos';
+import { QueryParamsCategoryRecent, QueryParamsCategoryTop,
+  QueryParamsGetManyPartial, QueryParamsGlobalRecent, QueryParamsGlobalTop,
+  QueryParamsIndividualList, QueryParamsPage, QueryParamsPageRange,
+  QueryParamsSubscribedRecent, QueryParamsSubscribedTop } from '../queryParams';
 
 export async function reqItemGetByIdOrIdText(
   api: ApiRequestService,
@@ -34,23 +16,232 @@ export async function reqItemGetByIdOrIdText(
   });
 }
 
-export async function reqItemGetManyWithoutLiveItemByChannel(
+export async function reqItemGetManyGlobalRecent(
   api: ApiRequestService,
-  channelIdOrIdText: string,
-  params: QueryParamsChannel = {}
+  params: QueryParamsGlobalRecent
 ) {
   return api.apiRequest<ApiListResponse<DTOItem>>({
-    path: `/item/channel/${channelIdOrIdText}`,
+    path: '/item/global/recent',
     method: 'GET',
     config: {
-      params: {
-        ...(params.page ? { page: params.page } : {}),
-        ...(params.sort ? { sort: params.sort } : {}),
-        ...(params.range ? { range: params.range } : {})
-      },
+      params
+    }
+  });
+}
+
+export async function reqItemGetManyGlobalTop(
+  api: ApiRequestService,
+  params: QueryParamsGlobalTop
+) {
+  return api.apiRequest<ApiListResponse<DTOItem>>({
+    path: '/item/global/top',
+    method: 'GET',
+    config: {
+      params
+    }
+  });
+}
+
+export async function reqItemGetManyCategoryRecent(
+  api: ApiRequestService,
+  params: QueryParamsCategoryRecent
+) {
+  return api.apiRequest<ApiListResponse<DTOItem>>({
+    path: '/item/category/recent',
+    method: 'GET',
+    config: {
+      params
+    }
+  });
+}
+
+export async function reqItemGetManyCategoryTop(
+  api: ApiRequestService,
+  params: QueryParamsCategoryTop
+) {
+  return api.apiRequest<ApiListResponse<DTOItem>>({
+    path: '/item/category/top',
+    method: 'GET',
+    config: {
+      params
+    }
+  });
+}
+
+export async function reqItemGetManySubscribedRecent(
+  api: ApiRequestService,
+  params: QueryParamsSubscribedRecent
+) {
+  return api.apiRequest<ApiListResponse<DTOItem>>({
+    path: '/item/subscribed/recent',
+    method: 'GET',
+    config: {
+      params,
       withCredentials: true
     }
   });
+}
+
+export async function reqItemGetManySubscribedTop(
+  api: ApiRequestService,
+  params: QueryParamsSubscribedTop
+) {
+  return api.apiRequest<ApiListResponse<DTOItem>>({
+    path: '/item/subscribed/top',
+    method: 'GET',
+    config: {
+      params,
+      withCredentials: true
+    }
+  });
+}
+
+export async function reqItemGetMany(
+  api: ApiRequestService,
+  params: QueryParamsGetManyPartial
+) {
+  const { type, sort, range, category, page, medium } = params;
+
+  if (type === "category" && category) {
+    if (sort === "recent") {
+      return reqItemGetManyCategoryRecent(
+        api,
+        {
+          page,
+          medium,
+          category
+        }
+      );
+    } else if (sort === "top" && range) {
+      return reqItemGetManyCategoryTop(
+        api,
+        {
+          page,
+          medium,
+          range,
+          category
+        }
+      );
+    }
+  } else if (type === "global") {
+    if (sort === "recent") {
+      return reqItemGetManyGlobalRecent(
+        api,
+        {
+          page,
+          medium
+        }
+      );
+    } else if (sort === "top" && range) {
+      return reqItemGetManyGlobalTop(
+        api,
+        {
+          page,
+          medium,
+          range
+        }
+      );
+    }
+  } else if (type === "subscribed") {
+    if (sort === "recent") {
+      return reqItemGetManySubscribedRecent(
+        api,
+        {
+          page,
+          medium
+        }
+      );
+    } else if (sort === "top" && range) {
+      return reqItemGetManySubscribedTop(
+        api,
+        {
+          page,
+          medium,
+          range
+        }
+      );
+    }
+  }
+
+  return Promise.resolve(emptyApiListResponse);
+}
+
+export async function reqItemGetManyByChannelRecent(
+  api: ApiRequestService,
+  channelIdOrIdText: string,
+  params: QueryParamsPage
+) {
+  return api.apiRequest<ApiListResponse<DTOItem>>({
+    path: `/item/channel/recent/${channelIdOrIdText}`,
+    method: 'GET',
+    config: {
+      params
+    }
+  });
+}
+
+export async function reqItemGetManyByChannelOldest(
+  api: ApiRequestService,
+  channelIdOrIdText: string,
+  params: QueryParamsPage
+) {
+  return api.apiRequest<ApiListResponse<DTOItem>>({
+    path: `/item/channel/oldest/${channelIdOrIdText}`,
+    method: 'GET',
+    config: {
+      params
+    }
+  });
+}
+
+export async function reqItemGetManyByChannelTop(
+  api: ApiRequestService,
+  channelIdOrIdText: string,
+  params: QueryParamsPageRange
+) {
+  return api.apiRequest<ApiListResponse<DTOItem>>({
+    path: `/item/channel/top/${channelIdOrIdText}`,
+    method: 'GET',
+    config: {
+      params
+    }
+  });
+}
+
+export async function reqItemGetManyByChannel(
+  api: ApiRequestService,
+  params: QueryParamsIndividualList
+) {
+  const { idOrIdText, sort, range, page } = params;
+
+  if (sort === "recent") {
+    return reqItemGetManyByChannelRecent(
+      api,
+      idOrIdText,
+      {
+        page
+      }
+    );
+  } else if (sort === "oldest") {
+    return reqItemGetManyByChannelOldest(
+      api,
+      idOrIdText,
+      {
+        page
+      }
+    );
+  } else if (sort === "top" && range) {
+    return reqItemGetManyByChannelTop(
+      api,
+      idOrIdText,
+      {
+        page,
+        range
+      }
+    );
+  }
+
+  return Promise.resolve(emptyApiListResponse);
 }
 
 export async function reqItemGetManyForQueueByPubDate(

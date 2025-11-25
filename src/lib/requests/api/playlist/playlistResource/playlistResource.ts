@@ -19,7 +19,7 @@ export async function reqPlaylistResourceGetAllByPlaylistIdTextPrivate(
 export async function reqPlaylistResourceGetManyByPlaylistIdText(
   api: ApiRequestService,
   playlist_id_text: string,
-  params: QueryParamsPlaylistResources = {}
+  params: QueryParamsPlaylistResources
 ) {
   return api.apiRequest<ApiListResponse<DTOPlaylistResource>>({
     path: `/playlist/${playlist_id_text}/resources`,

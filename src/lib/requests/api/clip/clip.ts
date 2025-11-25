@@ -64,7 +64,7 @@ export async function reqClipGet(api: ApiRequestService, clip_id_text: string) {
 export async function reqClipGetManyByChannelIdTextPublic(
   api: ApiRequestService,
   channel_id_text: string,
-  params: QueryParamsClipsByChannel = {}
+  params: QueryParamsClipsByChannel
 ) {
   return api.apiRequest<ApiListResponse<DTOClip>>({
     path: `/clip/public/channel/${channel_id_text}`,
@@ -83,7 +83,7 @@ export async function reqClipGetManyByChannelIdTextPublic(
 export async function reqClipGetManyByItemIdTextPublic(
   api: ApiRequestService,
   item_id_text: string,
-  params: QueryParamsClipsByChannel = {}
+  params: QueryParamsClipsByChannel
 ) {
   return api.apiRequest<ApiListResponse<DTOClip>>({
     path: `/clip/public/item/${item_id_text}`,

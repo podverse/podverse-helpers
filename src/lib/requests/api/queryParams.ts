@@ -1,10 +1,6 @@
 import { MediumEnum, QueryParamsMedium } from "../../../lib/medium";
 import { CategoryMappingKeys } from "../../category";
 
-export interface QueryParamsPage {
-  page?: number;
-}
-
 // Helpers
 
 export const getValidQueryParam = <T extends string>(
@@ -20,11 +16,36 @@ export const getValidQueryParam = <T extends string>(
 
 // Global
 
+export interface QueryParamsPage {
+  page: number;
+}
+
+export interface QueryParamsPageRange {
+  page: number;
+  range: QueryParamsStatsRange;
+}
+
+export interface QueryParamsIndividualList {
+  idOrIdText: string;
+  page: number;
+  sort: QueryParamsSubscribedPartialSort;
+  range: QueryParamsStatsRange | null;
+}
+
 export interface QueryParamsGetMany {
   page: number;
   medium: QueryParamsMedium;
   type: QueryParamsSubscribedType;
   sort: QueryParamsSubscribedFullSort;
+  range: QueryParamsStatsRange | null;
+  category: string | null;
+}
+
+export interface QueryParamsGetManyPartial {
+  page: number;
+  medium: QueryParamsMedium;
+  type: QueryParamsSubscribedType;
+  sort: QueryParamsSubscribedPartialSort;
   range: QueryParamsStatsRange | null;
   category: string | null;
 }
@@ -72,7 +93,7 @@ export type QueryParamsSubscribedTop = {
 export const QUERY_PARAMS_SUBSCRIBED_TYPE = ["global", "subscribed", "category"] as const;
 export type QueryParamsSubscribedType = typeof QUERY_PARAMS_SUBSCRIBED_TYPE[number];
 
-export const QUERY_PARAMS_GLOBAL_SORT_VALUES = ["top", "recent"] as const;
+export const QUERY_PARAMS_GLOBAL_SORT_VALUES = ["recent", "oldest", "top"] as const;
 export type QueryParamsGlobalSort = typeof QUERY_PARAMS_GLOBAL_SORT_VALUES[number];
 
 export const QUERY_PARAMS_SUBSCRIBED_FULL_SORT = ["recent", "oldest", "a_z", "top"] as const;
