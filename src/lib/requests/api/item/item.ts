@@ -1,11 +1,11 @@
 import { ApiRequestService } from '../_request';
 import { ApiListResponse } from '../_response';
 import { DTOChannel, DTOItem, DTOItemChapter, DTOItemQueueItem } from 'src/dtos';
-import { QueryParamsChannel, QueryParamsChannels } from '../queryParams';
+import { QueryParamsChannel, QueryParamsGetMany } from '../queryParams';
 
 export async function reqItemGetMany(
   api: ApiRequestService,
-  params: QueryParamsChannels
+  params: QueryParamsGetMany
 ) {
   return api.apiRequest<ApiListResponse<DTOChannel>>({
     path: '/item',

@@ -9,7 +9,7 @@ export interface QueryParamsPage {
 
 export const getValidQueryParam = <T extends string>(
   validParams: readonly T[],
-  param: string | undefined,
+  param: string | null,
   defaultParam: T
 ): T => {
   if (param && (validParams as readonly string[]).includes(param)) {
@@ -19,6 +19,55 @@ export const getValidQueryParam = <T extends string>(
 };
 
 // Global
+
+export interface QueryParamsGetMany {
+  page: number;
+  medium: QueryParamsMedium;
+  type: QueryParamsSubscribedType;
+  sort: QueryParamsSubscribedFullSort;
+  range: QueryParamsStatsRange | null;
+  category: string | null;
+}
+
+export type QueryParamsGlobalRecent = {
+  page: number;
+  medium: QueryParamsMedium;
+}
+
+export type QueryParamsGlobalTop = {
+  page: number;
+  medium: QueryParamsMedium;
+  range: QueryParamsStatsRange;
+}
+
+export type QueryParamsCategoryRecent = {
+  page: number;
+  medium: QueryParamsMedium;
+  category: CategoryMappingKeys;
+}
+
+export type QueryParamsCategoryTop = {
+  page: number;
+  medium: QueryParamsMedium;
+  range: QueryParamsStatsRange;
+  category: CategoryMappingKeys;
+}
+
+export type QueryParamsSubscribedAZ = {
+  page: number;
+  medium: QueryParamsMedium;
+}
+
+export type QueryParamsSubscribedRecent = {
+  page: number;
+  medium: QueryParamsMedium;
+}
+
+export type QueryParamsSubscribedTop = {
+  page: number;
+  medium: QueryParamsMedium;
+  range: QueryParamsStatsRange;
+}
 
 export const QUERY_PARAMS_SUBSCRIBED_TYPE = ["global", "subscribed", "category"] as const;
 export type QueryParamsSubscribedType = typeof QUERY_PARAMS_SUBSCRIBED_TYPE[number];
