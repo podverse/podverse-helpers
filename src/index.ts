@@ -1,5 +1,6 @@
 export * from './dtos';
 
+export * from './lib/auth';
 // export * from './lib/backend';
 export * from './lib/error';
 export * from './lib/i18n';
