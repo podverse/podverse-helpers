@@ -24,12 +24,7 @@ export async function reqPlaylistGetManyPublic(
     path: '/playlist/public',
     method: 'GET',
     config: {
-      params: {
-        ...(params.page ? { page: params.page } : {}),
-        ...(params.sort ? { sort: params.sort } : {}),
-        ...(params.range ? { range: params.range } : {}),
-        ...(params.medium_id ? { medium_id: params.medium_id } : {})
-      }
+      params
     }
   });
 }
@@ -43,12 +38,7 @@ export async function reqPlaylistGetManyPrivate(
     method: 'GET',
     config: {
       withCredentials: true,
-      params: {
-        ...(params.page ? { page: params.page } : {}),
-        ...(params.sort ? { sort: params.sort } : {}),
-        ...(params.range ? { range: params.range } : {}),
-        ...(params.medium_id ? { medium_id: params.medium_id } : {})
-      }
+      params
     }
   });
 }
@@ -62,12 +52,7 @@ export async function reqPlaylistGetManyPrivateFollowed(
     method: 'GET',
     config: {
       withCredentials: true,
-      params: {
-        ...(params.page ? { page: params.page } : {}),
-        ...(params.sort ? { sort: params.sort } : {}),
-        ...(params.range ? { range: params.range } : {}),
-        ...(params.medium_id ? { medium_id: params.medium_id } : {})
-      }
+      params
     }
   });
 }
