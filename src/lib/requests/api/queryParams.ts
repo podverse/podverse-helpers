@@ -118,15 +118,17 @@ export const QUERY_PARAMS_CHANNEL_SORT_VALUES = ["recent", "oldest", "top"] as c
 export type QueryParamsChannelType = typeof QUERY_PARAMS_CHANNEL_TYPE_VALUES[number];
 export type QueryParamsChannelSort = typeof QUERY_PARAMS_CHANNEL_SORT_VALUES[number];
 
-export interface QueryParamsChannel extends QueryParamsPage {
-  type?: typeof QUERY_PARAMS_CHANNEL_TYPE_VALUES[number];
-  sort?: typeof QUERY_PARAMS_CHANNEL_SORT_VALUES[number];
-  range?: QueryParamsStatsRange;
+export interface QueryParamsChannel {
+  page: number;
+  type: typeof QUERY_PARAMS_CHANNEL_TYPE_VALUES[number];
+  sort: typeof QUERY_PARAMS_CHANNEL_SORT_VALUES[number];
+  range: QueryParamsStatsRange | null;
 }
 
 // Channels
 
-export interface QueryParamsChannels extends QueryParamsPage {
+export interface QueryParamsChannels {
+  page: number;
   type?: QueryParamsSubscribedType;
   sort?: QueryParamsSubscribedFullSort;
   range?: QueryParamsStatsRange;
@@ -140,9 +142,10 @@ export const QUERY_PARAMS_CLIPS_BY_CHANNEL_SORT_VALUES = ["recent", "oldest", "t
 
 export type QueryParamsClipsByChannelSort = typeof QUERY_PARAMS_CLIPS_BY_CHANNEL_SORT_VALUES[number];
 
-export interface QueryParamsClipsByChannel extends QueryParamsPage {
-  sort?: QueryParamsClipsByChannelSort;
-  range?: QueryParamsStatsRange;
+export interface QueryParamsClipsByChannel {
+  page: number;
+  sort: QueryParamsClipsByChannelSort;
+  range: QueryParamsStatsRange | null;
 }
 
 // Home
@@ -151,9 +154,10 @@ export const QUERY_PARAMS_HOME_SORT_VALUES = ["a_z", "recent", "oldest"] as cons
 
 export type QueryParamsHomeSort = typeof QUERY_PARAMS_HOME_SORT_VALUES[number];
 
-export interface QueryParamsHome extends QueryParamsPage {
+export interface QueryParamsHome {
+  page: number;
   medium: QueryParamsMedium;
-  sort?: QueryParamsHomeSort;
+  sort: QueryParamsHomeSort;
 }
 
 // Item
@@ -164,10 +168,11 @@ export const QUERY_PARAMS_ITEM_SORT_VALUES = ["recent", "oldest", "top"] as cons
 export type QueryParamsItemType = typeof QUERY_PARAMS_ITEM_TYPE_VALUES[number];
 export type QueryParamsItemSort = typeof QUERY_PARAMS_ITEM_SORT_VALUES[number];
 
-export interface QueryParamsItem extends QueryParamsPage {
-  type?: typeof QUERY_PARAMS_ITEM_TYPE_VALUES[number];
-  sort?: typeof QUERY_PARAMS_ITEM_SORT_VALUES[number];
-  range?: QueryParamsStatsRange;
+export interface QueryParamsItem {
+  page: number;
+  type: typeof QUERY_PARAMS_ITEM_TYPE_VALUES[number];
+  sort: typeof QUERY_PARAMS_ITEM_SORT_VALUES[number];
+  range: QueryParamsStatsRange | null;
 }
 
 // Items
@@ -178,7 +183,8 @@ export const QUERY_PARAMS_ITEMS_SORT_VALUES = ["recent", "oldest", "top"] as con
 export type QueryParamsItemsType = typeof QUERY_PARAMS_ITEMS_TYPE_VALUES[number];
 export type QueryParamsItemsSort = typeof QUERY_PARAMS_ITEMS_SORT_VALUES[number];
 
-export interface QueryParamsItems extends QueryParamsPage {
+export interface QueryParamsItems {
+  page: number;
   type?: QueryParamsItemsType;
   sort?: QueryParamsItemsSort;
   range?: QueryParamsStatsRange;
@@ -191,7 +197,8 @@ export const QUERY_PARAMS_ITEM_SOUNDBITES_BY_CHANNEL_SORT_VALUES = ["recent", "o
 
 export type QueryParamsItemSoundbitesByChannelSort = typeof QUERY_PARAMS_ITEM_SOUNDBITES_BY_CHANNEL_SORT_VALUES[number];
 
-export interface QueryParamsItemSoundbitesByChannel extends QueryParamsPage {
+export interface QueryParamsItemSoundbitesByChannel {
+  page: number;
   sort?: QueryParamsItemSoundbitesByChannelSort;
 }
 
@@ -199,23 +206,23 @@ export const QUERY_PARAMS_ITEM_SOUNDBITES_BY_ITEM_SORT_VALUES = ["recent", "olde
 
 export type QueryParamsItemSoundbitesByItemSort = typeof QUERY_PARAMS_ITEM_SOUNDBITES_BY_ITEM_SORT_VALUES[number];
 
-export interface QueryParamsItemSoundbitesByItem extends QueryParamsPage {
+export interface QueryParamsItemSoundbitesByItem {
+  page: number;
   sort?: QueryParamsItemSoundbitesByItemSort;
 }
 
 // Playlists
 
 export const QUERY_PARAMS_PLAYLISTS_TYPE_VALUES = ["my_playlists", "subscribed", "global"] as const;
-export const QUERY_PARAMS_PLAYLISTS_SORT_VALUES = ["top", "a_z", "recent", "oldest"] as const;
 
 export type QueryParamsPlaylistsType = typeof QUERY_PARAMS_PLAYLISTS_TYPE_VALUES[number];
-export type QueryParamsPlaylistsSort = typeof QUERY_PARAMS_PLAYLISTS_SORT_VALUES[number];
 
-export interface QueryParamsPlaylists extends QueryParamsPage {
-  type?: QueryParamsPlaylistsType;
-  sort?: QueryParamsPlaylistsSort;
-  range?: QueryParamsStatsRange;
-  medium_id?: MediumEnum | null;
+export interface QueryParamsPlaylists {
+  page: number;
+  medium: QueryParamsMedium;
+  type: QueryParamsPlaylistsType;
+  sort: QueryParamsSubscribedFullSort;
+  range: QueryParamsStatsRange | null;
 }
 
 // Playlist Resources
@@ -224,12 +231,13 @@ export type QueryParamsPlaylistResources = QueryParamsPage;
 
 // Queues
 
-export type QueryParamsQueues = QueryParamsPage & {
-  medium_id?: MediumEnum | null;
+export type QueryParamsQueues = {
+  medium: QueryParamsMedium;
 }
 
-export type QueryParamsHistory = QueryParamsPage & {
-  medium_id?: MediumEnum | null;
+export type QueryParamsHistory = {
+  page: number;
+  medium: QueryParamsMedium;
 }
 
 // MISC
