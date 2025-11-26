@@ -78,3 +78,16 @@ export const getMediumFromQueryParam = (val: QueryParamsMedium): MediumEnum | nu
     return null;
   }
 };
+
+export const getQueryParamFromMediumId = (mediumId: number | null): QueryParamsMedium => {
+  switch (mediumId) {
+  case MediumEnum.Podcast:
+    return "podcasts";
+  case MediumEnum.Video:
+    return "videos";
+  case MediumEnum.Music:
+    return "music";
+  default:
+    return "all";
+  }
+};
