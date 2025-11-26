@@ -1,4 +1,4 @@
-import { MediumEnum, QueryParamsMedium } from "../../../lib/medium";
+import { QueryParamsMedium } from "../../../lib/medium";
 import { CategoryMappingKeys } from "../../category";
 
 // Helpers
@@ -213,9 +213,8 @@ export interface QueryParamsItemSoundbitesByItem {
 
 // Playlists
 
-export const QUERY_PARAMS_PLAYLISTS_TYPE_VALUES = ["my_playlists", "subscribed", "global"] as const;
-
-export type QueryParamsPlaylistsType = typeof QUERY_PARAMS_PLAYLISTS_TYPE_VALUES[number];
+export const QUERY_PARAMS_PLAYLISTS_TYPE_VALUES = ['public', 'private', 'private_followed'] as const;
+export type QueryParamsPlaylistsType = (typeof QUERY_PARAMS_PLAYLISTS_TYPE_VALUES)[number];
 
 export interface QueryParamsPlaylists {
   page: number;
@@ -224,6 +223,54 @@ export interface QueryParamsPlaylists {
   sort: QueryParamsSubscribedFullSort;
   range: QueryParamsStatsRange | null;
 }
+
+export type QueryParamsPlaylistsPublicTop = {
+  page: number;
+  medium: QueryParamsMedium;
+  range: QueryParamsStatsRange;
+};
+
+export type QueryParamsPlaylistsPrivateAZ = {
+  page: number;
+  medium: QueryParamsMedium;
+};
+
+export type QueryParamsPlaylistsPrivateOldest = {
+  page: number;
+  medium: QueryParamsMedium;
+};
+
+export type QueryParamsPlaylistsPrivateRecent = {
+  page: number;
+  medium: QueryParamsMedium;
+};
+
+export type QueryParamsPlaylistsPrivateTop = {
+  page: number;
+  medium: QueryParamsMedium;
+  range: QueryParamsStatsRange;
+};
+
+export type QueryParamsPlaylistsPrivateFollowedAZ = {
+  page: number;
+  medium: QueryParamsMedium;
+};
+
+export type QueryParamsPlaylistsPrivateFollowedOldest = {
+  page: number;
+  medium: QueryParamsMedium;
+};
+
+export type QueryParamsPlaylistsPrivateFollowedRecent = {
+  page: number;
+  medium: QueryParamsMedium;
+};
+
+export type QueryParamsPlaylistsPrivateFollowedTop = {
+  page: number;
+  medium: QueryParamsMedium;
+  range: QueryParamsStatsRange;
+};
 
 // Playlist Resources
 

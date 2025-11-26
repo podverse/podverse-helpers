@@ -14,16 +14,16 @@ import { reqClipCreate, ReqClipCreateParams, reqClipDelete, reqClipGet, reqClipG
 import { reqItemGetByIdOrIdText, reqItemGetMany, reqItemGetManyByChannel, reqItemGetManyForQueueByPubDate,
   reqItemParseAndGetChapters } from './item/item';
 import { reqPlaylistCreate, ReqPlaylistCreateParams, reqPlaylistDelete, reqPlaylistEdit, ReqPlaylistEditParams,
-  reqPlaylistGet, reqPlaylistGetAllFavoritesPrivate, reqPlaylistGetManyPrivate, reqPlaylistGetManyPrivateFollowed,
-  reqPlaylistGetManyPublic } from './playlist/playlist';
+  reqPlaylistGet, reqPlaylistGetAllFavoritesPrivate, reqPlaylistGetMany } from './playlist/playlist';
 import { reqPlaylistResourceClipAddBetween, reqPlaylistResourceClipAddFirst, reqPlaylistResourceClipAddLast,
   reqPlaylistResourceClipDelete } from './playlist/playlistResource/playlistResourceClip';
 import { reqPlaylistResourceItemAddFirst, reqPlaylistResourceItemAddBetween,
   reqPlaylistResourceItemAddLast, 
   reqPlaylistResourceItemDelete} from './playlist/playlistResource/playlistResourceItem';
 import { reqPodrollGetForChannel } from './podroll/podroll';
-import { QueryParamsChannel, QueryParamsClipsByChannel, QueryParamsGetMany, QueryParamsGetManyPartial, QueryParamsIndividualList, QueryParamsItemSoundbitesByChannel,
-  QueryParamsItemSoundbitesByItem, QueryParamsPlaylistResources, QueryParamsPlaylists } from './queryParams';
+import { QueryParamsClipsByChannel, QueryParamsGetMany, QueryParamsGetManyPartial, QueryParamsIndividualList,
+  QueryParamsItemSoundbitesByChannel, QueryParamsItemSoundbitesByItem, QueryParamsPlaylistResources,
+  QueryParamsPlaylists } from './queryParams';
 import { reqQueueGetAllForAccountPrivate, reqQueueUpdateIsActiveQueue } from './queue/queue';
 import { reqQueueResourceItemAddBetween, reqQueueResourceItemAddHistory,
   reqQueueResourceItemAddLast, reqQueueResourceItemAddNext,
@@ -325,16 +325,8 @@ export class ApiRequestService {
     return reqPlaylistGet(this, id_text);
   }
 
-  reqPlaylistGetManyPublic(params: QueryParamsPlaylists) {
-    return reqPlaylistGetManyPublic(this, params);
-  }
-
-  reqPlaylistGetManyPrivate(params: QueryParamsPlaylists) {
-    return reqPlaylistGetManyPrivate(this, params);
-  }
-
-  reqPlaylistGetManyPrivateFollowed(params: QueryParamsPlaylists) {
-    return reqPlaylistGetManyPrivateFollowed(this, params);
+  reqPlaylistGetMany(params: QueryParamsPlaylists) {
+    return reqPlaylistGetMany(this, params);
   }
 
   reqPlaylistGetAllFavoritesPrivate() {

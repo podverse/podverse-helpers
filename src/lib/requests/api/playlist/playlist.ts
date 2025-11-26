@@ -1,7 +1,7 @@
-import { ApiListResponse } from "../..";
+import { ApiListResponse, emptyApiListResponse } from "../..";
 import { DTOPlaylist, DTOPlaylistFavorites } from "../../../../dtos";
 import { ApiRequestService } from "../_request";
-import { QueryParamsPlaylists } from "../queryParams";
+import { QueryParamsGlobalRecent, QueryParamsGlobalTop, QueryParamsPlaylists } from "../queryParams";
 
 export async function reqPlaylistGet(
   api: ApiRequestService,
@@ -16,12 +16,12 @@ export async function reqPlaylistGet(
   });
 }
 
-export async function reqPlaylistGetManyPublic(
+export async function reqPlaylistGetManyPublicTop(
   api: ApiRequestService,
-  params: QueryParamsPlaylists
+  params: QueryParamsGlobalTop
 ) {
   return api.apiRequest<ApiListResponse<DTOPlaylist>>({
-    path: '/playlist/public',
+    path: '/playlist/public/top',
     method: 'GET',
     config: {
       params
@@ -29,32 +29,177 @@ export async function reqPlaylistGetManyPublic(
   });
 }
 
-export async function reqPlaylistGetManyPrivate(
+export async function reqPlaylistGetManyPrivateTop(
   api: ApiRequestService,
-  params: QueryParamsPlaylists
+  params: QueryParamsGlobalTop
 ) {
   return api.apiRequest<ApiListResponse<DTOPlaylist>>({
-    path: '/playlist/private',
+    path: '/playlist/private/top',
     method: 'GET',
     config: {
-      withCredentials: true,
-      params
+      params,
+      withCredentials: true
     }
   });
 }
 
-export async function reqPlaylistGetManyPrivateFollowed(
+export async function reqPlaylistGetManyPrivateRecent(
+  api: ApiRequestService,
+  params: QueryParamsGlobalRecent
+) {
+  return api.apiRequest<ApiListResponse<DTOPlaylist>>({
+    path: '/playlist/private/recent',
+    method: 'GET',
+    config: {
+      params,
+      withCredentials: true
+    }
+  });
+}
+
+export async function reqPlaylistGetManyPrivateOldest(
+  api: ApiRequestService,
+  params: QueryParamsGlobalRecent
+) {
+  return api.apiRequest<ApiListResponse<DTOPlaylist>>({
+    path: '/playlist/private/oldest',
+    method: 'GET',
+    config: {
+      params,
+      withCredentials: true
+    }
+  });
+}
+
+export async function reqPlaylistGetManyPrivateAZ(
+  api: ApiRequestService,
+  params: QueryParamsGlobalRecent
+) {
+  return api.apiRequest<ApiListResponse<DTOPlaylist>>({
+    path: '/playlist/private/az',
+    method: 'GET',
+    config: {
+      params,
+      withCredentials: true
+    }
+  });
+}
+
+export async function reqPlaylistGetManyPrivateFollowedTop(
+  api: ApiRequestService,
+  params: QueryParamsGlobalTop
+) {
+  return api.apiRequest<ApiListResponse<DTOPlaylist>>({
+    path: '/playlist/private/followed/top',
+    method: 'GET',
+    config: {
+      params,
+      withCredentials: true
+    }
+  });
+}
+
+export async function reqPlaylistGetManyPrivateFollowedRecent(
+  api: ApiRequestService,
+  params: QueryParamsGlobalRecent
+) {
+  return api.apiRequest<ApiListResponse<DTOPlaylist>>({
+    path: '/playlist/private/followed/recent',
+    method: 'GET',
+    config: {
+      params,
+      withCredentials: true
+    }
+  });
+}
+
+export async function reqPlaylistGetManyPrivateFollowedOldest(
+  api: ApiRequestService,
+  params: QueryParamsGlobalRecent
+) {
+  return api.apiRequest<ApiListResponse<DTOPlaylist>>({
+    path: '/playlist/private/followed/oldest',
+    method: 'GET',
+    config: {
+      params,
+      withCredentials: true
+    }
+  });
+}
+
+export async function reqPlaylistGetManyPrivateFollowedAZ(
+  api: ApiRequestService,
+  params: QueryParamsGlobalRecent
+) {
+  return api.apiRequest<ApiListResponse<DTOPlaylist>>({
+    path: '/playlist/private/followed/az',
+    method: 'GET',
+    config: {
+      params,
+      withCredentials: true
+    }
+  });
+}
+
+export async function reqPlaylistGetMany(
   api: ApiRequestService,
   params: QueryParamsPlaylists
 ) {
-  return api.apiRequest<ApiListResponse<DTOPlaylist>>({
-    path: '/playlist/private/followed',
-    method: 'GET',
-    config: {
-      withCredentials: true,
-      params
+  if (params.type === 'public') {
+    return reqPlaylistGetManyPublicTop(api, {
+      page: params.page,
+      medium: params.medium,
+      range: params.range!
+    });
+  } else if (params.type === 'private') {
+    if (params.sort === 'recent') {
+      return reqPlaylistGetManyPrivateRecent(api, {
+        page: params.page,
+        medium: params.medium
+      });
+    } else if (params.sort === 'oldest') {
+      return reqPlaylistGetManyPrivateOldest(api, {
+        page: params.page,
+        medium: params.medium
+      });
+    } else if (params.sort === 'a_z') {
+      return reqPlaylistGetManyPrivateAZ(api, {
+        page: params.page,
+        medium: params.medium
+      });
+    } else if (params.sort === 'top') {
+      return reqPlaylistGetManyPrivateTop(api, {
+        page: params.page,
+        medium: params.medium,
+        range: params.range!
+      });
     }
-  });
+  } else if (params.type === 'private_followed') {
+    if (params.sort === 'recent') {
+      return reqPlaylistGetManyPrivateFollowedRecent(api, {
+        page: params.page,
+        medium: params.medium
+      });
+    } else if (params.sort === 'oldest') {
+      return reqPlaylistGetManyPrivateFollowedOldest(api, {
+        page: params.page,
+        medium: params.medium
+      });
+    } else if (params.sort === 'a_z') {
+      return reqPlaylistGetManyPrivateFollowedAZ(api, {
+        page: params.page,
+        medium: params.medium
+      });
+    } else if (params.sort === 'top') {
+      return reqPlaylistGetManyPrivateFollowedTop(api, {
+        page: params.page,
+        medium: params.medium,
+        range: params.range!
+      });
+    }
+  }
+
+  return emptyApiListResponse;  
 }
 
 export async function reqPlaylistGetAllFavoritesPrivate(api: ApiRequestService) {
