@@ -9,8 +9,9 @@ import { reqAccountFollowPlaylist, reqAccountUnfollowPlaylist } from './account/
 import { reqAuthCheckSession, reqAuthLogin, reqAuthLogout, reqAuthMe } from './auth/auth';
 import { reqCategoryGetAll } from './category/category';
 import { reqChannelGetByIdOrIdText, reqChannelGetByPodcastIndexId, reqChannelGetMany } from './channel/channel';
-import { reqClipCreate, ReqClipCreateParams, reqClipDelete, reqClipGet, reqClipGetManyByChannelIdTextPublic,
-  reqClipGetManyByItemIdTextPublic, reqClipUpdate } from './clip/clip';
+import { reqClipCreate, ReqClipCreateParams, reqClipDelete, reqClipGet,
+  reqClipGetManyByChannel, reqClipGetManyByItem, reqClipGetManyPublic,
+  reqClipUpdate } from './clip/clip';
 import { reqItemGetByIdOrIdText, reqItemGetMany, reqItemGetManyByChannel, reqItemGetManyForQueueByPubDate,
   reqItemParseAndGetChapters } from './item/item';
 import { reqPlaylistCreate, ReqPlaylistCreateParams, reqPlaylistDelete, reqPlaylistEdit, ReqPlaylistEditParams,
@@ -21,7 +22,7 @@ import { reqPlaylistResourceItemAddFirst, reqPlaylistResourceItemAddBetween,
   reqPlaylistResourceItemAddLast, 
   reqPlaylistResourceItemDelete} from './playlist/playlistResource/playlistResourceItem';
 import { reqPodrollGetForChannel } from './podroll/podroll';
-import { QueryParamsClipsByChannel, QueryParamsGetMany, QueryParamsGetManyPartial, QueryParamsIndividualList,
+import { QueryParamsGetMany, QueryParamsGetManyPartial, QueryParamsIndividualList,
   QueryParamsItemSoundbitesByChannel, QueryParamsItemSoundbitesByItem, QueryParamsPlaylistResources,
   QueryParamsPlaylists } from './queryParams';
 import { reqQueueGetAllForAccountPrivate, reqQueueUpdateIsActiveQueue } from './queue/queue';
@@ -232,12 +233,16 @@ export class ApiRequestService {
     return reqClipGet(this, clip_id_text);
   }
 
-  reqClipGetManyByChannelIdTextPublic(channel_id_text: string, params: QueryParamsClipsByChannel) {
-    return reqClipGetManyByChannelIdTextPublic(this, channel_id_text, params);
+  reqClipGetManyPublic(params: QueryParamsGetManyPartial) {
+    return reqClipGetManyPublic(this, params);
   }
 
-  reqClipGetManyByItemIdTextPublic(item_id_text: string, params: QueryParamsClipsByChannel) {
-    return reqClipGetManyByItemIdTextPublic(this, item_id_text, params);
+  reqClipGetManyByChannel(params: QueryParamsIndividualList) {
+    return reqClipGetManyByChannel(this, params);
+  }
+
+  reqClipGetManyByItem(params: QueryParamsIndividualList) {
+    return reqClipGetManyByItem(this, params);
   }
 
   /* EXTERNAL SERVICES > PODCAST INDEX */

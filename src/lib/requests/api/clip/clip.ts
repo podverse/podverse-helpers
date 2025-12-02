@@ -1,7 +1,9 @@
 import { DTOClip } from "../../../../dtos";
 import { ApiRequestService } from "../_request";
-import { ApiListResponse } from "../_response";
-import { QueryParamsClipsByChannel } from "../queryParams";
+import { ApiListResponse, emptyApiListResponse } from "../_response";
+import { QueryParamsCategoryRecent, QueryParamsCategoryTop, QueryParamsGetManyPartial,
+  QueryParamsGlobalRecent, QueryParamsGlobalTop, QueryParamsIndividualList,
+  QueryParamsPage, QueryParamsPageRange } from "../queryParams";
 
 export type ReqClipCreateParams = {
   item_id_text: string;
@@ -61,40 +63,339 @@ export async function reqClipGet(api: ApiRequestService, clip_id_text: string) {
   });
 }
 
-export async function reqClipGetManyByChannelIdTextPublic(
+export async function reqClipGetManyPublicRecent(
   api: ApiRequestService,
-  channel_id_text: string,
-  params: QueryParamsClipsByChannel
+  params: QueryParamsGlobalRecent
 ) {
   return api.apiRequest<ApiListResponse<DTOClip>>({
-    path: `/clip/public/channel/${channel_id_text}`,
+    path: `/clip/public/recent/`,
     method: 'GET',
     config: {
       params: {
-        ...(params.page ? { page: params.page } : {}),
-        ...(params.sort ? { sort: params.sort } : {}),
-        ...(params.range ? { range: params.range } : {})
-      },
-      withCredentials: true
+        page: params.page,
+        medium: params.medium
+      }
     }
   });
 }
 
-export async function reqClipGetManyByItemIdTextPublic(
+export async function reqClipGetManyPublicOldest(
   api: ApiRequestService,
-  item_id_text: string,
-  params: QueryParamsClipsByChannel
+  params: QueryParamsGlobalRecent
 ) {
   return api.apiRequest<ApiListResponse<DTOClip>>({
-    path: `/clip/public/item/${item_id_text}`,
+    path: `/clip/public/oldest/`,
     method: 'GET',
     config: {
       params: {
-        ...(params.page ? { page: params.page } : {}),
-        ...(params.sort ? { sort: params.sort } : {}),
-        ...(params.range ? { range: params.range } : {})
-      },
-      withCredentials: true
+        page: params.page,
+        medium: params.medium
+      }
     }
   });
+}
+
+export async function reqClipGetManyPublicTop(
+  api: ApiRequestService,
+  params: QueryParamsGlobalTop
+) {
+  return api.apiRequest<ApiListResponse<DTOClip>>({
+    path: `/clip/public/top/`,
+    method: 'GET',
+    config: {
+      params: {
+        page: params.page,
+        medium: params.medium,
+        range: params.range
+      }
+    }
+  });
+}
+
+export async function reqClipGetManyByCategoryPublicRecent(
+  api: ApiRequestService,
+  params: QueryParamsCategoryRecent
+) {
+  return api.apiRequest<ApiListResponse<DTOClip>>({
+    path: `/clip/public/category/recent/`,
+    method: 'GET',
+    config: {
+      params: {
+        page: params.page,
+        medium: params.medium,
+        category: params.category
+      }
+    }
+  });
+}
+
+export async function reqClipGetManyByCategoryPublicOldest(
+  api: ApiRequestService,
+  params: QueryParamsCategoryRecent
+) {
+  return api.apiRequest<ApiListResponse<DTOClip>>({
+    path: `/clip/public/category/oldest/`,
+    method: 'GET',
+    config: {
+      params: {
+        page: params.page,
+        medium: params.medium,
+        category: params.category
+      }
+    }
+  });
+}
+
+export async function reqClipGetManyByCategoryPublicTop(
+  api: ApiRequestService,
+  params: QueryParamsCategoryTop
+) {
+  return api.apiRequest<ApiListResponse<DTOClip>>({
+    path: `/clip/public/category/top/`,
+    method: 'GET',
+    config: {
+      params: {
+        page: params.page,
+        medium: params.medium,
+        category: params.category,
+        range: params.range
+      }
+    }
+  });
+}
+
+export async function reqClipGetManyPublic(
+  api: ApiRequestService,
+  params: QueryParamsGetManyPartial
+) {
+  const { type, sort, range, category, page, medium } = params;
+
+  if (type === "category" && category) {
+    if (sort === "recent") {
+      return reqClipGetManyByCategoryPublicRecent(
+        api,
+        {
+          page,
+          medium,
+          category
+        }
+      );
+    } else if (sort === "oldest") {
+      return reqClipGetManyByCategoryPublicOldest(
+        api,
+        {
+          page,
+          medium,
+          category
+        }
+      );
+    } else if (sort === "top" && range) {
+      return reqClipGetManyByCategoryPublicTop(
+        api,
+        {
+          page,
+          medium,
+          range,
+          category
+        }
+      );
+    }
+  } else if (type === "global") {
+    if (sort === "recent") {
+      return reqClipGetManyPublicRecent(
+        api,
+        {
+          page,
+          medium
+        }
+      );
+    } else if (sort === "oldest") {
+      return reqClipGetManyPublicOldest(
+        api,
+        {
+          page,
+          medium
+        }
+      );
+    } else if (sort === "top" && range) {
+      return reqClipGetManyPublicTop(
+        api,
+        {
+          page,
+          medium,
+          range
+        }
+      );
+    }
+  }
+
+  return Promise.resolve(emptyApiListResponse);
+}
+
+export async function reqClipGetManyByChannelPublicRecent(
+  api: ApiRequestService,
+  channel_id_text: string,
+  params: QueryParamsPage
+) {
+  return api.apiRequest<ApiListResponse<DTOClip>>({
+    path: `/clip/public/channel/recent/${channel_id_text}`,
+    method: 'GET',
+    config: {
+      params: {
+        page: params.page
+      }
+    }
+  });
+}
+
+export async function reqClipGetManyByChannelPublicOldest(
+  api: ApiRequestService,
+  channel_id_text: string,
+  params: QueryParamsPage
+) {
+  return api.apiRequest<ApiListResponse<DTOClip>>({
+    path: `/clip/public/channel/oldest/${channel_id_text}`,
+    method: 'GET',
+    config: {
+      params: {
+        page: params.page
+      }
+    }
+  });
+}
+
+export async function reqClipGetManyByChannelPublicTop(
+  api: ApiRequestService,
+  channel_id_text: string,
+  params: QueryParamsPageRange
+) {
+  return api.apiRequest<ApiListResponse<DTOClip>>({
+    path: `/clip/public/channel/top/${channel_id_text}`,
+    method: 'GET',
+    config: {
+      params: {
+        page: params.page
+      }
+    }
+  });
+}
+
+export async function reqClipGetManyByChannel(
+  api: ApiRequestService,
+  params: QueryParamsIndividualList
+) {
+  const { idOrIdText, sort, range, page } = params;
+
+  if (sort === "recent") {
+    return reqClipGetManyByChannelPublicRecent(
+      api,
+      idOrIdText,
+      {
+        page
+      }
+    );
+  } else if (sort === "oldest") {
+    return reqClipGetManyByChannelPublicOldest(
+      api,
+      idOrIdText,
+      {
+        page
+      }
+    );
+  } else if (sort === "top" && range) {
+    return reqClipGetManyByChannelPublicTop(
+      api,
+      idOrIdText,
+      {
+        page,
+        range
+      }
+    );
+  }
+
+  return Promise.resolve(emptyApiListResponse);
+}
+
+export async function reqClipGetManyByItemPublicRecent(
+  api: ApiRequestService,
+  item_id_text: string,
+  params: QueryParamsPage
+) {
+  return api.apiRequest<ApiListResponse<DTOClip>>({
+    path: `/clip/public/item/recent/${item_id_text}`,
+    method: 'GET',
+    config: {
+      params: {
+        page: params.page
+      }
+    }
+  });
+}
+
+export async function reqClipGetManyByItemPublicOldest(
+  api: ApiRequestService,
+  item_id_text: string,
+  params: QueryParamsPage
+) {
+  return api.apiRequest<ApiListResponse<DTOClip>>({
+    path: `/clip/public/item/oldest/${item_id_text}`,
+    method: 'GET',
+    config: {
+      params: {
+        page: params.page
+      }
+    }
+  });
+}
+
+export async function reqClipGetManyByItemPublicTop(
+  api: ApiRequestService,
+  item_id_text: string,
+  params: QueryParamsPageRange
+) {
+  return api.apiRequest<ApiListResponse<DTOClip>>({
+    path: `/clip/public/item/top/${item_id_text}`,
+    method: 'GET',
+    config: {
+      params: {
+        page: params.page
+      }
+    }
+  });
+}
+
+export async function reqClipGetManyByItem(
+  api: ApiRequestService,
+  params: QueryParamsIndividualList
+) {
+  const { idOrIdText, sort, range, page } = params;
+
+  if (sort === "recent") {
+    return reqClipGetManyByItemPublicRecent(
+      api,
+      idOrIdText,
+      {
+        page
+      }
+    );
+  } else if (sort === "oldest") {
+    return reqClipGetManyByItemPublicOldest(
+      api,
+      idOrIdText,
+      {
+        page
+      }
+    );
+  } else if (sort === "top" && range) {
+    return reqClipGetManyByItemPublicTop(
+      api,
+      idOrIdText,
+      {
+        page,
+        range
+      }
+    );
+  }
+
+  return Promise.resolve(emptyApiListResponse);
 }
