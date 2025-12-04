@@ -3,7 +3,8 @@ import { ApiRequestService } from "../_request";
 import { ApiListResponse, emptyApiListResponse } from "../_response";
 import { QueryParamsCategoryRecent, QueryParamsCategoryTop, QueryParamsGetManyPartial,
   QueryParamsGlobalRecent, QueryParamsGlobalTop, QueryParamsIndividualList,
-  QueryParamsPage, QueryParamsPageRange } from "../queryParams";
+  QueryParamsPage, QueryParamsPageRange, QueryParamsSubscribedRecent, 
+  QueryParamsSubscribedTop } from "../queryParams";
 
 export type ReqClipCreateParams = {
   item_id_text: string;
@@ -164,6 +165,34 @@ export async function reqClipGetManyByCategoryPublicTop(
   });
 }
 
+export async function reqClipGetManySubscribedPublicRecent(
+  api: ApiRequestService,
+  params: QueryParamsSubscribedRecent
+) {
+  return api.apiRequest<ApiListResponse<DTOClip>>({
+    path: `/clip/public/subscribed/recent`,
+    method: 'GET',
+    config: {
+      params,
+      withCredentials: true
+    }
+  });
+}
+
+export async function reqClipGetManySubscribedPublicTop(
+  api: ApiRequestService,
+  params: QueryParamsSubscribedTop
+) {
+  return api.apiRequest<ApiListResponse<DTOClip>>({
+    path: `/clip/public/subscribed/top`,
+    method: 'GET',
+    config: {
+      params,
+      withCredentials: true
+    }
+  });
+}
+
 export async function reqClipGetManyPublic(
   api: ApiRequestService,
   params: QueryParamsGetManyPartial
@@ -219,6 +248,25 @@ export async function reqClipGetManyPublic(
       );
     } else if (sort === "top" && range) {
       return reqClipGetManyPublicTop(
+        api,
+        {
+          page,
+          medium,
+          range
+        }
+      );
+    }
+  } else if (type === "subscribed") {
+    if (sort === "recent") {
+      return reqClipGetManySubscribedPublicRecent(
+        api,
+        {
+          page,
+          medium
+        }
+      );
+    } else if (sort === "top" && range) {
+      return reqClipGetManySubscribedPublicTop(
         api,
         {
           page,
