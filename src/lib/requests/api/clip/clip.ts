@@ -328,7 +328,7 @@ export async function reqClipGetManyByChannelPublicTop(
   });
 }
 
-export async function reqClipGetManyByChannel(
+export async function reqClipGetManyByChannelPublic(
   api: ApiRequestService,
   params: QueryParamsIndividualList
 ) {
@@ -412,7 +412,7 @@ export async function reqClipGetManyByItemPublicTop(
   });
 }
 
-export async function reqClipGetManyByItem(
+export async function reqClipGetManyByItemPublic(
   api: ApiRequestService,
   params: QueryParamsIndividualList
 ) {

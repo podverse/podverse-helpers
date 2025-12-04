@@ -10,7 +10,7 @@ import { reqAuthCheckSession, reqAuthLogin, reqAuthLogout, reqAuthMe } from './a
 import { reqCategoryGetAll } from './category/category';
 import { reqChannelGetByIdOrIdText, reqChannelGetByPodcastIndexId, reqChannelGetMany } from './channel/channel';
 import { reqClipCreate, ReqClipCreateParams, reqClipDelete, reqClipGet,
-  reqClipGetManyByChannel, reqClipGetManyByItem, reqClipGetManyPublic,
+  reqClipGetManyByChannelPublic, reqClipGetManyByItemPublic, reqClipGetManyPublic,
   reqClipUpdate } from './clip/clip';
 import { reqItemGetByIdOrIdText, reqItemGetMany, reqItemGetManyByChannel, reqItemGetManyForQueueByPubDate,
   reqItemParseAndGetChapters } from './item/item';
@@ -237,12 +237,12 @@ export class ApiRequestService {
     return reqClipGetManyPublic(this, params);
   }
 
-  reqClipGetManyByChannel(params: QueryParamsIndividualList) {
-    return reqClipGetManyByChannel(this, params);
+  reqClipGetManyByChannelPublic(params: QueryParamsIndividualList) {
+    return reqClipGetManyByChannelPublic(this, params);
   }
 
-  reqClipGetManyByItem(params: QueryParamsIndividualList) {
-    return reqClipGetManyByItem(this, params);
+  reqClipGetManyByItemPublic(params: QueryParamsIndividualList) {
+    return reqClipGetManyByItemPublic(this, params);
   }
 
   /* EXTERNAL SERVICES > PODCAST INDEX */
