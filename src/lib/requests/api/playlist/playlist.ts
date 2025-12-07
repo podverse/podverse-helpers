@@ -1,3 +1,4 @@
+import { QueryParamsQueueMedium } from "src/lib/medium";
 import { ApiListResponse, emptyApiListResponse } from "../..";
 import { DTOPlaylist, DTOPlaylistFavorites } from "../../../../dtos";
 import { ApiRequestService } from "../_request";
@@ -215,7 +216,7 @@ export async function reqPlaylistGetAllFavoritesPrivate(api: ApiRequestService) 
 export type ReqPlaylistCreateParams = {
   title: string;
   description?: string;
-  medium_id: number;
+  medium: QueryParamsQueueMedium;
   sharable_status_id: number;
 }
 
@@ -234,7 +235,7 @@ export type ReqPlaylistEditParams = {
   id_text: string;
   title: string;
   description?: string;
-  medium_id: number;
+  medium: QueryParamsQueueMedium;
   sharable_status_id: number;
 }
 
@@ -248,7 +249,7 @@ export async function reqPlaylistEdit(api: ApiRequestService, params: ReqPlaylis
     data: {
       title: params.title,
       description: params.description,
-      medium_id: params.medium_id,
+      medium: params.medium,
       sharable_status_id: params.sharable_status_id
     }
   });

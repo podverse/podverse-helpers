@@ -1,4 +1,4 @@
-import { QueryParamsMedium } from "../../../lib/medium";
+import { QueryParamsMedium, QueryParamsQueueMedium } from "../../../lib/medium";
 import { CategoryMappingKeys } from "../../category";
 
 // Helpers
@@ -218,7 +218,7 @@ export type QueryParamsPlaylistsType = (typeof QUERY_PARAMS_PLAYLISTS_TYPE_VALUE
 
 export interface QueryParamsPlaylists {
   page: number;
-  medium: QueryParamsMedium;
+  medium: QueryParamsQueueMedium;
   type: QueryParamsPlaylistsType;
   sort: QueryParamsSubscribedFullSort;
   range: QueryParamsStatsRange | null;
@@ -226,49 +226,49 @@ export interface QueryParamsPlaylists {
 
 export type QueryParamsPlaylistsPublicTop = {
   page: number;
-  medium: QueryParamsMedium;
+  medium: QueryParamsQueueMedium;
   range: QueryParamsStatsRange;
 };
 
 export type QueryParamsPlaylistsPrivateAZ = {
   page: number;
-  medium: QueryParamsMedium;
+  medium: QueryParamsQueueMedium;
 };
 
 export type QueryParamsPlaylistsPrivateOldest = {
   page: number;
-  medium: QueryParamsMedium;
+  medium: QueryParamsQueueMedium;
 };
 
 export type QueryParamsPlaylistsPrivateRecent = {
   page: number;
-  medium: QueryParamsMedium;
+  medium: QueryParamsQueueMedium;
 };
 
 export type QueryParamsPlaylistsPrivateTop = {
   page: number;
-  medium: QueryParamsMedium;
+  medium: QueryParamsQueueMedium;
   range: QueryParamsStatsRange;
 };
 
 export type QueryParamsPlaylistsPrivateFollowedAZ = {
   page: number;
-  medium: QueryParamsMedium;
+  medium: QueryParamsQueueMedium;
 };
 
 export type QueryParamsPlaylistsPrivateFollowedOldest = {
   page: number;
-  medium: QueryParamsMedium;
+  medium: QueryParamsQueueMedium;
 };
 
 export type QueryParamsPlaylistsPrivateFollowedRecent = {
   page: number;
-  medium: QueryParamsMedium;
+  medium: QueryParamsQueueMedium;
 };
 
 export type QueryParamsPlaylistsPrivateFollowedTop = {
   page: number;
-  medium: QueryParamsMedium;
+  medium: QueryParamsQueueMedium;
   range: QueryParamsStatsRange;
 };
 
@@ -279,12 +279,12 @@ export type QueryParamsPlaylistResources = QueryParamsPage;
 // Queues
 
 export type QueryParamsQueues = {
-  medium: QueryParamsMedium;
+  medium: QueryParamsQueueMedium;
 }
 
 export type QueryParamsHistory = {
   page: number;
-  medium: QueryParamsMedium;
+  medium: QueryParamsQueueMedium;
 }
 
 // MISC
