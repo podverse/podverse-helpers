@@ -3,10 +3,21 @@ export const PAGINATION = {
   DEFAULT_LIMIT: 60
 };
 
-export function getTotalPages(count: number | null, limit: number): number {
-  const totalCount = count === null ? PAGINATION.MAX_COUNT : count;
+export function getTotalPages(
+  count: number | null,
+  limit: number,
+  currentPageItemCount: number,
+  currentPage: number
+): number {
+  if (count === null) {
+    if (currentPageItemCount < limit) {
+      return currentPage;
+    }
+    return PAGINATION.MAX_COUNT;
+  }
+
   if (!limit || limit <= 0) return 1;
-  return Math.max(1, Math.ceil(totalCount / limit)); // ensure at least 1
+  return Math.max(1, Math.ceil(count / limit)); // ensure at least 1
 }
 
 export function getUndeterminedTotalPages() {
