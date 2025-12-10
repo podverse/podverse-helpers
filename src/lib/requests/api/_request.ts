@@ -52,10 +52,11 @@ import { reqPlaylistResourceItemSoundbiteAddFirst, reqPlaylistResourceItemSoundb
   reqPlaylistResourceItemSoundbiteDelete } from './playlist/playlistResource/playlistResourceItemSoundbite';
 import { reqPlaylistResourceGetAllByPlaylistIdTextPrivate,
   reqPlaylistResourceGetManyByPlaylistIdText } from './playlist/playlistResource/playlistResource';
-import { reqLiveItemGetManyByChannel } from './liveItem/liveItem';
+import { reqLiveItemGetMany, reqLiveItemGetManyByChannel } from './liveItem/liveItem';
 import { reqPodcastIndexFeedById, reqPodcastIndexSearchPodcasts } from './externalServices/podcastIndex';
 import { reqMQRSSAddOnDemand } from './mq/mq';
 import { reqFeedGetByPodcastIndexId } from './feed/feed';
+import { LiveItemStatus } from 'src';
 
 export type AbortOpts = { controller: AbortController; timeoutMs: number };
 
@@ -311,6 +312,10 @@ export class ApiRequestService {
 
   /* LIVE ITEM */
 
+  reqLiveItemGetMany(params: QueryParamsGetManyPartial, liveItemType: LiveItemStatus) {
+    return reqLiveItemGetMany(this, params, liveItemType);
+  }
+  
   reqLiveItemGetManyByChannel(channelIdOrIdText: string) {
     return reqLiveItemGetManyByChannel(this, channelIdOrIdText);
   }

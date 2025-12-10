@@ -1,3 +1,4 @@
+import { LiveItemStatus } from "src/dtos";
 import { QueryParamsMedium, QueryParamsQueueMedium } from "../../../lib/medium";
 import { CategoryMappingKeys } from "../../category";
 
@@ -49,6 +50,8 @@ export interface QueryParamsGetManyPartial {
   range: QueryParamsStatsRange | null;
   category: string | null;
 }
+
+export type QueryParamsGetManyLivestreams = QueryParamsGetManyPartial & { liveItemType: LiveItemStatus };
 
 export type QueryParamsGlobalRecent = {
   page: number;
