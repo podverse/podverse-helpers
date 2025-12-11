@@ -214,6 +214,16 @@ export interface QueryParamsItemSoundbitesByItem {
   sort?: QueryParamsItemSoundbitesByItemSort;
 }
 
+// Live Item
+
+export const QUERY_PARAMS_LIVE_ITEM_TYPE_VALUES = ["summary"] as const;
+
+export type QueryParamsLiveItemType = typeof QUERY_PARAMS_LIVE_ITEM_TYPE_VALUES[number];
+
+export interface QueryParamsLiveItem {
+  type: typeof QUERY_PARAMS_LIVE_ITEM_TYPE_VALUES[number];
+}
+
 // Playlists
 
 export const QUERY_PARAMS_PLAYLISTS_TYPE_VALUES = ['public', 'private', 'private_followed'] as const;
