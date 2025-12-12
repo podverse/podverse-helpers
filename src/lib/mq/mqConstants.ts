@@ -25,7 +25,7 @@ export const MQ_QUEUES: Record<MQQueueNameParamKey, MQQueueConfig> = {
   },
   "rss-on-demand": {
     queueName: 'rss-on-demand',
-    dedupeCacheTimeMS: 5 * 60 * 1000,
+    dedupeCacheTimeMS: 1 * 60 * 1000,
     priority: 'normal'
   },
   "rss-live": {
