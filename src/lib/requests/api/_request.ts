@@ -57,6 +57,7 @@ import { reqPodcastIndexFeedById, reqPodcastIndexSearchPodcasts } from './extern
 import { reqMQRSSAddOnDemand } from './mq/mq';
 import { reqFeedGetByPodcastIndexId } from './feed/feed';
 import { LiveItemStatus } from 'src';
+import { reqAccountNotificationChannelCreate, reqAccountNotificationChannelDelete } from './account/notification/channel';
 
 export type AbortOpts = { controller: AbortController; timeoutMs: number };
 
@@ -172,6 +173,16 @@ export class ApiRequestService {
 
   reqAccountUnfollowPlaylist(params: { playlist_id_text: string }) {
     return reqAccountUnfollowPlaylist(this, params);
+  }
+
+  /* ACCOUNT > NOTIFICATION > CHANNEL */
+
+  reqAccountNotificationChannelCreate(params: { channel_id_text: string }) {
+    return reqAccountNotificationChannelCreate(this, params);
+  }
+
+  reqAccountNotificationChannelDelete(params: { channel_id_text: string }) {
+    return reqAccountNotificationChannelDelete(this, params);
   }
 
   /* AUTH */
