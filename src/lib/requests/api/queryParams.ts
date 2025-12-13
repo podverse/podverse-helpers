@@ -115,7 +115,7 @@ export type StatsSortColumn = typeof STATS_SORT_COLUMNS[number];
 
 // Channel
 
-export const QUERY_PARAMS_CHANNEL_TYPE_VALUES = ["episodes", "soundbites", "clips", "about", "podroll"] as const;
+export const QUERY_PARAMS_CHANNEL_TYPE_VALUES = ["episodes", "soundbites", "clips", "about", "podroll", "settings"] as const;
 export const QUERY_PARAMS_CHANNEL_SORT_VALUES = ["recent", "oldest", "top"] as const;
 
 export type QueryParamsChannelType = typeof QUERY_PARAMS_CHANNEL_TYPE_VALUES[number];
