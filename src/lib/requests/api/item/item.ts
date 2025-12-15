@@ -260,6 +260,22 @@ export async function reqItemGetManyForQueueByPubDate(
   });
 }
 
+export async function reqItemGetManyForQueueBySeason(
+  api: ApiRequestService,
+  idText: string,
+  direction: 'forward' | 'backward'
+) {
+  return api.apiRequest<DTOItemQueueItem[]>({
+    path: `/item/queue/season/${idText}`,
+    method: 'GET',
+    config: {
+      params: {
+        direction
+      }
+    }
+  });
+}
+
 export async function reqItemParseAndGetChapters(
   api: ApiRequestService,
   item_id_text: string

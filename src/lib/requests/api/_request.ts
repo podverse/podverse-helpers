@@ -13,6 +13,7 @@ import { reqClipCreate, ReqClipCreateParams, reqClipDelete, reqClipGet,
   reqClipGetManyByChannelPublic, reqClipGetManyByItemPublic, reqClipGetManyPublic,
   reqClipUpdate } from './clip/clip';
 import { reqItemGetByIdOrIdText, reqItemGetMany, reqItemGetManyByChannel, reqItemGetManyForQueueByPubDate,
+  reqItemGetManyForQueueBySeason,
   reqItemParseAndGetChapters } from './item/item';
 import { reqPlaylistCreate, ReqPlaylistCreateParams, reqPlaylistDelete, reqPlaylistEdit, ReqPlaylistEditParams,
   reqPlaylistGet, reqPlaylistGetAllFavoritesPrivate, reqPlaylistGetMany } from './playlist/playlist';
@@ -289,6 +290,10 @@ export class ApiRequestService {
 
   reqItemGetManyForQueueByPubDate(idText: string, direction: 'forward' | 'backward') {
     return reqItemGetManyForQueueByPubDate(this, idText, direction);
+  }
+
+  reqItemGetManyForQueueBySeason(idText: string, direction: 'forward' | 'backward') {
+    return reqItemGetManyForQueueBySeason(this, idText, direction);
   }
 
   /* ITEM CHAPTER */
