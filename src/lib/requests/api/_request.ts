@@ -54,7 +54,7 @@ import { reqPlaylistResourceGetAllByPlaylistIdTextPrivate,
   reqPlaylistResourceGetManyByPlaylistIdText } from './playlist/playlistResource/playlistResource';
 import { reqLiveItemGetMany, reqLiveItemGetManyByChannel } from './liveItem/liveItem';
 import { reqPodcastIndexFeedById, reqPodcastIndexSearchPodcasts } from './externalServices/podcastIndex';
-import { reqMQRSSAddOnDemand } from './mq/mq';
+import { reqMQRSSAddOnDemand, reqMQRSSRefreshOnDemand } from './mq/mq';
 import { reqFeedGetByPodcastIndexId } from './feed/feed';
 import { LiveItemStatus } from 'src';
 import { reqAccountNotificationChannelCreate, reqAccountNotificationChannelDelete } from './account/notification/channel';
@@ -338,6 +338,13 @@ export class ApiRequestService {
     podcast_index_id: number;
   }) {
     return reqMQRSSAddOnDemand(this, params);
+  }
+
+  reqMQRSSRefreshOnDemand(params: {
+    url: string;
+    podcast_index_id: number;
+  }) {
+    return reqMQRSSRefreshOnDemand(this, params);
   }
 
   /* PLAYLIST */

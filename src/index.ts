@@ -30,6 +30,8 @@ export * from './lib/medium';
 
 export * from './lib/mq/mqConstants';
 
+export * from './lib/onDemandParserEvent';
+
 export * from './lib/pagination';
 export * from './lib/playlistResource';
 export * from './lib/queue/queue';

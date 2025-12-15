@@ -3,6 +3,7 @@ export * from './category';
 export * from './clip';
 export * from './medium';
 export * from './membershipClaimToken';
+export * from './onDemandParserEvent';
 export * from './queueExtraParams';
 export * from './sharableStatus';
 
