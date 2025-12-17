@@ -58,6 +58,14 @@ export interface QueryParamsGetManyPartial {
   category: string | null;
 }
 
+export interface QueryParamsGetManyPartialMusic {
+  page: number;
+  medium: QueryParamsMedium;
+  type: QueryParamsSubscribedMusicType;
+  sort: QueryParamsSubscribedPartialSort;
+  range: QueryParamsStatsRange | null;
+}
+
 export type QueryParamsGetManyLivestreams = QueryParamsGetManyPartial & { liveItemType: LiveItemStatus };
 
 export type QueryParamsGetManyMusic = Omit<QueryParamsGetMany, 'category'>;
@@ -113,6 +121,9 @@ export type QueryParamsSubscribedFullSort = typeof QUERY_PARAMS_SUBSCRIBED_FULL_
 
 export const QUERY_PARAMS_SUBSCRIBED_PARTIAL_SORT = QUERY_PARAMS_GLOBAL_SORT_VALUES;
 export type QueryParamsSubscribedPartialSort = typeof QUERY_PARAMS_SUBSCRIBED_PARTIAL_SORT[number];
+
+export const QUERY_PARAMS_SUBSCRIBED_MUSIC_TYPE = ["global", "subscribed"] as const;
+export type QueryParamsSubscribedMusicType = typeof QUERY_PARAMS_SUBSCRIBED_MUSIC_TYPE[number];
 
 // Stats
 
