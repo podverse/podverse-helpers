@@ -137,7 +137,7 @@ export interface QueryParamsChannel {
   range: QueryParamsStatsRange | null;
 }
 
-export const QUERY_PARAMS_CHANNEL_MUSIC_TYPE_VALUES = ["episodes", "about", "podroll", "settings"] as const;
+export const QUERY_PARAMS_CHANNEL_MUSIC_TYPE_VALUES = ["tracks", "about", "podroll", "settings"] as const;
 export const QUERY_PARAMS_CHANNEL_MUSIC_SORT_VALUES = ["forward", "backward", "top"] as const;
 
 export type QueryParamsChannelMusicType = typeof QUERY_PARAMS_CHANNEL_MUSIC_TYPE_VALUES[number];
