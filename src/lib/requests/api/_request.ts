@@ -12,7 +12,7 @@ import { reqChannelGetByIdOrIdText, reqChannelGetByPodcastIndexId, reqChannelGet
 import { reqClipCreate, ReqClipCreateParams, reqClipDelete, reqClipGet,
   reqClipGetManyByChannelPublic, reqClipGetManyByItemPublic, reqClipGetManyPublic,
   reqClipUpdate } from './clip/clip';
-import { reqItemGetByIdOrIdText, reqItemGetMany, reqItemGetManyByChannel, reqItemGetManyForQueueByPubDate,
+import { reqItemGetByIdOrIdText, reqItemGetMany, reqItemGetManyByChannel, reqItemGetManyByChannelBySeason, reqItemGetManyForQueueByPubDate,
   reqItemGetManyForQueueBySeason,
   reqItemParseAndGetChapters } from './item/item';
 import { reqPlaylistCreate, ReqPlaylistCreateParams, reqPlaylistDelete, reqPlaylistEdit, ReqPlaylistEditParams,
@@ -24,6 +24,7 @@ import { reqPlaylistResourceItemAddFirst, reqPlaylistResourceItemAddBetween,
   reqPlaylistResourceItemDelete} from './playlist/playlistResource/playlistResourceItem';
 import { reqPodrollGetForChannel } from './podroll/podroll';
 import { QueryParamsGetMany, QueryParamsGetManyPartial, QueryParamsIndividualList,
+  QueryParamsIndividualListMusic,
   QueryParamsItemSoundbitesByChannel, QueryParamsItemSoundbitesByItem, QueryParamsPlaylistResources,
   QueryParamsPlaylists } from './queryParams';
 import { reqQueueGetAllForAccountPrivate, reqQueueUpdateIsActiveQueue } from './queue/queue';
@@ -286,6 +287,10 @@ export class ApiRequestService {
 
   reqItemGetManyByChannel(params: QueryParamsIndividualList) {
     return reqItemGetManyByChannel(this, params);
+  }
+
+  reqItemGetManyByChannelBySeason(params: QueryParamsIndividualListMusic) {
+    return reqItemGetManyByChannelBySeason(this, params);
   }
 
   reqItemGetManyForQueueByPubDate(idText: string, direction: 'forward' | 'backward') {

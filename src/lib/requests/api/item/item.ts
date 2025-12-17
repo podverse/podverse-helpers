@@ -3,7 +3,7 @@ import { ApiListResponse, emptyApiListResponse } from '../_response';
 import { DTOItem, DTOItemChapter, DTOItemQueueItem } from '../../../../dtos';
 import { QueryParamsCategoryRecent, QueryParamsCategoryTop,
   QueryParamsGetManyPartial, QueryParamsGlobalRecent, QueryParamsGlobalTop,
-  QueryParamsIndividualList, QueryParamsPage, QueryParamsPageRange,
+  QueryParamsIndividualList, QueryParamsIndividualListMusic, QueryParamsPage, QueryParamsPageRange,
   QueryParamsSubscribedRecent, QueryParamsSubscribedTop } from '../queryParams';
 
 export async function reqItemGetByIdOrIdText(
@@ -224,6 +224,70 @@ export async function reqItemGetManyByChannel(
     );
   } else if (sort === "oldest") {
     return reqItemGetManyByChannelOldest(
+      api,
+      idOrIdText,
+      {
+        page
+      }
+    );
+  } else if (sort === "top" && range) {
+    return reqItemGetManyByChannelTop(
+      api,
+      idOrIdText,
+      {
+        page,
+        range
+      }
+    );
+  }
+
+  return Promise.resolve(emptyApiListResponse);
+}
+
+export async function reqItemGetManyByChannelBySeasonForward(
+  api: ApiRequestService,
+  channelIdOrIdText: string,
+  params: QueryParamsPage
+) {
+  return api.apiRequest<ApiListResponse<DTOItem>>({
+    path: `/item/channel/season/forward/${channelIdOrIdText}`,
+    method: 'GET',
+    config: {
+      params
+    }
+  });
+}
+
+export async function reqItemGetManyByChannelBySeasonBackward(
+  api: ApiRequestService,
+  channelIdOrIdText: string,
+  params: QueryParamsPage
+) {
+  return api.apiRequest<ApiListResponse<DTOItem>>({
+    path: `/item/channel/season/backward/${channelIdOrIdText}`,
+    method: 'GET',
+    config: {
+      params
+    }
+  });
+}
+
+export async function reqItemGetManyByChannelBySeason(
+  api: ApiRequestService,
+  params: QueryParamsIndividualListMusic
+) {
+  const { idOrIdText, sort, range, page } = params;
+
+  if (sort === "forward") {
+    return reqItemGetManyByChannelBySeasonForward(
+      api,
+      idOrIdText,
+      {
+        page
+      }
+    );
+  } else if (sort === "backward") {
+    return reqItemGetManyByChannelBySeasonBackward(
       api,
       idOrIdText,
       {

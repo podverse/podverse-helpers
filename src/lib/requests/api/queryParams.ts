@@ -33,6 +33,13 @@ export interface QueryParamsIndividualList {
   range: QueryParamsStatsRange | null;
 }
 
+export interface QueryParamsIndividualListMusic {
+  idOrIdText: string;
+  page: number;
+  sort: QueryParamsChannelMusicSort;
+  range: QueryParamsStatsRange | null;
+}
+
 export interface QueryParamsGetMany {
   page: number;
   medium: QueryParamsMedium;
@@ -127,6 +134,19 @@ export interface QueryParamsChannel {
   page: number;
   type: typeof QUERY_PARAMS_CHANNEL_TYPE_VALUES[number];
   sort: typeof QUERY_PARAMS_CHANNEL_SORT_VALUES[number];
+  range: QueryParamsStatsRange | null;
+}
+
+export const QUERY_PARAMS_CHANNEL_MUSIC_TYPE_VALUES = ["episodes", "about", "podroll", "settings"] as const;
+export const QUERY_PARAMS_CHANNEL_MUSIC_SORT_VALUES = ["forward", "backward", "top"] as const;
+
+export type QueryParamsChannelMusicType = typeof QUERY_PARAMS_CHANNEL_MUSIC_TYPE_VALUES[number];
+export type QueryParamsChannelMusicSort = typeof QUERY_PARAMS_CHANNEL_MUSIC_SORT_VALUES[number];
+
+export interface QueryParamsChannelMusic {
+  page: number;
+  type: typeof QUERY_PARAMS_CHANNEL_MUSIC_TYPE_VALUES[number];
+  sort: typeof QUERY_PARAMS_CHANNEL_MUSIC_SORT_VALUES[number];
   range: QueryParamsStatsRange | null;
 }
 
