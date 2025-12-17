@@ -140,3 +140,8 @@ export const getQueueMediumIdFromType = (type: QueryParamsQueueMedium | null): M
     return null;
   }
 };
+
+export const getQueueMediumIdFromMediumId = (mediumId: number | null): MediumEnum | null => {
+  return getQueueMediumIdFromType(getQueryParamFromQueueMediumId(mediumId));
+};
+
