@@ -211,6 +211,14 @@ export interface QueryParamsItem {
   range: QueryParamsStatsRange | null;
 }
 
+export const QUERY_PARAMS_ITEM_MUSIC_TYPE_VALUES = ["summary", "transcript"] as const;
+
+export type QueryParamsItemMusicType = typeof QUERY_PARAMS_ITEM_MUSIC_TYPE_VALUES[number];
+
+export interface QueryParamsItemMusic {
+  type: typeof QUERY_PARAMS_ITEM_MUSIC_TYPE_VALUES[number];
+}
+
 // Items
 
 export const QUERY_PARAMS_ITEMS_TYPE_VALUES = ["global", "subscribed", "category"] as const;
