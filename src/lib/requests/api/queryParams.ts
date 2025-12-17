@@ -53,6 +53,8 @@ export interface QueryParamsGetManyPartial {
 
 export type QueryParamsGetManyLivestreams = QueryParamsGetManyPartial & { liveItemType: LiveItemStatus };
 
+export type QueryParamsGetManyMusic = Omit<QueryParamsGetMany, 'category'>;
+
 export type QueryParamsGlobalRecent = {
   page: number;
   medium: QueryParamsMedium;
