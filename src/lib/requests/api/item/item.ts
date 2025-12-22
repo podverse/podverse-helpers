@@ -1,7 +1,7 @@
 import { ApiRequestService } from '../_request';
 import { ApiListResponse, emptyApiListResponse } from '../_response';
 import { DTOItem, DTOItemChapter, DTOItemQueueItem } from '../../../../dtos';
-import { QueryParamsCategoryRecent, QueryParamsCategoryTop,
+import { QueryDirection, QueryParamsCategoryRecent, QueryParamsCategoryTop,
   QueryParamsGetManyPartial, QueryParamsGlobalRecent, QueryParamsGlobalTop,
   QueryParamsIndividualList, QueryParamsIndividualListMusic, QueryParamsPage, QueryParamsPageRange,
   QueryParamsSubscribedRecent, QueryParamsSubscribedTop } from '../queryParams';
@@ -311,7 +311,7 @@ export async function reqItemGetManyByChannelBySeason(
 export async function reqItemGetManyForQueueByPubDate(
   api: ApiRequestService,
   idText: string,
-  direction: 'forward' | 'backward'
+  direction: QueryDirection
 ) {
   return api.apiRequest<DTOItemQueueItem[]>({
     path: `/item/queue/pub-date/${idText}`,
@@ -327,7 +327,7 @@ export async function reqItemGetManyForQueueByPubDate(
 export async function reqItemGetManyForQueueBySeason(
   api: ApiRequestService,
   idText: string,
-  direction: 'forward' | 'backward'
+  direction: QueryDirection
 ) {
   return api.apiRequest<DTOItemQueueItem[]>({
     path: `/item/queue/season/${idText}`,

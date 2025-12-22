@@ -349,8 +349,20 @@ export type QueryParamsHistory = {
 
 // MISC
 
+export type QueryDirection = "forward" | "backward";
+
 export type QueryParamsDirection = {
-  direction: "forward" | "backward";
+  direction: QueryDirection;
 }
 
 export const QUERY_PARAMS_DIRECTION_VALUES = ["forward", "backward"] as const;
+
+export type QueryParamsAutoQueueSort = "forward" | "backward" | "recent" | "oldest" | "top";
+
+export const getShuffleHash = (): string => {
+  let out = '';
+  for (let i = 0; i < 10; i++) {
+    out += Math.floor(Math.random() * 10).toString();
+  }
+  return out;
+};

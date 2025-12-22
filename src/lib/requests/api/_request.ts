@@ -23,7 +23,7 @@ import { reqPlaylistResourceItemAddFirst, reqPlaylistResourceItemAddBetween,
   reqPlaylistResourceItemAddLast, 
   reqPlaylistResourceItemDelete} from './playlist/playlistResource/playlistResourceItem';
 import { reqPodrollGetForChannel } from './podroll/podroll';
-import { QueryParamsGetMany, QueryParamsGetManyPartial, QueryParamsIndividualList,
+import { QueryDirection, QueryParamsGetMany, QueryParamsGetManyPartial, QueryParamsIndividualList,
   QueryParamsIndividualListMusic,
   QueryParamsItemSoundbitesByChannel, QueryParamsItemSoundbitesByItem, QueryParamsPlaylistResources,
   QueryParamsPlaylists } from './queryParams';
@@ -293,11 +293,11 @@ export class ApiRequestService {
     return reqItemGetManyByChannelBySeason(this, params);
   }
 
-  reqItemGetManyForQueueByPubDate(idText: string, direction: 'forward' | 'backward') {
+  reqItemGetManyForQueueByPubDate(idText: string, direction: QueryDirection) {
     return reqItemGetManyForQueueByPubDate(this, idText, direction);
   }
 
-  reqItemGetManyForQueueBySeason(idText: string, direction: 'forward' | 'backward') {
+  reqItemGetManyForQueueBySeason(idText: string, direction: QueryDirection) {
     return reqItemGetManyForQueueBySeason(this, idText, direction);
   }
 
