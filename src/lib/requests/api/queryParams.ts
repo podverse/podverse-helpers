@@ -21,6 +21,11 @@ export interface QueryParamsPage {
   page: number;
 }
 
+export interface QueryParamsShuffle {
+  page: number;
+  shuffleHash: string;
+}
+
 export interface QueryParamsPageRange {
   page: number;
   range: QueryParamsStatsRange;

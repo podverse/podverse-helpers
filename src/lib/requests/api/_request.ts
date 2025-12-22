@@ -12,8 +12,8 @@ import { reqChannelGetByIdOrIdText, reqChannelGetByPodcastIndexId, reqChannelGet
 import { reqClipCreate, ReqClipCreateParams, reqClipDelete, reqClipGet,
   reqClipGetManyByChannelPublic, reqClipGetManyByItemPublic, reqClipGetManyPublic,
   reqClipUpdate } from './clip/clip';
-import { reqItemGetByIdOrIdText, reqItemGetMany, reqItemGetManyByChannel, reqItemGetManyByChannelBySeason, reqItemGetManyForQueueByPubDate,
-  reqItemGetManyForQueueBySeason,
+import { reqItemGetByIdOrIdText, reqItemGetMany, reqItemGetManyByChannel, reqItemGetManyByChannelBySeason,
+  reqItemGetManyByChannelShuffle, reqItemGetManyForQueueByPubDate, reqItemGetManyForQueueBySeason,
   reqItemParseAndGetChapters } from './item/item';
 import { reqPlaylistCreate, ReqPlaylistCreateParams, reqPlaylistDelete, reqPlaylistEdit, ReqPlaylistEditParams,
   reqPlaylistGet, reqPlaylistGetAllFavoritesPrivate, reqPlaylistGetMany } from './playlist/playlist';
@@ -25,8 +25,9 @@ import { reqPlaylistResourceItemAddFirst, reqPlaylistResourceItemAddBetween,
 import { reqPodrollGetForChannel } from './podroll/podroll';
 import { QueryDirection, QueryParamsGetMany, QueryParamsGetManyPartial, QueryParamsIndividualList,
   QueryParamsIndividualListMusic,
-  QueryParamsItemSoundbitesByChannel, QueryParamsItemSoundbitesByItem, QueryParamsPlaylistResources,
-  QueryParamsPlaylists } from './queryParams';
+  QueryParamsItemSoundbitesByChannel, QueryParamsItemSoundbitesByItem, QueryParamsPage, QueryParamsPlaylistResources,
+  QueryParamsPlaylists, 
+  QueryParamsShuffle} from './queryParams';
 import { reqQueueGetAllForAccountPrivate, reqQueueUpdateIsActiveQueue } from './queue/queue';
 import { reqQueueResourceItemAddBetween, reqQueueResourceItemAddHistory,
   reqQueueResourceItemAddLast, reqQueueResourceItemAddNext,
@@ -291,6 +292,10 @@ export class ApiRequestService {
 
   reqItemGetManyByChannelBySeason(params: QueryParamsIndividualListMusic) {
     return reqItemGetManyByChannelBySeason(this, params);
+  }
+
+  reqItemGetManyByChannelShuffle(idText: string, params: QueryParamsShuffle) {
+    return reqItemGetManyByChannelShuffle(this, idText, params);
   }
 
   reqItemGetManyForQueueByPubDate(idText: string, direction: QueryDirection) {

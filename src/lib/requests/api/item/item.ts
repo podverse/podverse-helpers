@@ -4,6 +4,7 @@ import { DTOItem, DTOItemChapter, DTOItemQueueItem } from '../../../../dtos';
 import { QueryDirection, QueryParamsCategoryRecent, QueryParamsCategoryTop,
   QueryParamsGetManyPartial, QueryParamsGlobalRecent, QueryParamsGlobalTop,
   QueryParamsIndividualList, QueryParamsIndividualListMusic, QueryParamsPage, QueryParamsPageRange,
+  QueryParamsShuffle,
   QueryParamsSubscribedRecent, QueryParamsSubscribedTop } from '../queryParams';
 
 export async function reqItemGetByIdOrIdText(
@@ -306,6 +307,20 @@ export async function reqItemGetManyByChannelBySeason(
   }
 
   return Promise.resolve(emptyApiListResponse);
+}
+
+export async function reqItemGetManyByChannelShuffle(
+  api: ApiRequestService,
+  channelIdOrIdText: string,
+  params: QueryParamsShuffle
+) {
+  return api.apiRequest<ApiListResponse<DTOItem>>({
+    path: `/item/channel/shuffle/${channelIdOrIdText}`,
+    method: 'GET',
+    config: {
+      params
+    }
+  });
 }
 
 export async function reqItemGetManyForQueueByPubDate(
