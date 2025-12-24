@@ -1,5 +1,5 @@
 import { ApiRequestService } from '../../_request';
-import { DTOPlaylistResource } from '../../../../../dtos';
+import { DTOPlaylistResource, PlaylistResourceIdTextOptions } from '../../../../../dtos';
 import { ApiListResponse } from '../../_response';
 import { QueryParamsPlaylistResources } from '../../queryParams';
 
@@ -27,6 +27,44 @@ export async function reqPlaylistResourceGetManyByPlaylistIdText(
     config: {
       withCredentials: true,
       params
+    }
+  });
+}
+
+export async function reqPlaylistResourceGetManyForQueueByListPosition(
+  api: ApiRequestService,
+  playlist_id_text: string,
+  idTextOptions: PlaylistResourceIdTextOptions,
+  direction: 'forward' | 'backward'
+) {
+  return api.apiRequest<ApiListResponse<DTOPlaylistResource>>({
+    path: `/playlist/${playlist_id_text}/resources/queue-by-list-position`,
+    method: 'GET',
+    config: {
+      params: {
+        ...idTextOptions,
+        direction
+      },
+      withCredentials: true
+    }
+  });
+}
+
+export async function reqPlaylistResourceGetManyByShuffle(
+  api: ApiRequestService,
+  playlist_id_text: string,
+  shuffleHash: string,
+  page: number
+) {
+  return api.apiRequest<ApiListResponse<DTOPlaylistResource>>({
+    path: `/playlist/${playlist_id_text}/resources/shuffle`,
+    method: 'GET',
+    config: {
+      params: {
+        shuffleHash,
+        page
+      },
+      withCredentials: true
     }
   });
 }

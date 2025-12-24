@@ -54,12 +54,14 @@ import { reqPlaylistResourceItemSoundbiteAddFirst, reqPlaylistResourceItemSoundb
   reqPlaylistResourceItemSoundbiteAddBetween, 
   reqPlaylistResourceItemSoundbiteDelete } from './playlist/playlistResource/playlistResourceItemSoundbite';
 import { reqPlaylistResourceGetAllByPlaylistIdTextPrivate,
-  reqPlaylistResourceGetManyByPlaylistIdText } from './playlist/playlistResource/playlistResource';
+  reqPlaylistResourceGetManyByPlaylistIdText, 
+  reqPlaylistResourceGetManyByShuffle, 
+  reqPlaylistResourceGetManyForQueueByListPosition} from './playlist/playlistResource/playlistResource';
 import { reqLiveItemGetMany, reqLiveItemGetManyByChannel } from './liveItem/liveItem';
 import { reqPodcastIndexFeedById, reqPodcastIndexSearchPodcasts } from './externalServices/podcastIndex';
 import { reqMQRSSAddOnDemand, reqMQRSSRefreshOnDemand } from './mq/mq';
 import { reqFeedGetByPodcastIndexId } from './feed/feed';
-import { LiveItemStatus } from 'src';
+import { LiveItemStatus, PlaylistResourceIdTextOptions } from 'src';
 import { reqAccountNotificationChannelCreate, reqAccountNotificationChannelDelete } from './account/notification/channel';
 
 export type AbortOpts = { controller: AbortController; timeoutMs: number };
@@ -396,6 +398,14 @@ export class ApiRequestService {
 
   reqPlaylistResourceGetManyByPlaylistIdText(playlist_id_text: string, params: QueryParamsPlaylistResources) {
     return reqPlaylistResourceGetManyByPlaylistIdText(this, playlist_id_text, params);
+  }
+
+  reqPlaylistResourceGetManyForQueueByListPosition(playlist_id_text: string, idTextOptions: PlaylistResourceIdTextOptions, direction: 'forward' | 'backward') {
+    return reqPlaylistResourceGetManyForQueueByListPosition(this, playlist_id_text, idTextOptions, direction);
+  }
+
+  reqPlaylistResourceGetManyByShuffle(playlist_id_text: string, shuffleHash: string, page: number) {
+    return reqPlaylistResourceGetManyByShuffle(this, playlist_id_text, shuffleHash, page);
   }
 
   /* PLAYLIST RESOURCE > CLIP */

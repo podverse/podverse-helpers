@@ -11,7 +11,7 @@ export interface DTOQueueResource {
   completed: boolean;
   clip?: DTOClip;
   clip_id: number | null;
-  item?: DTOItem;
+  item: DTOItem;
   item_id: number | null;
   item_soundbite?: DTOItemSoundbite;
   item_soundbite_id: number | null;
