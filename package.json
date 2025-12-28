@@ -25,7 +25,6 @@
     "he": "^1.2.0",
     "joi": "^18.0.1",
     "module-alias": "^2.2.3",
-    "podcast-partytime": "^4.9.1",
     "uuid": "^13.0.0",
     "winston": "^3.17.0",
     "winston-transport": "^4.9.0"
