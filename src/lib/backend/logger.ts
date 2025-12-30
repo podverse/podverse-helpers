@@ -1,7 +1,5 @@
 import { createLogger, format, transports, Logger } from 'winston';
 import * as TransportStream from 'winston-transport';
-import * as fs from 'fs';
-import * as path from 'path';
 
 const { combine, timestamp, printf, colorize } = format;
 
@@ -10,19 +8,13 @@ const logFormat = printf(({ level, message, timestamp, stack }) => {
 });
 
 export interface LoggerServiceParams {
-  logDir: string;
   logLevel: string;
 }
 
 export class LoggerService {
   private logger: Logger;
 
-  constructor({ logDir, logLevel }: LoggerServiceParams) {
-    const logDirectory = logDir;
-    if (!fs.existsSync(logDirectory)) {
-      fs.mkdirSync(logDirectory, { recursive: true });
-    }
-
+  constructor({ logLevel }: LoggerServiceParams) {
     this.logger = createLogger({
       level: logLevel,
       format: combine(
@@ -33,22 +25,6 @@ export class LoggerService {
         new transports.Console({
           format: combine(
             colorize(),
-            timestamp(),
-            logFormat
-          )
-        }),
-        new transports.File({
-          filename: path.join(logDirectory, 'info.log'),
-          level: 'info',
-          format: combine(
-            timestamp(),
-            logFormat
-          )
-        }),
-        new transports.File({
-          filename: path.join(logDirectory, 'error.log'),
-          level: 'error',
-          format: combine(
             timestamp(),
             logFormat
           )
