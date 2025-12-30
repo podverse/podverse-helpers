@@ -12,6 +12,10 @@ export type MQQueueConfig = {
   priority: 'normal' | 'slow';
 }
 
+export type MQQueueConfigFunctionParams = MQQueueConfig & {
+  closeAfterSend: boolean;
+}
+
 export const MQ_QUEUES: Record<MQQueueNameParamKey, MQQueueConfig> = {
   "rss-slow":{
     queueName: 'rss-normal',
