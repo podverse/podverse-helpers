@@ -62,10 +62,10 @@ export const supportedQueueMediums: { [key: number]: boolean } = {
   [MediumEnum.Music]: true
 };
 
-export const QUERY_PARAMS_MEDIUMS = ["all", "podcasts", "videos", "music", "av"] as const;
+export const QUERY_PARAMS_MEDIUMS = ["all", "podcasts", "videos", "music", "av", "publisher-av", "publisher-music"] as const;
 export type QueryParamsMedium = typeof QUERY_PARAMS_MEDIUMS[number];
 
-export const QUERY_PARAMS_QUEUE_MEDIUMS = ["all", "av", "music"] as const;
+export const QUERY_PARAMS_QUEUE_MEDIUMS = ["all", "av", "music", "publisher-av", "publisher-music"] as const;
 export type QueryParamsQueueMedium = typeof QUERY_PARAMS_QUEUE_MEDIUMS[number];
 
 export const getMediumFromQueryParam = (val: QueryParamsMedium): MediumEnum | null => {
@@ -78,6 +78,10 @@ export const getMediumFromQueryParam = (val: QueryParamsMedium): MediumEnum | nu
     return MediumEnum.AV;
   case "music":
     return MediumEnum.Music;
+  case "publisher-av": // TODO
+    return MediumEnum.Publisher;
+  case "publisher-music": // TODO
+    return MediumEnum.Publisher;
   case "all":
   default:
     return null;
@@ -94,6 +98,8 @@ export const getQueryParamFromMediumId = (mediumId: number | null): QueryParamsM
     return "av";
   case MediumEnum.Music:
     return "music";
+  case MediumEnum.Publisher:
+    return "publisher-music"; // TODO: need separate handling for publisher-av
   default:
     return "all";
   }
@@ -124,6 +130,10 @@ export const getMediumIdArrayFromType = (type: QueryParamsMedium | null): number
     return [MediumEnum.Music];
   case "av":
     return [MediumEnum.Podcast, MediumEnum.Video];
+  case "publisher-av": // TODO
+    return [MediumEnum.Publisher];
+  case "publisher-music": // TODO
+    return [MediumEnum.Publisher];
   case "all":
   default:
     return null;
@@ -144,4 +154,3 @@ export const getQueueMediumIdFromType = (type: QueryParamsQueueMedium | null): M
 export const getQueueMediumIdFromMediumId = (mediumId: number | null): MediumEnum | null => {
   return getQueueMediumIdFromType(getQueryParamFromQueueMediumId(mediumId));
 };
-
