@@ -1,12 +1,13 @@
 import { DTOChannel } from "./channel/channel";
 import { DTOItem } from "./item/item";
+import { EpisodeByGuidResponse } from "./podcast-index/episodeByGuid";
 import { PodcastBatchByFeedGuidResponse } from "./podcast-index/podcastBatchByFeedGuid";
 
-export interface RemoteItemResponse {
+export interface RemoteItemsResponse {
   channelsAdded: DTOChannel[];
   channelsUnadded: PodcastBatchByFeedGuidResponse['feeds'];
   itemsAdded: DTOItem[];
-  itemsUnadded: DTOItem[];
+  itemsUnadded: EpisodeByGuidResponse['episode'][];
 }
 
 export type RemoteItemGeneric = {

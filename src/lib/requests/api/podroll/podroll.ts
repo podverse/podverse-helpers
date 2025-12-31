@@ -1,11 +1,11 @@
 import { ApiRequestService } from '../_request';
-import { DTOPodroll } from 'src/dtos';
+import { RemoteItemsResponse } from 'src/dtos';
 
 export async function reqPodrollGetForChannel(
   api: ApiRequestService,
   idOrIdText: string
 ) {
-  return api.apiRequest<DTOPodroll>({
+  return api.apiRequest<RemoteItemsResponse>({
     path: `/podroll/channel/${idOrIdText}`,
     method: 'GET'
   });

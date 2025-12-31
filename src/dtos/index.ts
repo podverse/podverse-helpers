@@ -103,8 +103,6 @@ export * from './podcast-index/valueByEpisodeGuid';
 export * from './podcast-index/podcastBatchByFeedGuid';
 export * from './podcast-index/episodeByGuid';
 
-export * from './podroll';
-
 export * from './queue/queue';
 export * from './queue/queueResource';
 export * from './queue/queueResourceAbridged';
