@@ -100,12 +100,16 @@ export * from './podcast-index/podcastsByTag';
 export * from './podcast-index/searchPodcasts';
 export * from './podcast-index/valueBatchByEpisodeGuid';
 export * from './podcast-index/valueByEpisodeGuid';
+export * from './podcast-index/podcastBatchByFeedGuid';
+export * from './podcast-index/episodeByGuid';
 
 export * from './podroll';
 
 export * from './queue/queue';
 export * from './queue/queueResource';
 export * from './queue/queueResourceAbridged';
+
+export * from './remoteItem';
 
 export * from './stats/statsAggregatedAccount';
 export * from './stats/statsAggregatedChannel';
