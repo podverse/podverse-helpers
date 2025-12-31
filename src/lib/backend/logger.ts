@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { createLogger, format, transports, Logger } from 'winston';
 import * as TransportStream from 'winston-transport';
 
@@ -9,6 +11,15 @@ const logFormat = printf(({ level, message, timestamp, stack }) => {
 
 export interface LoggerServiceParams {
   logLevel: string;
+}
+
+export interface ILoggerLike {
+  addRemoteTransport(transport: unknown): void;
+  logError(message: string, error?: Error | unknown): void;
+  info(message: string, meta?: any): void;
+  warn(message: string, meta?: any): void;
+  error(message: string, meta?: any): void;
+  debug(message: string, meta?: any): void;
 }
 
 export class LoggerService {
@@ -49,22 +60,18 @@ export class LoggerService {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   info(message: string, meta?: any) {
     this.logger.info(message, meta);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   warn(message: string, meta?: any) {
     this.logger.warn(message, meta);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   error(message: string, meta?: any) {
     this.logger.error(message, meta);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   debug(message: string, meta?: any) {
     this.logger.debug(message, meta);
   }
