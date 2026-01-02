@@ -25,7 +25,7 @@ import { reqPlaylistResourceItemAddFirst, reqPlaylistResourceItemAddBetween,
 import { reqPodrollGetForChannel } from './podroll/podroll';
 import { QueryDirection, QueryParamsGetMany, QueryParamsGetManyPartial, QueryParamsIndividualList,
   QueryParamsIndividualListMusic,
-  QueryParamsItemSoundbitesByChannel, QueryParamsItemSoundbitesByItem, QueryParamsPage, QueryParamsPlaylistResources,
+  QueryParamsItemSoundbitesByChannel, QueryParamsItemSoundbitesByItem, QueryParamsPlaylistResources,
   QueryParamsPlaylists, 
   QueryParamsShuffle} from './queryParams';
 import { reqQueueGetAllForAccountPrivate, reqQueueUpdateIsActiveQueue } from './queue/queue';
@@ -63,6 +63,7 @@ import { reqMQRSSAddOnDemand, reqMQRSSRefreshOnDemand } from './mq/mq';
 import { reqFeedGetByPodcastIndexId } from './feed/feed';
 import { LiveItemStatus, PlaylistResourceIdTextOptions } from 'src';
 import { reqAccountNotificationChannelCreate, reqAccountNotificationChannelDelete } from './account/notification/channel';
+import { reqPublisherFeedGetRemoteItemsForChannel } from './publisherFeed/publisherFeed';
 
 export type AbortOpts = { controller: AbortController; timeoutMs: number };
 
@@ -466,6 +467,12 @@ export class ApiRequestService {
 
   reqPodrollGetForChannel(idOrIdText: string) {
     return reqPodrollGetForChannel(this, idOrIdText);
+  }
+
+  /* PUBLISHER FEED */
+
+  reqPublisherFeedGetRemoteItemsForChannel(idOrIdText: string) {
+    return reqPublisherFeedGetRemoteItemsForChannel(this, idOrIdText);
   }
 
   /* QUEUE */

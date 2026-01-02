@@ -46,6 +46,7 @@ type Episode = {
   feedId?: number;
   feedGuid?: string;
   feedTitle?: string;
+  feedImage?: string;
   value?: EpisodeValue;
 };
 

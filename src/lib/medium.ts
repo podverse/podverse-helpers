@@ -18,7 +18,16 @@ export enum MediumEnum {
   BlogL = 17,
   PublisherL = 18,
   CourseL = 19,
-  AV = 20
+  AV = 20,
+  PublisherAV = 21,
+  PublisherPodcast = 22,
+  PublisherMusic = 23,
+  PublisherVideo = 24,
+  PublisherFilm = 25,
+  PublisherAudiobook = 26,
+  PublisherNewsletter = 27,
+  PublisherBlog = 28,
+  PublisherCourse = 29
 }
 
 export function getMediumEnumValue(input: string | null): MediumEnum {
@@ -46,7 +55,16 @@ export function getMediumEnumValue(input: string | null): MediumEnum {
     blogl: MediumEnum.BlogL,
     publisherl: MediumEnum.PublisherL,
     coursel: MediumEnum.CourseL,
-    av: MediumEnum.AV
+    av: MediumEnum.AV,
+    publisherpodcast: MediumEnum.PublisherPodcast,
+    publishermusic: MediumEnum.PublisherMusic,
+    publishervideo: MediumEnum.PublisherVideo,
+    publisherfilm: MediumEnum.PublisherFilm,
+    publisheraudiobook: MediumEnum.PublisherAudiobook,
+    publishernewsletter: MediumEnum.PublisherNewsletter,
+    publisherblog: MediumEnum.PublisherBlog,
+    publishercourse: MediumEnum.PublisherCourse,
+    publisherav: MediumEnum.PublisherAV
   };
 
   return (sanitizedInput && mapping[sanitizedInput]) || MediumEnum.Podcast;
@@ -62,10 +80,13 @@ export const supportedQueueMediums: { [key: number]: boolean } = {
   [MediumEnum.Music]: true
 };
 
-export const QUERY_PARAMS_MEDIUMS = ["all", "podcasts", "videos", "music", "av", "publisher-av", "publisher-music"] as const;
+export const QUERY_PARAMS_MEDIUMS = [
+  "all", "podcasts", "videos", "music", "av",
+  "publisher-podcasts", "publisher-videos", "publisher-music", "publisher-av"
+] as const;
 export type QueryParamsMedium = typeof QUERY_PARAMS_MEDIUMS[number];
 
-export const QUERY_PARAMS_QUEUE_MEDIUMS = ["all", "av", "music", "publisher-av", "publisher-music"] as const;
+export const QUERY_PARAMS_QUEUE_MEDIUMS = ["all", "av", "music"] as const;
 export type QueryParamsQueueMedium = typeof QUERY_PARAMS_QUEUE_MEDIUMS[number];
 
 export const getMediumFromQueryParam = (val: QueryParamsMedium): MediumEnum | null => {
@@ -78,10 +99,14 @@ export const getMediumFromQueryParam = (val: QueryParamsMedium): MediumEnum | nu
     return MediumEnum.AV;
   case "music":
     return MediumEnum.Music;
-  case "publisher-av": // TODO
-    return MediumEnum.Publisher;
-  case "publisher-music": // TODO
-    return MediumEnum.Publisher;
+  case "publisher-podcasts":
+    return MediumEnum.PublisherPodcast;
+  case "publisher-videos":
+    return MediumEnum.PublisherVideo;
+  case "publisher-music":
+    return MediumEnum.PublisherMusic;
+  case "publisher-av":
+    return MediumEnum.PublisherAV;
   case "all":
   default:
     return null;
@@ -98,8 +123,14 @@ export const getQueryParamFromMediumId = (mediumId: number | null): QueryParamsM
     return "av";
   case MediumEnum.Music:
     return "music";
-  case MediumEnum.Publisher:
-    return "publisher-music"; // TODO: need separate handling for publisher-av
+  case MediumEnum.PublisherPodcast:
+    return "publisher-podcasts";
+  case MediumEnum.PublisherVideo:
+    return "publisher-videos";
+  case MediumEnum.PublisherMusic:
+    return "publisher-music";
+  case MediumEnum.PublisherAV:
+    return "publisher-av";
   default:
     return "all";
   }
@@ -130,10 +161,14 @@ export const getMediumIdArrayFromType = (type: QueryParamsMedium | null): number
     return [MediumEnum.Music];
   case "av":
     return [MediumEnum.Podcast, MediumEnum.Video];
-  case "publisher-av": // TODO
-    return [MediumEnum.Publisher];
-  case "publisher-music": // TODO
-    return [MediumEnum.Publisher];
+  case "publisher-podcasts":
+    return [MediumEnum.PublisherPodcast];
+  case "publisher-videos":
+    return [MediumEnum.PublisherVideo];
+  case "publisher-music":
+    return [MediumEnum.PublisherMusic];
+  case "publisher-av":
+    return [MediumEnum.PublisherPodcast, MediumEnum.PublisherVideo];
   case "all":
   default:
     return null;

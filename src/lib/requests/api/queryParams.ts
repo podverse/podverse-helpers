@@ -41,7 +41,7 @@ export interface QueryParamsIndividualList {
 export interface QueryParamsIndividualListMusic {
   idOrIdText: string;
   page: number;
-  sort: QueryParamsChannelMusicSort;
+  sort: QueryParamsChannelMusicAlbumSort;
   range: QueryParamsStatsRange | null;
 }
 
@@ -159,16 +159,24 @@ export interface QueryParamsChannel {
   range: QueryParamsStatsRange | null;
 }
 
-export const QUERY_PARAMS_CHANNEL_MUSIC_TYPE_VALUES = ["tracks", "about", "podroll", "settings"] as const;
-export const QUERY_PARAMS_CHANNEL_MUSIC_SORT_VALUES = ["forward", "backward", "top"] as const;
+export const QUERY_PARAMS_CHANNEL_MUSIC_ARTIST_TYPE_VALUES = ["albums", "tracks", "about", "podroll", "settings"] as const;
 
-export type QueryParamsChannelMusicType = typeof QUERY_PARAMS_CHANNEL_MUSIC_TYPE_VALUES[number];
-export type QueryParamsChannelMusicSort = typeof QUERY_PARAMS_CHANNEL_MUSIC_SORT_VALUES[number];
+export type QueryParamsChannelMusicArtistType = typeof QUERY_PARAMS_CHANNEL_MUSIC_ARTIST_TYPE_VALUES[number];
 
-export interface QueryParamsChannelMusic {
+export interface QueryParamsChannelMusicArtist {
+  type: typeof QUERY_PARAMS_CHANNEL_MUSIC_ARTIST_TYPE_VALUES[number];
+}
+
+export const QUERY_PARAMS_CHANNEL_MUSIC_ALBUM_TYPE_VALUES = ["tracks", "about", "podroll", "settings"] as const;
+export const QUERY_PARAMS_CHANNEL_MUSIC_ALBUM_SORT_VALUES = ["forward", "backward", "top"] as const;
+
+export type QueryParamsChannelMusicAlbumType = typeof QUERY_PARAMS_CHANNEL_MUSIC_ALBUM_TYPE_VALUES[number];
+export type QueryParamsChannelMusicAlbumSort = typeof QUERY_PARAMS_CHANNEL_MUSIC_ALBUM_SORT_VALUES[number];
+
+export interface QueryParamsChannelMusicAlbum {
   page: number;
-  type: typeof QUERY_PARAMS_CHANNEL_MUSIC_TYPE_VALUES[number];
-  sort: typeof QUERY_PARAMS_CHANNEL_MUSIC_SORT_VALUES[number];
+  type: typeof QUERY_PARAMS_CHANNEL_MUSIC_ALBUM_TYPE_VALUES[number];
+  sort: typeof QUERY_PARAMS_CHANNEL_MUSIC_ALBUM_SORT_VALUES[number];
   range: QueryParamsStatsRange | null;
 }
 

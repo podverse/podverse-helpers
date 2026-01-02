@@ -15,3 +15,11 @@ export type RemoteItemGeneric = {
   feed_url: string | null;
   item_guid: string | null;
 }
+
+export interface PublisherRemoteItemsResponse {
+  channel: DTOChannel;
+  channelsAdded: DTOChannel[];
+  channelsUnadded: PodcastBatchByFeedGuidResponse['feeds'];
+  itemsAdded: DTOItem[];
+  itemsUnadded: NonNullable<EpisodeByGuidResponse['episode']>[];
+}
