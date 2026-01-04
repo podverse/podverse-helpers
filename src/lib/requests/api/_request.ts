@@ -63,6 +63,8 @@ import { reqMQRSSAddOnDemand, reqMQRSSRefreshOnDemand } from './mq/mq';
 import { reqFeedGetByPodcastIndexId } from './feed/feed';
 import { LiveItemStatus, PlaylistResourceIdTextOptions } from 'src';
 import { reqAccountNotificationChannelCreate, reqAccountNotificationChannelDelete } from './account/notification/channel';
+import { reqAccountFCMDeviceCreate, reqAccountFCMDeviceUpdate, reqAccountFCMDeviceDelete,
+  reqAccountFCMDeviceGetAllForAccount } from './account/fcm/fcm';
 import { reqPublisherFeedGetRemoteItemsForChannel } from './publisherFeed/publisherFeed';
 
 export type AbortOpts = { controller: AbortController; timeoutMs: number };
@@ -111,7 +113,7 @@ export class ApiRequestService {
       };
       
       const options =
-        method === 'GET' || method === 'DELETE'
+        method === 'GET'
           ? { method, ...mergedConfig }
           : { method, data, ...mergedConfig };
 
@@ -159,6 +161,24 @@ export class ApiRequestService {
 
   reqAccountChangeEmailAddress(params: { token: string }) {
     return reqAccountChangeEmailAddress(this, params);
+  }
+
+  /* ACCOUNT > FCM DEVICE */
+
+  reqAccountFCMDeviceCreate(params: { fcm_token: string; installation_id: string }) {
+    return reqAccountFCMDeviceCreate(this, params);
+  }
+
+  reqAccountFCMDeviceUpdate(params: { previous_fcm_token: string; new_fcm_token: string; installation_id: string }) {
+    return reqAccountFCMDeviceUpdate(this, params);
+  }
+
+  reqAccountFCMDeviceDelete(params: { fcm_token?: string; installation_id?: string }) {
+    return reqAccountFCMDeviceDelete(this, params);
+  }
+
+  reqAccountFCMDeviceGetAllForAccount() {
+    return reqAccountFCMDeviceGetAllForAccount(this);
   }
 
   /* ACCOUNT > FOLLOW > CHANNEL */
