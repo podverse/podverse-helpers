@@ -15,9 +15,6 @@
   },
   "author": "",
   "license": "AGPLv3",
-  "overrides": {
-    "fast-xml-parser": "^4.1.2"
-  },
   "dependencies": {
     "axios": "^1.12.2",
     "bignumber.js": "^9.3.1",
