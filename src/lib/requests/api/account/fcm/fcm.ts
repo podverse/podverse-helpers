@@ -1,6 +1,8 @@
-import { DTOAccountFCMDevice } from 'src/dtos';
+import { DTOAccountFCMDevice, CreateAccountFCMDeviceParams, UpdateAccountFCMDeviceParams,
+  DeleteAccountFCMDeviceParams, UpdateLocaleForAccountParams } from 'src/dtos';
 import { ApiRequestService } from '../../_request';
-export async function reqAccountFCMDeviceCreate(api: ApiRequestService, params: { fcm_token: string; installation_id: string }) {
+
+export async function reqAccountFCMDeviceCreate(api: ApiRequestService, params: CreateAccountFCMDeviceParams) {
   return api.apiRequest<DTOAccountFCMDevice>({
     path: '/account/fcm-device/create',
     method: 'POST',
@@ -9,7 +11,7 @@ export async function reqAccountFCMDeviceCreate(api: ApiRequestService, params: 
   });
 }
 
-export async function reqAccountFCMDeviceUpdate(api: ApiRequestService, params: { previous_fcm_token: string; new_fcm_token: string; installation_id: string }) {
+export async function reqAccountFCMDeviceUpdate(api: ApiRequestService, params: UpdateAccountFCMDeviceParams) {
   return api.apiRequest<DTOAccountFCMDevice>({
     path: '/account/fcm-device/update',
     method: 'PUT',
@@ -18,7 +20,7 @@ export async function reqAccountFCMDeviceUpdate(api: ApiRequestService, params: 
   });
 }
 
-export async function reqAccountFCMDeviceDelete(api: ApiRequestService, params: { fcm_token?: string; installation_id?: string }) {
+export async function reqAccountFCMDeviceDelete(api: ApiRequestService, params: DeleteAccountFCMDeviceParams) {
   return api.apiRequest<void>({
     path: '/account/fcm-device/delete',
     method: 'DELETE',
@@ -31,6 +33,15 @@ export async function reqAccountFCMDeviceGetAllForAccount(api: ApiRequestService
   return api.apiRequest<DTOAccountFCMDevice[]>({
     path: '/account/fcm-device/all-for-account',
     method: 'GET',
+    config: { withCredentials: true }
+  });
+}
+
+export async function reqAccountFCMDeviceUpdateLocale(api: ApiRequestService, params: UpdateLocaleForAccountParams) {
+  return api.apiRequest<void>({
+    path: '/account/fcm-device/update-locale',
+    method: 'PUT',
+    data: params,
     config: { withCredentials: true }
   });
 }

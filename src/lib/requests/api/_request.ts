@@ -61,10 +61,12 @@ import { reqLiveItemGetMany, reqLiveItemGetManyByChannel } from './liveItem/live
 import { reqPodcastIndexFeedById, reqPodcastIndexSearchPodcasts } from './externalServices/podcastIndex';
 import { reqMQRSSAddOnDemand, reqMQRSSRefreshOnDemand } from './mq/mq';
 import { reqFeedGetByPodcastIndexId } from './feed/feed';
-import { LiveItemStatus, PlaylistResourceIdTextOptions } from 'src';
+import { CreateAccountFCMDeviceParams, DeleteAccountFCMDeviceParams, LiveItemStatus, PlaylistResourceIdTextOptions, UpdateAccountFCMDeviceParams, UpdateLocaleForAccountParams } from 'src';
 import { reqAccountNotificationChannelCreate, reqAccountNotificationChannelDelete } from './account/notification/channel';
+import { reqAccountSettingsNotificationTypeCreate, reqAccountSettingsNotificationTypeDelete } from './accountSettings/accountSettings';
 import { reqAccountFCMDeviceCreate, reqAccountFCMDeviceUpdate, reqAccountFCMDeviceDelete,
-  reqAccountFCMDeviceGetAllForAccount } from './account/fcm/fcm';
+  reqAccountFCMDeviceGetAllForAccount, 
+  reqAccountFCMDeviceUpdateLocale} from './account/fcm/fcm';
 import { reqPublisherFeedGetRemoteItemsForChannel } from './publisherFeed/publisherFeed';
 
 export type AbortOpts = { controller: AbortController; timeoutMs: number };
@@ -165,20 +167,24 @@ export class ApiRequestService {
 
   /* ACCOUNT > FCM DEVICE */
 
-  reqAccountFCMDeviceCreate(params: { fcm_token: string; installation_id: string }) {
+  reqAccountFCMDeviceCreate(params: CreateAccountFCMDeviceParams) {
     return reqAccountFCMDeviceCreate(this, params);
   }
 
-  reqAccountFCMDeviceUpdate(params: { previous_fcm_token: string; new_fcm_token: string; installation_id: string }) {
+  reqAccountFCMDeviceUpdate(params: UpdateAccountFCMDeviceParams) {
     return reqAccountFCMDeviceUpdate(this, params);
   }
 
-  reqAccountFCMDeviceDelete(params: { fcm_token?: string; installation_id?: string }) {
+  reqAccountFCMDeviceDelete(params: DeleteAccountFCMDeviceParams) {
     return reqAccountFCMDeviceDelete(this, params);
   }
 
   reqAccountFCMDeviceGetAllForAccount() {
     return reqAccountFCMDeviceGetAllForAccount(this);
+  }
+  
+  reqAccountFCMDeviceUpdateLocale(params: UpdateLocaleForAccountParams) {
+    return reqAccountFCMDeviceUpdateLocale(this, params);
   }
 
   /* ACCOUNT > FOLLOW > CHANNEL */
@@ -209,6 +215,16 @@ export class ApiRequestService {
 
   reqAccountNotificationChannelDelete(params: { channel_id_text: string }) {
     return reqAccountNotificationChannelDelete(this, params);
+  }
+
+  /* ACCOUNT > SETTINGS > NOTIFICATIONS */
+
+  reqAccountSettingsNotificationTypeCreate(params: { type: string }) {
+    return reqAccountSettingsNotificationTypeCreate(this, params);
+  }
+
+  reqAccountSettingsNotificationTypeDelete(params: { type: string }) {
+    return reqAccountSettingsNotificationTypeDelete(this, params);
   }
 
   /* AUTH */

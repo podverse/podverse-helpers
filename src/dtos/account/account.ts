@@ -12,6 +12,7 @@ import { DTOAccountNotificationChannel } from './accountNotificationChannel';
 import { DTOAccountPayPalOrder } from './accountPayPalOrder';
 import { DTOAccountProfile } from './accountProfile';
 import { DTOAccountResetPassword } from './accountResetPassword';
+import { DTOAccountSettings } from './accountSettings/accountSettings';
 import { DTOAccountUPDevice } from './accountUPDevice';
 import { DTOAccountVerification } from './accountVerification';
 
@@ -34,6 +35,7 @@ export interface DTOAccount {
   account_paypal_orders?: DTOAccountPayPalOrder[];
   account_profile?: DTOAccountProfile;
   account_reset_password?: DTOAccountResetPassword;
+  account_settings?: DTOAccountSettings;
   account_up_devices?: DTOAccountUPDevice[];
   account_verification?: DTOAccountVerification;
 }
