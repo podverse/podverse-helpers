@@ -13,7 +13,7 @@ export async function reqAccountGetManyPublic(
 
 export async function reqAccountCreate(
   api: ApiRequestService,
-  params: { email: string; password: string }
+  params: { email: string; password: string, locale: string }
 ): Promise<{ message: string }> {
   return api.apiRequest<{ message: string }>({
     path: '/account',

@@ -24,7 +24,6 @@ export type CreateAccountFCMDeviceParams = {
   fcm_token: string;
   installation_id: string;
   platform: AccountFCMDevicePlatformValues;
-  locale: string;
 };
 
 export type UpdateAccountFCMDeviceParams = {
@@ -32,14 +31,9 @@ export type UpdateAccountFCMDeviceParams = {
   installation_id: string;
   previous_fcm_token: string | null;
   platform: AccountFCMDevicePlatformValues;
-  locale: string;
 };
 
 export type DeleteAccountFCMDeviceParams = {
   fcm_token: string | null;
   installation_id: string | null;
-};
-
-export type UpdateLocaleForAccountParams = {
-  locale: string;
 };

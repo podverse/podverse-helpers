@@ -1,5 +1,5 @@
 import { DTOAccountFCMDevice, CreateAccountFCMDeviceParams, UpdateAccountFCMDeviceParams,
-  DeleteAccountFCMDeviceParams, UpdateLocaleForAccountParams } from 'src/dtos';
+  DeleteAccountFCMDeviceParams } from 'src/dtos';
 import { ApiRequestService } from '../../_request';
 
 export async function reqAccountFCMDeviceCreate(api: ApiRequestService, params: CreateAccountFCMDeviceParams) {
@@ -33,15 +33,6 @@ export async function reqAccountFCMDeviceGetAllForAccount(api: ApiRequestService
   return api.apiRequest<DTOAccountFCMDevice[]>({
     path: '/account/fcm-device/all-for-account',
     method: 'GET',
-    config: { withCredentials: true }
-  });
-}
-
-export async function reqAccountFCMDeviceUpdateLocale(api: ApiRequestService, params: UpdateLocaleForAccountParams) {
-  return api.apiRequest<void>({
-    path: '/account/fcm-device/update-locale',
-    method: 'PUT',
-    data: params,
     config: { withCredentials: true }
   });
 }

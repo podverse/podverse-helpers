@@ -61,12 +61,15 @@ import { reqLiveItemGetMany, reqLiveItemGetManyByChannel } from './liveItem/live
 import { reqPodcastIndexFeedById, reqPodcastIndexSearchPodcasts } from './externalServices/podcastIndex';
 import { reqMQRSSAddOnDemand, reqMQRSSRefreshOnDemand } from './mq/mq';
 import { reqFeedGetByPodcastIndexId } from './feed/feed';
-import { CreateAccountFCMDeviceParams, DeleteAccountFCMDeviceParams, LiveItemStatus, PlaylistResourceIdTextOptions, UpdateAccountFCMDeviceParams, UpdateLocaleForAccountParams } from 'src';
+import { CreateAccountFCMDeviceParams, DeleteAccountFCMDeviceParams, LiveItemStatus, PlaylistResourceIdTextOptions, UpdateAccountFCMDeviceParams } from 'src';
 import { reqAccountNotificationChannelCreate, reqAccountNotificationChannelDelete } from './account/notification/channel';
-import { reqAccountSettingsNotificationTypeCreate, reqAccountSettingsNotificationTypeDelete } from './accountSettings/accountSettings';
+import { 
+  reqAccountSettingsLocaleUpdate,
+  reqAccountSettingsNotificationTypeCreate, 
+  reqAccountSettingsNotificationTypeDelete 
+} from './accountSettings/accountSettings';
 import { reqAccountFCMDeviceCreate, reqAccountFCMDeviceUpdate, reqAccountFCMDeviceDelete,
-  reqAccountFCMDeviceGetAllForAccount, 
-  reqAccountFCMDeviceUpdateLocale} from './account/fcm/fcm';
+  reqAccountFCMDeviceGetAllForAccount } from './account/fcm/fcm';
 import { reqPublisherFeedGetRemoteItemsForChannel } from './publisherFeed/publisherFeed';
 
 export type AbortOpts = { controller: AbortController; timeoutMs: number };
@@ -137,7 +140,7 @@ export class ApiRequestService {
     return reqAccountGetManyPublic(this);
   }
 
-  reqAccountCreate(params: { email: string; password: string }) {
+  reqAccountCreate(params: { email: string; password: string, locale: string }) {
     return reqAccountCreate(this, params);
   }
 
@@ -182,10 +185,6 @@ export class ApiRequestService {
   reqAccountFCMDeviceGetAllForAccount() {
     return reqAccountFCMDeviceGetAllForAccount(this);
   }
-  
-  reqAccountFCMDeviceUpdateLocale(params: UpdateLocaleForAccountParams) {
-    return reqAccountFCMDeviceUpdateLocale(this, params);
-  }
 
   /* ACCOUNT > FOLLOW > CHANNEL */
 
@@ -215,6 +214,12 @@ export class ApiRequestService {
 
   reqAccountNotificationChannelDelete(params: { channel_id_text: string }) {
     return reqAccountNotificationChannelDelete(this, params);
+  }
+
+  /* ACCOUNT > SETTINGS > LOCALE */
+
+  reqAccountSettingsLocaleUpdate(params: { locale: string }) {
+    return reqAccountSettingsLocaleUpdate(this, params);
   }
 
   /* ACCOUNT > SETTINGS > NOTIFICATIONS */
