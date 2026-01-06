@@ -63,6 +63,7 @@ import { reqMQRSSAddOnDemand, reqMQRSSRefreshOnDemand } from './mq/mq';
 import { reqFeedGetByPodcastIndexId } from './feed/feed';
 import { CreateAccountFCMDeviceParams, DeleteAccountFCMDeviceParams, LiveItemStatus, PlaylistResourceIdTextOptions, UpdateAccountFCMDeviceParams } from 'src';
 import { reqAccountNotificationChannelCreate, reqAccountNotificationChannelDelete } from './account/notification/channel';
+import { reqAccountNotificationChannelTypeCreate, reqAccountNotificationChannelTypeDelete } from './account/notification/channelType';
 import { 
   reqAccountSettingsLocaleUpdate,
   reqAccountSettingsNotificationTypeCreate, 
@@ -214,6 +215,16 @@ export class ApiRequestService {
 
   reqAccountNotificationChannelDelete(params: { channel_id_text: string }) {
     return reqAccountNotificationChannelDelete(this, params);
+  }
+
+  /* ACCOUNT > NOTIFICATION > CHANNEL TYPE */
+
+  reqAccountNotificationChannelTypeCreate(params: { channel_id_text: string; type: string }) {
+    return reqAccountNotificationChannelTypeCreate(this, params);
+  }
+
+  reqAccountNotificationChannelTypeDelete(params: { channel_id_text: string; type: string }) {
+    return reqAccountNotificationChannelTypeDelete(this, params);
   }
 
   /* ACCOUNT > SETTINGS > LOCALE */

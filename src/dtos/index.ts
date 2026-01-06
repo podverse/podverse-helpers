@@ -20,6 +20,7 @@ export * from './account/accountGooglePlayPurchase';
 export * from './account/accountMembership';
 export * from './account/accountMembershipStatus';
 export * from './account/accountNotificationChannel';
+export * from './account/accountNotificationChannelType';
 export * from './account/accountPayPalOrder';
 export * from './account/accountProfile';
 export * from './account/accountResetPassword';
