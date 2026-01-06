@@ -61,8 +61,16 @@ import { reqLiveItemGetMany, reqLiveItemGetManyByChannel } from './liveItem/live
 import { reqPodcastIndexFeedById, reqPodcastIndexSearchPodcasts } from './externalServices/podcastIndex';
 import { reqMQRSSAddOnDemand, reqMQRSSRefreshOnDemand } from './mq/mq';
 import { reqFeedGetByPodcastIndexId } from './feed/feed';
-import { LiveItemStatus, PlaylistResourceIdTextOptions } from 'src';
+import { CreateAccountFCMDeviceParams, DeleteAccountFCMDeviceParams, LiveItemStatus, PlaylistResourceIdTextOptions, UpdateAccountFCMDeviceParams } from 'src';
 import { reqAccountNotificationChannelCreate, reqAccountNotificationChannelDelete } from './account/notification/channel';
+import { reqAccountNotificationChannelTypeCreate, reqAccountNotificationChannelTypeDelete } from './account/notification/channelType';
+import { 
+  reqAccountSettingsLocaleUpdate,
+  reqAccountSettingsNotificationTypeCreate, 
+  reqAccountSettingsNotificationTypeDelete 
+} from './accountSettings/accountSettings';
+import { reqAccountFCMDeviceCreate, reqAccountFCMDeviceUpdate, reqAccountFCMDeviceDelete,
+  reqAccountFCMDeviceGetAllForAccount } from './account/fcm/fcm';
 import { reqPublisherFeedGetRemoteItemsForChannel } from './publisherFeed/publisherFeed';
 
 export type AbortOpts = { controller: AbortController; timeoutMs: number };
@@ -111,7 +119,7 @@ export class ApiRequestService {
       };
       
       const options =
-        method === 'GET' || method === 'DELETE'
+        method === 'GET'
           ? { method, ...mergedConfig }
           : { method, data, ...mergedConfig };
 
@@ -133,7 +141,7 @@ export class ApiRequestService {
     return reqAccountGetManyPublic(this);
   }
 
-  reqAccountCreate(params: { email: string; password: string }) {
+  reqAccountCreate(params: { email: string; password: string, locale: string }) {
     return reqAccountCreate(this, params);
   }
 
@@ -159,6 +167,24 @@ export class ApiRequestService {
 
   reqAccountChangeEmailAddress(params: { token: string }) {
     return reqAccountChangeEmailAddress(this, params);
+  }
+
+  /* ACCOUNT > FCM DEVICE */
+
+  reqAccountFCMDeviceCreate(params: CreateAccountFCMDeviceParams) {
+    return reqAccountFCMDeviceCreate(this, params);
+  }
+
+  reqAccountFCMDeviceUpdate(params: UpdateAccountFCMDeviceParams) {
+    return reqAccountFCMDeviceUpdate(this, params);
+  }
+
+  reqAccountFCMDeviceDelete(params: DeleteAccountFCMDeviceParams) {
+    return reqAccountFCMDeviceDelete(this, params);
+  }
+
+  reqAccountFCMDeviceGetAllForAccount() {
+    return reqAccountFCMDeviceGetAllForAccount(this);
   }
 
   /* ACCOUNT > FOLLOW > CHANNEL */
@@ -189,6 +215,32 @@ export class ApiRequestService {
 
   reqAccountNotificationChannelDelete(params: { channel_id_text: string }) {
     return reqAccountNotificationChannelDelete(this, params);
+  }
+
+  /* ACCOUNT > NOTIFICATION > CHANNEL TYPE */
+
+  reqAccountNotificationChannelTypeCreate(params: { channel_id_text: string; type: string }) {
+    return reqAccountNotificationChannelTypeCreate(this, params);
+  }
+
+  reqAccountNotificationChannelTypeDelete(params: { channel_id_text: string; type: string }) {
+    return reqAccountNotificationChannelTypeDelete(this, params);
+  }
+
+  /* ACCOUNT > SETTINGS > LOCALE */
+
+  reqAccountSettingsLocaleUpdate(params: { locale: string }) {
+    return reqAccountSettingsLocaleUpdate(this, params);
+  }
+
+  /* ACCOUNT > SETTINGS > NOTIFICATIONS */
+
+  reqAccountSettingsNotificationTypeCreate(params: { type: string }) {
+    return reqAccountSettingsNotificationTypeCreate(this, params);
+  }
+
+  reqAccountSettingsNotificationTypeDelete(params: { type: string }) {
+    return reqAccountSettingsNotificationTypeDelete(this, params);
   }
 
   /* AUTH */

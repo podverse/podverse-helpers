@@ -20,9 +20,14 @@ export * from './account/accountGooglePlayPurchase';
 export * from './account/accountMembership';
 export * from './account/accountMembershipStatus';
 export * from './account/accountNotificationChannel';
+export * from './account/accountNotificationChannelType';
 export * from './account/accountPayPalOrder';
 export * from './account/accountProfile';
 export * from './account/accountResetPassword';
+export * from './account/accountSettings/accountSettings';
+export * from './account/accountSettings/accountSettingsLocale';
+export * from './account/accountSettings/accountSettingsNotification';
+export * from './account/accountSettings/accountSettingsNotificationType';
 export * from './account/accountUPDevice';
 export * from './account/accountVerification';
 

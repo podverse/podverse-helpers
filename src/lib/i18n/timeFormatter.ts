@@ -22,14 +22,14 @@ export function formatSecondsToReadableDuration(
 
   let locale;
   switch (lang) {
-  case "es":
+  case 'es':
     locale = es;
     break;
-  case "el":
-  case "el-GR":
+  case 'el':
+  case 'el-GR':
     locale = el;
     break;
-  case "en":
+  case 'en':
   default:
     locale = enUS;
     break;

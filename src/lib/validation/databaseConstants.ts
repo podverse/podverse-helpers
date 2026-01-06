@@ -13,5 +13,6 @@ export const DATABASE_CONSTANTS = {
   varchar_uri: 2083,
   varchar_url: 2083,
   varchar_fcm_token: 255,
+  varchar_locale: 85,
   getMediaPlayerNumeric: (num: number) => num.toFixed(2),
 };
