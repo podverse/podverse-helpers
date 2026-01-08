@@ -62,7 +62,8 @@ import { reqPodcastIndexFeedById, reqPodcastIndexSearchPodcasts } from './extern
 import { reqMQRSSAddOnDemand, reqMQRSSRefreshOnDemand } from './mq/mq';
 import { reqFeedGetByPodcastIndexId } from './feed/feed';
 import { CreateAccountFCMDeviceParams, DeleteAccountFCMDeviceParams, LiveItemStatus, PlaylistResourceIdTextOptions, UpdateAccountFCMDeviceParams,
-  CreateAccountWebPushDeviceParams, UpdateAccountWebPushDeviceParams, DeleteAccountWebPushDeviceParams } from 'src';
+  CreateAccountWebPushDeviceParams, UpdateAccountWebPushDeviceParams, DeleteAccountWebPushDeviceParams,
+  CreateAccountUPDeviceParams, UpdateAccountUPDeviceParams, DeleteAccountUPDeviceParams } from 'src';
 import { reqAccountNotificationChannelCreate, reqAccountNotificationChannelDelete } from './account/notification/channel';
 import { reqAccountNotificationChannelTypeCreate, reqAccountNotificationChannelTypeDelete } from './account/notification/channelType';
 import { 
@@ -74,6 +75,8 @@ import { reqAccountFCMDeviceCreate, reqAccountFCMDeviceUpdate, reqAccountFCMDevi
   reqAccountFCMDeviceGetAllForAccount } from './account/fcm/fcm';
 import { reqAccountWebPushDeviceCreate, reqAccountWebPushDeviceUpdate, reqAccountWebPushDeviceDelete,
   reqAccountWebPushDeviceGetAllForAccount } from './account/webpush/webpush';
+import { reqAccountUPDeviceCreate, reqAccountUPDeviceUpdate, reqAccountUPDeviceDelete,
+  reqAccountUPDeviceGetAllForAccount } from './account/unifiedpush/unifiedpush';
 import { reqPublisherFeedGetRemoteItemsForChannel } from './publisherFeed/publisherFeed';
 
 export type AbortOpts = { controller: AbortController; timeoutMs: number };
@@ -206,6 +209,24 @@ export class ApiRequestService {
 
   reqAccountWebPushDeviceGetAllForAccount() {
     return reqAccountWebPushDeviceGetAllForAccount(this);
+  }
+
+  /* ACCOUNT > UNIFIED PUSH DEVICE */
+
+  reqAccountUPDeviceCreate(params: CreateAccountUPDeviceParams) {
+    return reqAccountUPDeviceCreate(this, params);
+  }
+
+  reqAccountUPDeviceUpdate(params: UpdateAccountUPDeviceParams) {
+    return reqAccountUPDeviceUpdate(this, params);
+  }
+
+  reqAccountUPDeviceDelete(params: DeleteAccountUPDeviceParams) {
+    return reqAccountUPDeviceDelete(this, params);
+  }
+
+  reqAccountUPDeviceGetAllForAccount() {
+    return reqAccountUPDeviceGetAllForAccount(this);
   }
 
   /* ACCOUNT > FOLLOW > CHANNEL */
