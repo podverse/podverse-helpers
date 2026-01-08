@@ -61,7 +61,8 @@ import { reqLiveItemGetMany, reqLiveItemGetManyByChannel } from './liveItem/live
 import { reqPodcastIndexFeedById, reqPodcastIndexSearchPodcasts } from './externalServices/podcastIndex';
 import { reqMQRSSAddOnDemand, reqMQRSSRefreshOnDemand } from './mq/mq';
 import { reqFeedGetByPodcastIndexId } from './feed/feed';
-import { CreateAccountFCMDeviceParams, DeleteAccountFCMDeviceParams, LiveItemStatus, PlaylistResourceIdTextOptions, UpdateAccountFCMDeviceParams } from 'src';
+import { CreateAccountFCMDeviceParams, DeleteAccountFCMDeviceParams, LiveItemStatus, PlaylistResourceIdTextOptions, UpdateAccountFCMDeviceParams,
+  CreateAccountWebPushDeviceParams, UpdateAccountWebPushDeviceParams, DeleteAccountWebPushDeviceParams } from 'src';
 import { reqAccountNotificationChannelCreate, reqAccountNotificationChannelDelete } from './account/notification/channel';
 import { reqAccountNotificationChannelTypeCreate, reqAccountNotificationChannelTypeDelete } from './account/notification/channelType';
 import { 
@@ -71,6 +72,8 @@ import {
 } from './accountSettings/accountSettings';
 import { reqAccountFCMDeviceCreate, reqAccountFCMDeviceUpdate, reqAccountFCMDeviceDelete,
   reqAccountFCMDeviceGetAllForAccount } from './account/fcm/fcm';
+import { reqAccountWebPushDeviceCreate, reqAccountWebPushDeviceUpdate, reqAccountWebPushDeviceDelete,
+  reqAccountWebPushDeviceGetAllForAccount } from './account/webpush/webpush';
 import { reqPublisherFeedGetRemoteItemsForChannel } from './publisherFeed/publisherFeed';
 
 export type AbortOpts = { controller: AbortController; timeoutMs: number };
@@ -185,6 +188,24 @@ export class ApiRequestService {
 
   reqAccountFCMDeviceGetAllForAccount() {
     return reqAccountFCMDeviceGetAllForAccount(this);
+  }
+
+  /* ACCOUNT > WEBPUSH DEVICE */
+
+  reqAccountWebPushDeviceCreate(params: CreateAccountWebPushDeviceParams) {
+    return reqAccountWebPushDeviceCreate(this, params);
+  }
+
+  reqAccountWebPushDeviceUpdate(params: UpdateAccountWebPushDeviceParams) {
+    return reqAccountWebPushDeviceUpdate(this, params);
+  }
+
+  reqAccountWebPushDeviceDelete(params: DeleteAccountWebPushDeviceParams) {
+    return reqAccountWebPushDeviceDelete(this, params);
+  }
+
+  reqAccountWebPushDeviceGetAllForAccount() {
+    return reqAccountWebPushDeviceGetAllForAccount(this);
   }
 
   /* ACCOUNT > FOLLOW > CHANNEL */

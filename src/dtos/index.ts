@@ -30,6 +30,7 @@ export * from './account/accountSettings/accountSettingsNotification';
 export * from './account/accountSettings/accountSettingsNotificationType';
 export * from './account/accountUPDevice';
 export * from './account/accountVerification';
+export * from './account/accountWebPushDevice';
 
 export * from './channel/channel';
 export * from './channel/channelAbout';

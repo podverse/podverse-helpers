@@ -34,6 +34,7 @@ export * from './lib/remoteItem';
 export * from './lib/sharableStatus';
 export * from './lib/sleep';
 export * from './lib/sortableTitle';
+export * from './lib/stringify';
 export * from './lib/time';
 export * from './lib/url';
 export * from './lib/value';
