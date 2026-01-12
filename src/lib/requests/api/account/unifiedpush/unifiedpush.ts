@@ -29,9 +29,9 @@ export async function reqAccountUPDeviceDelete(api: ApiRequestService, params: D
   });
 }
 
-export async function reqAccountUPDeviceGetAllForAccount(api: ApiRequestService) {
-  return api.apiRequest<DTOAccountUPDevice[]>({
-    path: '/account/up-device/all-for-account',
+export async function reqAccountUPDeviceGetForAccount(api: ApiRequestService) {
+  return api.apiRequest<DTOAccountUPDevice | null>({
+    path: '/account/up-device/for-account',
     method: 'GET',
     config: { withCredentials: true }
   });

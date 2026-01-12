@@ -76,7 +76,7 @@ import { reqAccountFCMDeviceCreate, reqAccountFCMDeviceUpdate, reqAccountFCMDevi
 import { reqAccountWebPushDeviceCreate, reqAccountWebPushDeviceUpdate, reqAccountWebPushDeviceDelete,
   reqAccountWebPushDeviceGetAllForAccount } from './account/webpush/webpush';
 import { reqAccountUPDeviceCreate, reqAccountUPDeviceUpdate, reqAccountUPDeviceDelete,
-  reqAccountUPDeviceGetAllForAccount } from './account/unifiedpush/unifiedpush';
+  reqAccountUPDeviceGetForAccount } from './account/unifiedpush/unifiedpush';
 import { reqPublisherFeedGetRemoteItemsForChannel } from './publisherFeed/publisherFeed';
 
 export type AbortOpts = { controller: AbortController; timeoutMs: number };
@@ -225,8 +225,8 @@ export class ApiRequestService {
     return reqAccountUPDeviceDelete(this, params);
   }
 
-  reqAccountUPDeviceGetAllForAccount() {
-    return reqAccountUPDeviceGetAllForAccount(this);
+  reqAccountUPDeviceGetForAccount() {
+    return reqAccountUPDeviceGetForAccount(this);
   }
 
   /* ACCOUNT > FOLLOW > CHANNEL */
