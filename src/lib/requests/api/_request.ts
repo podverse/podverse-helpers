@@ -58,6 +58,7 @@ import { reqPlaylistResourceGetAllByPlaylistIdTextPrivate,
   reqPlaylistResourceGetManyByShuffle, 
   reqPlaylistResourceGetManyForQueueByListPosition} from './playlist/playlistResource/playlistResource';
 import { reqLiveItemGetMany, reqLiveItemGetManyByChannel } from './liveItem/liveItem';
+import { reqMembershipGetPricing } from './membership/membership';
 import { reqPodcastIndexFeedById, reqPodcastIndexSearchPodcasts } from './externalServices/podcastIndex';
 import { reqMQRSSAddOnDemand, reqMQRSSRefreshOnDemand } from './mq/mq';
 import { reqFeedGetByPodcastIndexId } from './feed/feed';
@@ -441,6 +442,12 @@ export class ApiRequestService {
   
   reqLiveItemGetManyByChannel(channelIdOrIdText: string) {
     return reqLiveItemGetManyByChannel(this, channelIdOrIdText);
+  }
+
+  /* MEMBERSHIP */
+
+  reqMembershipGetPricing() {
+    return reqMembershipGetPricing(this);
   }
 
   /* MQ */
