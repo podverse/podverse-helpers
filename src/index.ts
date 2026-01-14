@@ -8,6 +8,7 @@ export * from './lib/requests';
 export * from './lib/validation';
 export * from './lib/web';
 export * from './lib/accountMembership';
+export * from './lib/accountSignupMode';
 export * from './lib/accountNotificationType';
 export * from './lib/array';
 export * from './lib/bitrate';
