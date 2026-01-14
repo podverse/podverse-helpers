@@ -71,3 +71,54 @@ export function hhmmssToSecondsNumber(time: string): number {
   if (parts.length > 2) seconds += parts[2] * 3600;
   return Number(seconds.toFixed(2));
 }
+
+export type TimeRemaining = {
+  daysLeft: number | null;
+  hoursLeft: number | null;
+  minutesLeft: number | null;
+};
+
+/**
+ * Calculates the time remaining until an expiration date.
+ * Returns an object with days, hours, or minutes left based on the remaining time:
+ * - If less than 1 hour: sets minutes only
+ * - If less than 24 hours: sets hours only
+ * - If 24 hours or more: sets days only
+ * 
+ * @param expirationDate - The expiration date as a Date object or ISO string
+ * @returns Object with daysLeft, hoursLeft, and minutesLeft
+ */
+export function calculateTimeRemaining(
+  expirationDate: Date | string | null | undefined
+): TimeRemaining {
+  const result: TimeRemaining = {
+    daysLeft: null,
+    hoursLeft: null,
+    minutesLeft: null,
+  };
+
+  if (!expirationDate) {
+    return result;
+  }
+
+  const expiration = typeof expirationDate === 'string' ? new Date(expirationDate) : expirationDate;
+  const now = new Date();
+  const diffTime = Math.max(0, expiration.getTime() - now.getTime());
+  const diffHours = diffTime / (1000 * 60 * 60);
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  const diffMinutes = Math.ceil(diffTime / (1000 * 60));
+  const diffHoursRounded = Math.ceil(diffTime / (1000 * 60 * 60));
+
+  if (diffHours < 1) {
+    // Less than an hour left - show minutes
+    result.minutesLeft = diffMinutes;
+  } else if (diffHours < 24) {
+    // Less than a day but at least an hour - show hours
+    result.hoursLeft = diffHoursRounded;
+  } else {
+    // At least a day left - show days
+    result.daysLeft = diffDays;
+  }
+
+  return result;
+}
