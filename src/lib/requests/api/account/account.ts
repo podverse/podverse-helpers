@@ -88,3 +88,13 @@ export async function reqAccountChangeEmailAddress(
     data: params
   });
 }
+
+export async function reqAccountDelete(
+  api: ApiRequestService
+): Promise<{ message: string }> {
+  return api.apiRequest<{ message: string }>({
+    path: '/account/delete',
+    method: 'DELETE',
+    config: { withCredentials: true }
+  });
+}

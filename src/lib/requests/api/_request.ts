@@ -1,7 +1,7 @@
 import { QueueExtraParams } from '../../../dtos/queueExtraParams';
 import { BetweenParams } from '../../../dtos/betweenParams';
 import { request } from '../_request';
-import { reqAccountChangeEmailAddress, reqAccountCreate, reqAccountGetManyPublic, reqAccountResetPassword,
+import { reqAccountChangeEmailAddress, reqAccountCreate, reqAccountDelete, reqAccountGetManyPublic, reqAccountResetPassword,
   reqAccountSendChangeEmailAddressEmail, reqAccountSendResetPasswordEmail, reqAccountSendVerificationEmail,
   reqAccountVerifyEmail } from './account/account';
 import { reqAccountFollowChannel, reqAccountUnfollowChannel } from './account/follow/channel';
@@ -216,6 +216,10 @@ export class ApiRequestService {
 
   reqAccountChangeEmailAddress(params: { token: string }) {
     return reqAccountChangeEmailAddress(this, params);
+  }
+
+  reqAccountDelete() {
+    return reqAccountDelete(this);
   }
 
   /* ACCOUNT > FCM DEVICE */
