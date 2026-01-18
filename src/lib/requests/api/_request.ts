@@ -136,8 +136,50 @@ export class ApiRequestService {
         abort
       );
       return response.data;
-    } catch (error) {
-      console.error("API request error:", error);
+    } catch (error: unknown) {
+      // Extract useful debugging information from the error
+      const errorInfo: {
+        message?: string;
+        status?: number;
+        url?: string;
+        method?: string;
+        responseData?: unknown;
+      } = {};
+
+      // Type guard for error with response property (AxiosError)
+      const isAxiosError = (err: unknown): err is { response?: { status: number; data?: unknown }; config?: { url?: string; method?: string }; request?: unknown; message?: string } => {
+        return typeof err === 'object' && err !== null;
+      };
+
+      if (isAxiosError(error)) {
+        if (error.response) {
+          // Axios response error
+          errorInfo.status = error.response.status;
+          errorInfo.url = error.config?.url || `${this.apiBase}${path}`;
+          errorInfo.method = error.config?.method?.toUpperCase();
+          errorInfo.responseData = error.response.data;
+          const responseData = error.response.data as { message?: string } | undefined;
+          errorInfo.message = responseData?.message || error.message || 'Request failed';
+        } else if (error.request) {
+          // Request was made but no response received
+          errorInfo.message = error.message || 'No response received from server';
+          errorInfo.url = error.config?.url || `${this.apiBase}${path}`;
+          errorInfo.method = error.config?.method?.toUpperCase();
+        } else {
+          // Error setting up the request
+          errorInfo.message = error.message || 'Error setting up request';
+        }
+      } else if (error instanceof Error) {
+        errorInfo.message = error.message;
+      } else {
+        errorInfo.message = 'Unknown error occurred';
+      }
+
+      console.error("API request error:", {
+        ...errorInfo,
+        path: `${method} ${path}`,
+      });
+      
       throw error;
     }
   }
