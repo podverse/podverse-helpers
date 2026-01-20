@@ -1,10 +1,11 @@
 import { QueueExtraParams } from '../../../dtos/queueExtraParams';
 import { BetweenParams } from '../../../dtos/betweenParams';
 import { request } from '../_request';
-import { reqAccountChangeEmailAddress, reqAccountCreate, reqAccountDelete, reqAccountGetManyPublic, reqAccountResetPassword,
-  reqAccountSendChangeEmailAddressEmail, reqAccountSendResetPasswordEmail, reqAccountSendVerificationEmail,
-  reqAccountVerifyEmail } from './account/account';
+import { reqAccountChangeEmailAddress, reqAccountCreate, reqAccountDelete, reqAccountGetByIdText, reqAccountGetMany,
+  reqAccountResetPassword, reqAccountUpdate, reqAccountSendChangeEmailAddressEmail, reqAccountSendResetPasswordEmail,
+  reqAccountSendVerificationEmail, reqAccountVerifyEmail, QueryParamsGetManyProfiles } from './account/account';
 import { reqAccountFollowChannel, reqAccountUnfollowChannel } from './account/follow/channel';
+import { reqAccountFollowAccount, reqAccountUnfollowAccount } from './account/follow/account';
 import { reqAccountFollowPlaylist, reqAccountUnfollowPlaylist } from './account/follow/playlist';
 import { reqAuthCheckSession, reqAuthLogin, reqAuthLogout, reqAuthMe } from './auth/auth';
 import { reqCategoryGetAll } from './category/category';
@@ -26,8 +27,7 @@ import { reqPodrollGetForChannel } from './podroll/podroll';
 import { QueryDirection, QueryParamsGetMany, QueryParamsGetManyPartial, QueryParamsIndividualList,
   QueryParamsIndividualListMusic,
   QueryParamsItemSoundbitesByChannel, QueryParamsItemSoundbitesByItem, QueryParamsPlaylistResources,
-  QueryParamsPlaylists, 
-  QueryParamsShuffle} from './queryParams';
+  QueryParamsPlaylists, QueryParamsShuffle } from './queryParams';
 import { reqQueueGetAllForAccountPrivate, reqQueueUpdateIsActiveQueue } from './queue/queue';
 import { reqQueueResourceItemAddBetween, reqQueueResourceItemAddHistory,
   reqQueueResourceItemAddLast, reqQueueResourceItemAddNext,
@@ -186,8 +186,12 @@ export class ApiRequestService {
 
   /* ACCOUNT */
 
-  reqAccountGetManyPublic() {
-    return reqAccountGetManyPublic(this);
+  reqAccountGetMany(params: QueryParamsGetManyProfiles) {
+    return reqAccountGetMany(this, params);
+  }
+
+  reqAccountGetByIdText(params: { id_text: string }) {
+    return reqAccountGetByIdText(this, params);
   }
 
   reqAccountCreate(params: { email: string; password: string, locale: string }) {
@@ -216,6 +220,10 @@ export class ApiRequestService {
 
   reqAccountChangeEmailAddress(params: { token: string }) {
     return reqAccountChangeEmailAddress(this, params);
+  }
+
+  reqAccountUpdate(params: { display_name?: string | null; bio?: string | null; sharable_status: number; locale: string }) {
+    return reqAccountUpdate(this, params);
   }
 
   reqAccountDelete() {
@@ -284,6 +292,16 @@ export class ApiRequestService {
 
   reqAccountUnfollowChannel(params: { channel_id_text: string }) {
     return reqAccountUnfollowChannel(this, params);
+  }
+  
+  /* ACCOUNT > FOLLOW > ACCOUNT */
+
+  reqAccountFollowAccount(params: { following_account_id_text: string }) {
+    return reqAccountFollowAccount(this, params);
+  }
+
+  reqAccountUnfollowAccount(params: { following_account_id_text: string }) {
+    return reqAccountUnfollowAccount(this, params);
   }
   
   /* ACCOUNT > FOLLOW > PLAYLIST */

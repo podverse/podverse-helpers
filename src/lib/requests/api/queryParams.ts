@@ -21,6 +21,24 @@ export interface QueryParamsPage {
   page: number;
 }
 
+export type QueryParamsAccountPublic = {
+  page: number;
+};
+
+export type QueryParamsAccountSubscribed = {
+  page: number;
+};
+
+export type QueryParamsAccountGlobalTop = {
+  page: number;
+  range: QueryParamsStatsRange;
+};
+
+export type QueryParamsAccountSubscribedTop = {
+  page: number;
+  range: QueryParamsStatsRange;
+};
+
 export interface QueryParamsShuffle {
   page: number;
   shuffleHash: string;
