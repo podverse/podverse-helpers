@@ -119,7 +119,7 @@ export async function reqAccountChangeEmailAddress(
 
 export async function reqAccountUpdate(
   api: ApiRequestService,
-  params: { display_name?: string | null; bio?: string | null; sharable_status: number; locale: string }
+  params: { display_name: string | null; bio: string | null; sharable_status: number; locale: string }
 ): Promise<DTOAccount> {
   return api.apiRequest<DTOAccount>({
     path: '/account',
