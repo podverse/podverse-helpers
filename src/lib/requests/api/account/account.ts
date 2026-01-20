@@ -1,26 +1,40 @@
 import { ApiRequestService } from '../_request';
 import { ApiListResponse } from '../_response';
 import { DTOAccount } from '../../../../dtos/account/account';
-import { QueryParamsAccountPublic, QueryParamsAccountSubscribed, QueryParamsAccountGlobalTop, QueryParamsAccountSubscribedTop,
-  QueryParamsSubscribedType, QueryParamsSubscribedFullSort, QueryParamsStatsRange } from '../queryParams';
+import { QueryParamsAccountGlobalTop, QueryParamsAccountSubscribedTop,
+  QueryParamsSubscribedType, QueryParamsSubscribedFullSort, QueryParamsStatsRange, QueryParamsPage } from '../queryParams';
 
-export async function reqAccountGetManyPublic(
+export async function reqAccountGetManyPublicRecent(
   api: ApiRequestService,
-  params: QueryParamsAccountPublic
+  params: QueryParamsPage
 ): Promise<ApiListResponse<DTOAccount>> {
   return api.apiRequest<ApiListResponse<DTOAccount>>({
-    path: '/account',
+    path: '/account/recent',
     method: 'GET',
     config: { params }
   });
 }
 
-export async function reqAccountGetManySubscribed(
+export async function reqAccountGetManySubscribedAZ(
   api: ApiRequestService,
-  params: QueryParamsAccountSubscribed
+  params: QueryParamsPage
 ): Promise<ApiListResponse<DTOAccount>> {
   return api.apiRequest<ApiListResponse<DTOAccount>>({
-    path: '/account/subscribed',
+    path: '/account/subscribed/az',
+    method: 'GET',
+    config: {
+      params,
+      withCredentials: true
+    }
+  });
+}
+
+export async function reqAccountGetManySubscribedRecent(
+  api: ApiRequestService,
+  params: QueryParamsPage
+): Promise<ApiListResponse<DTOAccount>> {
+  return api.apiRequest<ApiListResponse<DTOAccount>>({
+    path: '/account/subscribed/recent',
     method: 'GET',
     config: {
       params,
@@ -199,7 +213,7 @@ export async function reqAccountGetMany(
       );
     } else {
       // Recent or default
-      return reqAccountGetManyPublic(
+      return reqAccountGetManyPublicRecent(
         api,
         {
           page
@@ -215,9 +229,16 @@ export async function reqAccountGetMany(
           range
         }
       );
+    } else if (sort === "a_z") {
+      return reqAccountGetManySubscribedAZ(
+        api,
+        {
+          page
+        }
+      );
     } else {
-      // A-Z or recent or default
-      return reqAccountGetManySubscribed(
+      // Recent or default
+      return reqAccountGetManySubscribedRecent(
         api,
         {
           page
