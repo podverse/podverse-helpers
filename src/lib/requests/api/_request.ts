@@ -79,6 +79,9 @@ import { reqAccountWebPushDeviceCreate, reqAccountWebPushDeviceUpdate, reqAccoun
 import { reqAccountUPDeviceCreate, reqAccountUPDeviceUpdate, reqAccountUPDeviceDelete,
   reqAccountUPDeviceGetForAccount } from './account/unifiedpush/unifiedpush';
 import { reqPublisherFeedGetRemoteItemsForChannel } from './publisherFeed/publisherFeed';
+import { reqProfilePodcastsAZ, reqProfilePlaylistsAZ, reqProfileClipsRecent, reqProfileAlbumsAZ,
+  reqMyProfilePodcastsAZ, reqMyProfilePlaylistsAZ, reqMyProfileClipsRecent, reqMyProfileAlbumsAZ,
+  QueryParamsProfileContent } from './profile/profile';
 
 export type AbortOpts = { controller: AbortController; timeoutMs: number };
 
@@ -222,7 +225,7 @@ export class ApiRequestService {
     return reqAccountChangeEmailAddress(this, params);
   }
 
-  reqAccountUpdate(params: { display_name?: string | null; bio?: string | null; sharable_status: number; locale: string }) {
+  reqAccountUpdate(params: { display_name: string | null; bio: string | null; sharable_status: number; locale: string }) {
     return reqAccountUpdate(this, params);
   }
 
@@ -770,6 +773,42 @@ export class ApiRequestService {
 
   reqQueueResourceItemSoundbiteDelete(queue_id_text: string, item_soundbite_id_text: string) {
     return reqQueueResourceItemSoundbiteDelete(this, queue_id_text, item_soundbite_id_text);
+  }
+
+  /* PROFILE CONTENT */
+
+  reqProfilePodcastsAZ(params: QueryParamsProfileContent) {
+    return reqProfilePodcastsAZ(this, params);
+  }
+
+  reqProfileAlbumsAZ(params: QueryParamsProfileContent) {
+    return reqProfileAlbumsAZ(this, params);
+  }
+
+  reqProfilePlaylistsAZ(params: QueryParamsProfileContent) {
+    return reqProfilePlaylistsAZ(this, params);
+  }
+
+  reqProfileClipsRecent(params: QueryParamsProfileContent) {
+    return reqProfileClipsRecent(this, params);
+  }
+
+  /* MY PROFILE CONTENT */
+
+  reqMyProfilePodcastsAZ(params: { page: number }) {
+    return reqMyProfilePodcastsAZ(this, params);
+  }
+
+  reqMyProfileAlbumsAZ(params: { page: number }) {
+    return reqMyProfileAlbumsAZ(this, params);
+  }
+
+  reqMyProfilePlaylistsAZ(params: { page: number }) {
+    return reqMyProfilePlaylistsAZ(this, params);
+  }
+
+  reqMyProfileClipsRecent(params: { page: number }) {
+    return reqMyProfileClipsRecent(this, params);
   }
 
 }
