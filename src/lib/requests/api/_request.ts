@@ -1,7 +1,7 @@
 import { QueueExtraParams } from '../../../dtos/queueExtraParams';
 import { BetweenParams } from '../../../dtos/betweenParams';
 import { request } from '../_request';
-import { reqAccountChangeEmailAddress, reqAccountCreate, reqAccountDelete, reqAccountGetByIdText, reqAccountGetMany,
+import { reqAccountChangeEmailAddress, reqAccountCreate, reqAccountDelete, reqAccountDownloadData, reqAccountGetByIdText, reqAccountGetMany,
   reqAccountResetPassword, reqAccountUpdate, reqAccountSendChangeEmailAddressEmail, reqAccountSendResetPasswordEmail,
   reqAccountSendVerificationEmail, reqAccountVerifyEmail, QueryParamsGetManyProfiles } from './account/account';
 import { reqAccountFollowChannel, reqAccountUnfollowChannel } from './account/follow/channel';
@@ -114,6 +114,9 @@ export class ApiRequestService {
   }
 
   async apiRequest<T>({ path, method = 'GET', data, config = {}, abort, userAgent }: ApiRequestParams): Promise<T> {
+    // Store responseType for error handling
+    const responseType = (config as { responseType?: string })?.responseType;
+    
     try {
       const mergedConfig = {
         ...config,
@@ -150,7 +153,7 @@ export class ApiRequestService {
       } = {};
 
       // Type guard for error with response property (AxiosError)
-      const isAxiosError = (err: unknown): err is { response?: { status: number; data?: unknown }; config?: { url?: string; method?: string }; request?: unknown; message?: string } => {
+      const isAxiosError = (err: unknown): err is { response?: { status: number; data?: unknown }; config?: { url?: string; method?: string; responseType?: string }; request?: unknown; message?: string } => {
         return typeof err === 'object' && err !== null;
       };
 
@@ -160,7 +163,23 @@ export class ApiRequestService {
           errorInfo.status = error.response.status;
           errorInfo.url = error.config?.url || `${this.apiBase}${path}`;
           errorInfo.method = error.config?.method?.toUpperCase();
-          errorInfo.responseData = error.response.data;
+          
+          // If responseType is 'blob' and we have an error response, convert blob to JSON
+          if (responseType === 'blob' && error.response.data instanceof Blob) {
+            try {
+              const blobText = await (error.response.data as Blob).text();
+              const parsedData = JSON.parse(blobText);
+              // Replace the blob with parsed JSON in the error object
+              error.response.data = parsedData;
+              errorInfo.responseData = parsedData;
+            } catch {
+              // If parsing fails, keep the blob but log the error
+              errorInfo.responseData = error.response.data;
+            }
+          } else {
+            errorInfo.responseData = error.response.data;
+          }
+          
           const responseData = error.response.data as { message?: string } | undefined;
           errorInfo.message = responseData?.message || error.message || 'Request failed';
         } else if (error.request) {
@@ -231,6 +250,10 @@ export class ApiRequestService {
 
   reqAccountDelete() {
     return reqAccountDelete(this);
+  }
+
+  reqAccountDownloadData() {
+    return reqAccountDownloadData(this);
   }
 
   /* ACCOUNT > FCM DEVICE */

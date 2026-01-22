@@ -153,6 +153,21 @@ export async function reqAccountDelete(
   });
 }
 
+export async function reqAccountDownloadData(
+  api: ApiRequestService
+): Promise<Blob> {
+  const result = await api.apiRequest<Blob>({
+    path: '/account/download-data',
+    method: 'GET',
+    config: { 
+      withCredentials: true,
+      responseType: 'blob'
+    }
+  });
+
+  return result;
+}
+
 export async function reqAccountGetManyPublicTop(
   api: ApiRequestService,
   params: QueryParamsAccountGlobalTop

@@ -19,20 +19,24 @@ export const request = async <T>(
   }
   
   try {
+    const method = requestConfig?.method || 'GET';
     const isJSONRequest =
-      requestConfig?.method?.toUpperCase() === 'POST'
-      || requestConfig?.method?.toUpperCase() === 'PUT';
+      method.toUpperCase() === 'POST'
+      || method.toUpperCase() === 'PUT';
 
-    const response: AxiosResponse<T> = await axios.request<T>({
+    const axiosConfig = {
       url,
-      method: 'GET',
+      method,
       ...requestConfig,
       headers: {
         ...(isJSONRequest ? { 'Content-Type': 'application/json' } : {}),
         ...requestConfig?.headers
       },
       signal: abort?.controller?.signal,
-    });
+    };
+
+    const response: AxiosResponse<T> = await axios.request<T>(axiosConfig);
+    
     return { status: response.status, data: response.data };
   } finally {
     if (timeoutId) {

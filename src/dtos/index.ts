@@ -10,6 +10,7 @@ export * from './sharableStatus';
 export * from './account/account';
 export * from './account/accountAppStorePurchase';
 export * from './account/accountCredentials';
+export * from './account/accountDataExport';
 export * from './account/accountEmailChangeVerification';
 export * from './account/accountFCMDevice';
 export * from './account/accountFollowingAccount';
