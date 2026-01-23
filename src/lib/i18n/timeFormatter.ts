@@ -3,7 +3,7 @@ import { enUS, es, el } from "date-fns/locale";
 
 export function formatSecondsToReadableDuration(
   input: string,
-  lang: string = "en"
+  lang: string = "en-US"
 ): string {
   let seconds = Math.floor(parseFloat(input));
   if (isNaN(seconds) || seconds < 0) seconds = 0;
@@ -29,7 +29,7 @@ export function formatSecondsToReadableDuration(
   case 'el-GR':
     locale = el;
     break;
-  case 'en':
+  case 'en-US':
   default:
     locale = enUS;
     break;

@@ -1,3 +1,4 @@
+export * from './configValidation';
 export * from './databaseConstants';
 export * from './email';
 export * from './password';
